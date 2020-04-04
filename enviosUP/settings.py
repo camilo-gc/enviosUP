@@ -37,6 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'ubicacion.apps.UbicacionConfig',
+    'empresa.apps.EmpresaConfig',
+    'personal.apps.PersonalConfig',
+    'vehiculo.apps.VehiculoConfig',
+    'envio.apps.EnvioConfig',
 ]
 
 MIDDLEWARE = [
@@ -54,7 +59,7 @@ ROOT_URLCONF = 'enviosUP.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'),],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -76,9 +81,9 @@ WSGI_APPLICATION = 'enviosUP.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'pruebaDjango',
+        'NAME': 'envios_up',
         'USER': 'root',
-        'PASSWORD': '#332817Cg', #Revisar siempreeeeeee!!!
+        'PASSWORD': '', #Revisar siempreeeeeee!!!
         'HOST': 'localhost',
     }
 }
