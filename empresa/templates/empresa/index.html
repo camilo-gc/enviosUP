@@ -2,80 +2,14 @@
 <html>
 
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Envios UP</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Free HTML5 Website Template by FreeHTML5.co" />
-	<meta name="keywords"
-		content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
-	<meta name="author" content="FreeHTML5.co" />
-
-	<!-- Facebook and Twitter integration -->
-	<meta property="og:title" content="" />
-	<meta property="og:image" content="" />
-	<meta property="og:url" content="" />
-	<meta property="og:site_name" content="" />
-	<meta property="og:description" content="" />
-	<meta name="twitter:title" content="" />
-	<meta name="twitter:image" content="" />
-	<meta name="twitter:url" content="" />
-	<meta name="twitter:card" content="" />
-
+	{% include "empresa/header.html" %}
 	{% load static %}
-
-	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
-	<link rel="shortcut icon" type="image/x-icon" href="{% static 'empresa/images/favicon.ico' %}" />
-	<!-- Animate.css -->
-	<link rel="stylesheet" type="text/css" href="{% static 'empresa/css/animate.css' %}">
-	<!-- Icomoon Icon Fonts-->
-	<link rel="stylesheet" type="text/css" href="{% static 'empresa/css/icomoon.css' %}">
-	<!-- Themify Icons-->
-	<link rel="stylesheet" type="text/css" href="{% static 'empresa/css/themify-icons.css' %}">
-	<!-- Bootstrap  -->
-	<link rel="stylesheet" type="text/css" href="{% static 'empresa/css/bootstrap.css' %}">
-
-	<!-- Magnific Popup -->
-	<link rel="stylesheet" type="text/css" href="{% static 'empresa/css/magnific-popup.css' %}">
-
-	<!-- Magnific Popup -->
-	<link rel="stylesheet" type="text/css" href="{% static 'empresa/css/bootstrap-datepicker.min.css' %}">
-
-	<!-- Owl Carousel  -->
-	<link rel="stylesheet" type="text/css" href="{% static 'empresa/css/owl.carousel.min.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'empresa/css/owl.theme.default.min.css' %}">
-
-	<!-- Theme style  -->
-	<link rel="stylesheet" type="text/css" href="{% static 'empresa/css/style.css' %}">
-
-	<!-- Modernizr JS -->
-	<script src="{% static 'empresa/js/modernizr-2.6.2.min.js' %}"></script>
-	<!-- FOR IE9 below -->
-	<!--[if lt IE 9]>
-	<script src="js/respond.min.js"></script>
-	<![endif]-->
 </head>
 
 <body>
 	<div class="gtco-loader"></div>
 	<div id="page">
-		<nav class="gtco-nav" role="navigation">
-			<div class="gtco-container">
-				<div class="row">
-					<div class="col-sm-4 col-xs-12">
-						<div id="gtco-logo"><a href="">ENVIOS UP</a></div>
-					</div>
-					<div class="col-xs-8 text-right menu-1">
-						<ul>
-							<li class="has-dropdown">
-								<a href="#">Tarifas</a>
-							</li>
-							<button type="button" class="btn btn-outline-info">Iniciar Sesión</button>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</nav>
+	{% include "empresa/nav.html" %}	
 		<header id="gtco-header" class="gtco-cover gtco-cover-md" role="banner"
 			style="background-image: url({% static 'empresa/images/img_home.png' %})">
 			<div class="overlay"></div>
@@ -268,85 +202,9 @@
 			</div>
 		</div>
 		<footer id="gtco-footer" role="contentinfo">
-			<div class="gtco-container">
-				<div class="row row-p	b-md">
-
-					<div class="col-md-4">
-						<div class="gtco-widget">
-							<figure>
-								<img src="{% static 'empresa/images/enviosup.png' %}" alt="Image" class="img-responsive">
-							</figure>
-						</div>
-					</div>
-					<div class="col-md-4 col-md-push-1">
-						<div class="gtco-widget">
-							<h3>DESCÚBRENOS</h3>
-							<ul class="gtco-footer-links">
-								<li><a href="#">Nosotros</a></li>
-								<li><a href="#">Puntos de servicio</a></li>
-								<li><a href="#">Preguntas Frecuentes</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-md-4 col-md-push-1">
-						<div class="gtco-widget">
-							<h3>POLÍTICAS</h3>
-							<ul class="gtco-footer-links">
-								<li><a href="#">Términos y condiciones</a></li>
-								<li><a href="#">Políticas de protección de datos</a></li>
-								<li><a href="#">Política de seguridad de la empresa</a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<div class="row copyright">
-					<div class="col-md-12">
-						<p class="pull-left">
-							<small class="block">&copy; 2020 Envios UP</small>
-						</p>
-						<p class="pull-right">
-							<ul class="gtco-social-icons pull-right">
-								<li><a href="https://twitter.com"><i class="icon-twitter"></i></a></li>
-								<li><a href="https://www.facebook.com"><i class="icon-facebook"></i></a></li>
-								<li><a href="https://www.youtube.com"><i class="icon-youtube"></i></a></li>
-							</ul>
-						</p>
-					</div>
-				</div>
-			</div>
+			{% include "empresa/footer.html" %}
 		</footer>
 	</div>
-
-	<div class="gototop js-top">
-		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
-	</div>
-
-	<!-- jQuery -->
-	<script src="{% static 'empresa/js/jquery.min.js' %}"></script>
-	<!-- jQuery Easing -->
-	<script src="{% static 'empresa/js/jquery.easing.1.3.js' %}"></script>
-	<!-- Bootstrap -->
-	<script src="{% static 'empresa/js/bootstrap.min.js' %}"></script>
-	<!-- Waypoints -->
-	<script src="{% static 'empresa/js/jquery.waypoints.min.js' %}"></script>
-	<!-- Carousel -->
-	<script src="{% static 'empresa/js/owl.carousel.min.js' %}"></script>
-	<!-- countTo -->
-	<script src="{% static 'empresa/js/jquery.countTo.js' %}"></script>
-
-	<!-- Stellar Parallax -->
-	<script src="{% static 'empresa/js/jquery.stellar.min.js' %}"></script>
-
-	<!-- Magnific Popup -->
-	<script src="{% static 'empresa/js/jquery.magnific-popup.min.js' %}"></script>
-	<script src="{% static 'empresa/js/magnific-popup-options.js' %}"></script>
-
-	<!-- Datepicker -->
-	<script src="{% static 'empresa/js/bootstrap-datepicker.min.js' %}"></script>
-
-
-	<!-- Main -->
-	<script src="{% static 'empresa/js/main.js' %}"></script>
 
 </body>
 
