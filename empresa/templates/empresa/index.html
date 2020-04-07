@@ -1,0 +1,353 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Envios UP</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Free HTML5 Website Template by FreeHTML5.co" />
+	<meta name="keywords"
+		content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
+	<meta name="author" content="FreeHTML5.co" />
+
+	<!-- Facebook and Twitter integration -->
+	<meta property="og:title" content="" />
+	<meta property="og:image" content="" />
+	<meta property="og:url" content="" />
+	<meta property="og:site_name" content="" />
+	<meta property="og:description" content="" />
+	<meta name="twitter:title" content="" />
+	<meta name="twitter:image" content="" />
+	<meta name="twitter:url" content="" />
+	<meta name="twitter:card" content="" />
+
+	{% load static %}
+
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+	<link rel="shortcut icon" type="image/x-icon" href="{% static 'empresa/images/favicon.ico' %}" />
+	<!-- Animate.css -->
+	<link rel="stylesheet" type="text/css" href="{% static 'empresa/css/animate.css' %}">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" type="text/css" href="{% static 'empresa/css/icomoon.css' %}">
+	<!-- Themify Icons-->
+	<link rel="stylesheet" type="text/css" href="{% static 'empresa/css/themify-icons.css' %}">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" type="text/css" href="{% static 'empresa/css/bootstrap.css' %}">
+
+	<!-- Magnific Popup -->
+	<link rel="stylesheet" type="text/css" href="{% static 'empresa/css/magnific-popup.css' %}">
+
+	<!-- Magnific Popup -->
+	<link rel="stylesheet" type="text/css" href="{% static 'empresa/css/bootstrap-datepicker.min.css' %}">
+
+	<!-- Owl Carousel  -->
+	<link rel="stylesheet" type="text/css" href="{% static 'empresa/css/owl.carousel.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'empresa/css/owl.theme.default.min.css' %}">
+
+	<!-- Theme style  -->
+	<link rel="stylesheet" type="text/css" href="{% static 'empresa/css/style.css' %}">
+
+	<!-- Modernizr JS -->
+	<script src="{% static 'empresa/js/modernizr-2.6.2.min.js' %}"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+	<div class="gtco-loader"></div>
+	<div id="page">
+		<nav class="gtco-nav" role="navigation">
+			<div class="gtco-container">
+				<div class="row">
+					<div class="col-sm-4 col-xs-12">
+						<div id="gtco-logo"><a href="">ENVIOS UP</a></div>
+					</div>
+					<div class="col-xs-8 text-right menu-1">
+						<ul>
+							<li class="has-dropdown">
+								<a href="#">Tarifas</a>
+							</li>
+							<button type="button" class="btn btn-outline-info">Iniciar Sesión</button>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</nav>
+		<header id="gtco-header" class="gtco-cover gtco-cover-md" role="banner"
+			style="background-image: url({% static 'empresa/images/img_home.png' %})">
+			<div class="overlay"></div>
+			<div class="gtco-container">
+				<div class="row">
+					<div class="col-md-12 col-md-offset-0 text-left">
+						<div class="row row-mt-15em">
+							<div class="col-md-7 mt-text animate-box" data-animate-effect="fadeInUp">
+							</div>
+							<div class="col-md-4 col-md-push-1 animate-box" data-animate-effect="fadeInRight">
+								<div class="form-wrap">
+									<div class="tab">
+
+										<div class="tab-content">
+											<div class="tab-content-inner active" data-content="signup">
+												<h3>Rastrea tu envio</h3>
+												<form action="#">
+													<div class="row form-group">
+														<div class="col-md-12">
+															<label for="fullname">Numero de guia</label>
+															<input type="text" id="fullname" class="form-control">
+														</div>
+													</div>
+													<div class="row form-group">
+														<div class="col-md-12">
+															<input type="submit" class="btn btn-primary btn-block"
+																value="Rastrear">
+														</div>
+													</div>
+												</form>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
+
+		<div class="gtco-section">
+			<div class="gtco-container">
+				<div class="row">
+					<div class="col-md-8 col-md-offset-2 text-center gtco-heading">
+						<h2>Ciudades Principales</h2>
+						<p>Estas son algunas de las ciudades en las que prestamos el servicio de mensajeria.</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-4 col-md-4 col-sm-6">
+						<a href="{% static 'empresa/images/img_1.png' %}" class="fh5co-card-item image-popup">
+							<figure>
+								<div class="overlay"><i class="ti-plus"></i></div>
+								<img src="{% static 'empresa/images/img_1.png' %}" alt="Image" class="img-responsive">
+							</figure>
+							<div class="fh5co-text">
+								<h2>Cúcuta</h2>
+								<p>Conocida como la perla del norte, capital del departamento de Norte de Santander.</p>
+							</div>
+						</a>
+					</div>
+					<div class="col-lg-4 col-md-4 col-sm-6">
+						<a href="{% static 'empresa/images/img_2.png' %}" class="fh5co-card-item image-popup">
+							<figure>
+								<div class="overlay"><i class="ti-plus"></i></div>
+								<img src="{% static 'empresa/images/img_2.png' %}" alt="Image" class="img-responsive">
+							</figure>
+							<div class="fh5co-text">
+								<h2>Medellín</h2>
+								<p>Conocida como la ciudad de la eterna primavera, capital del departamento de
+									Antioquia.</p>
+							</div>
+						</a>
+					</div>
+					<div class="col-lg-4 col-md-4 col-sm-6">
+						<a href="{% static 'empresa/images/img_3.png' %}" class="fh5co-card-item image-popup">
+							<figure>
+								<div class="overlay"><i class="ti-plus"></i></div>
+								<img src="{% static 'empresa/images/img_3.png' %}" alt="Image" class="img-responsive">
+							</figure>
+							<div class="fh5co-text">
+								<h2>Bogotá</h2>
+								<p>Conocida como la ciudad de todos, capital de nuestro pais y del departamento de
+									Cundinamarca.</p>
+							</div>
+						</a>
+					</div>
+					<div class="col-lg-4 col-md-4 col-sm-6">
+						<a href="{% static 'empresa/images/img_4.png' %}" class="fh5co-card-item image-popup">
+							<figure>
+								<div class="overlay"><i class="ti-plus"></i></div>
+								<img src="{% static 'empresa/images/img_4.png' %}" alt="Image" class="img-responsive">
+							</figure>
+							<div class="fh5co-text">
+								<h2>Cali</h2>
+								<p>Conocida como la sucursal del cielo, capital del departamento del Valle del Cauca.
+								</p>
+							</div>
+						</a>
+					</div>
+					<div class="col-lg-4 col-md-4 col-sm-6">
+						<a href="{% static 'empresa/images/img_5.png' %}" class="fh5co-card-item image-popup">
+							<figure>
+								<div class="overlay"><i class="ti-plus"></i></div>
+								<img src="{% static 'empresa/images/img_5.png' %}" alt="Image" class="img-responsive">
+							</figure>
+							<div class="fh5co-text">
+								<h2>Barranquilla</h2>
+								<p>Conocida como la puerta de oro de Colombia, capital del departamento del Atlántico.
+								</p>
+							</div>
+						</a>
+					</div>
+					<div class="col-lg-4 col-md-4 col-sm-6">
+						<a href="{% static 'empresa/images/img_6.png' %}" class="fh5co-card-item image-popup">
+							<figure>
+								<div class="overlay"><i class="ti-plus"></i></div>
+								<img src="{% static 'empresa/images/img_6.png' %}" alt="Image" class="img-responsive">
+							</figure>
+							<div class="fh5co-text">
+								<h2>Cartagena de Indias</h2>
+								<p>Conocida como la ciudad heroica, capital del departamento del Bolívar.</p>
+							</div>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="gtco-features">
+			<div class="gtco-container">
+				<div class="row">
+					<div class="col-md-8 col-md-offset-2 text-center gtco-heading animate-box">
+						<h2>Tipos de Mercancia</h2>
+						<p>Estas son nuestros servicios de transporte</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6 col-sm-6">
+						<div class="feature-center animate-box" data-animate-effect="fadeIn">
+							<img src="{% static 'empresa/images/icono_documento.png' %}" alt="Image" class="">
+							<h3>Documento</h3>
+							<p>Te ofrecemos el servicio de entrega de documentos unitarios. Transportamos y
+								entregamos tus documentos puerta a puerta hasta su destino.</p>
+						</div>
+					</div>
+					<div class="col-md-6 col-sm-6">
+						<div class="feature-center animate-box" data-animate-effect="fadeIn">
+							<img src="{% static 'empresa/images/icono_caja.png' %}" alt="Image" class="">
+							<h3>Paquete Premium</h3>
+							<p>Transportamos y entregamos tu mercancía o paquetes individuales. Con guía
+								independiente para que hagas el seguimiento de su entrega.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="gtco-cover gtco-cover-sm" style="background-image: url({% static 'empresa/images/img_bg_1.png' %})"
+			data-stellar-background-ratio="0.5">
+			<div class="overlay"></div>
+			<div class="gtco-container text-center">
+				<div class="display-t">
+					<div class="display-tc">
+						<h1>¡La mejor opcion de envío!</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="gtco-subscribe">
+			<div class="gtco-container">
+				<div class="row animate-box">
+					<div class="col-md-8 col-md-offset-2 text-center gtco-heading">
+						<h2>CONTÁCTANOS</h2>
+						<p>Lineas de atencion al cliente.</p>
+					</div>
+				</div>
+				<div class="row animate-box">
+					<div class="col-md-12 col-md-offset-2">
+						<form class="form-inline">
+							<div class="col-md-6 col-sm-6">
+								<a href="#" class="contact"><i class="icon-phone"> </i> 571 0305</a>
+							</div>
+							<div class="col-md-6 col-sm-6">
+								<a href="mailto:enviosup@gmail.com" class="contact"><i class="icon-mail2"></i>
+									enviosup@gmail.com</a>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<footer id="gtco-footer" role="contentinfo">
+			<div class="gtco-container">
+				<div class="row row-p	b-md">
+
+					<div class="col-md-4">
+						<div class="gtco-widget">
+							<figure>
+								<img src="{% static 'empresa/images/enviosup.png' %}" alt="Image" class="img-responsive">
+							</figure>
+						</div>
+					</div>
+					<div class="col-md-4 col-md-push-1">
+						<div class="gtco-widget">
+							<h3>DESCÚBRENOS</h3>
+							<ul class="gtco-footer-links">
+								<li><a href="#">Nosotros</a></li>
+								<li><a href="#">Puntos de servicio</a></li>
+								<li><a href="#">Preguntas Frecuentes</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-md-4 col-md-push-1">
+						<div class="gtco-widget">
+							<h3>POLÍTICAS</h3>
+							<ul class="gtco-footer-links">
+								<li><a href="#">Términos y condiciones</a></li>
+								<li><a href="#">Políticas de protección de datos</a></li>
+								<li><a href="#">Política de seguridad de la empresa</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="row copyright">
+					<div class="col-md-12">
+						<p class="pull-left">
+							<small class="block">&copy; 2020 Envios UP</small>
+						</p>
+						<p class="pull-right">
+							<ul class="gtco-social-icons pull-right">
+								<li><a href="https://twitter.com"><i class="icon-twitter"></i></a></li>
+								<li><a href="https://www.facebook.com"><i class="icon-facebook"></i></a></li>
+								<li><a href="https://www.youtube.com"><i class="icon-youtube"></i></a></li>
+							</ul>
+						</p>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</div>
+
+	<div class="gototop js-top">
+		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
+	</div>
+
+	<!-- jQuery -->
+	<script src="{% static 'empresa/js/jquery.min.js' %}"></script>
+	<!-- jQuery Easing -->
+	<script src="{% static 'empresa/js/jquery.easing.1.3.js' %}"></script>
+	<!-- Bootstrap -->
+	<script src="{% static 'empresa/js/bootstrap.min.js' %}"></script>
+	<!-- Waypoints -->
+	<script src="{% static 'empresa/js/jquery.waypoints.min.js' %}"></script>
+	<!-- Carousel -->
+	<script src="{% static 'empresa/js/owl.carousel.min.js' %}"></script>
+	<!-- countTo -->
+	<script src="{% static 'empresa/js/jquery.countTo.js' %}"></script>
+
+	<!-- Stellar Parallax -->
+	<script src="{% static 'empresa/js/jquery.stellar.min.js' %}"></script>
+
+	<!-- Magnific Popup -->
+	<script src="{% static 'empresa/js/jquery.magnific-popup.min.js' %}"></script>
+	<script src="{% static 'empresa/js/magnific-popup-options.js' %}"></script>
+
+	<!-- Datepicker -->
+	<script src="{% static 'empresa/js/bootstrap-datepicker.min.js' %}"></script>
+
+
+	<!-- Main -->
+	<script src="{% static 'empresa/js/main.js' %}"></script>
+
+</body>
+
+</html>
