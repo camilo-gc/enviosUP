@@ -30,6 +30,7 @@ class Persona(models.Model):
     per_apellido = models.CharField(max_length = 50)
     per_fecha_naci = models.DateField()
     per_email = models.EmailField(null = True)
+    per_contrasena = models.TextField()
     per_telefono = models.CharField(max_length = 10, null = True, blank = True)
     per_celular = models.CharField(max_length = 10, null = True, blank = True)
     per_direccion = models.CharField(max_length = 100)
