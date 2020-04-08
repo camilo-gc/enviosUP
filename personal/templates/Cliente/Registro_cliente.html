@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Mi primer Login</title>
+
+    <!--JQUERY-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    <!-- FRAMEWORK BOOTSTRAP para el estilo de la pagina-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    
+    <!-- Los iconos tipo Solid de Fontawesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+    <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+    <!-- estilo registro -->
+    <link rel="stylesheet" type="text/css" href="{% static 'personal/css/index.css' %}">
+
+   <script type="text/javascript">
+
+    $(document).ready(function() {
+
+    $('#pass2').keyup(function() {
+
+        var pass1 = $('#pass1').val();
+        var pass2 = $('#pass2').val();
+
+        if ( pass1 == pass2 ) {
+            $('#error2').css("background", "url(static/img/check.png)");
+        } else {
+            $('#error2').css("background", "url(static/img/check-.png)");
+        }
+
+    });
+
+});
+   </script>
+</head>
+<body>
+
+    <div class="modal-dialog text-center">
+        <div class="col-sm-10 main-section">
+            <div class="modal-content">
+                <div class="col-12 user-img">
+                    <img src="static/img/usuario_envia.png" th:src="@{/img/usuario_envia.png}"/>
+                </div>
+                <form class="col-12" th:action="" method="get" name="f1">
+                    <div class="form-group" id="Nombre_cliente">
+                        <input type="text" class="form-control" placeholder="Nombres" name="nombre" required/>
+                    </div>
+
+                    <div class="form-group" id= Apellido_cliente >
+                        <input type="text" class="form-control" placeholder="Apellidos" name="apellido" required/>
+                    </div>
+
+                    <div class="form-group" id="F_nacimiento" >
+                        <input type="date" class="form-control" placeholder="dd/mm/yyyy" name="fecha_nacimiento" required/>
+                    </div>
+
+                    <div class="form-group" id="Direccion_cliente" >
+                        <input type="text" class="form-control" placeholder="Direccion" name="direccion" required/>
+                    </div>
+                    
+                    <div class="form-group" id="Tel_cliente" >
+                        <input type="number" class="form-control" placeholder="Telefono" name="telefono"/>
+                    </div>
+
+                    <div class="form-group" id="Cell_cliente">
+                        <input type="number" class="form-control" placeholder="Celular" name="celular" required/>
+                    </div>
+
+                     <div class="form-group" id="T_documento" >
+                        <select name="tipo de documento" >
+                            <option value="tarjeta de identidad" > Tarjeta de identidad</option>
+                            <option value="Cedula de ciudadania"> Cedula de ciudadania</option>
+                            <option value="Cedula Extranjera" > Cedula Extranjera</option>
+                            <option value="Pasaporte" > Pasaporte</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" id="N_documento">
+                        <input type="number" class="form-control" placeholder="Numero de documento" name="N_documento" required/>
+                    </div>
+
+                    <div class="form-group" >
+                        <input type="email" class="form-control" placeholder="Corre Electronico" name="Correo" required/>
+                    </div>
+
+                    <div class="form-group" id="Con_cliente" for="pass1">
+                        <input id="pass1"type="password" class="form-control" placeholder="Contrasena" name="clave1" required/>
+                        <div id="error1"></div>
+                    </div>
+
+                    <div class="form-group" id="re_contrasena" for="pass2">
+                        <input id="pass2"type="password" class="form-control" placeholder="Repetir contrasena" name="clave2" required/>
+                        <div id="error2"></div>
+                    </div>
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i> Registrar </button>
+                </form>
+
+
+               <!-- <div class="col-12 forgot">
+                    <a href="#">Recordar contrasena?</a>
+                </div> 
+                <div th:if="${param.error}" class="alert alert-danger" role="alert">*\
+		            Invalid username and password.
+		        </div>
+		        <div th:if="${param.logout}" class="alert alert-success" role="alert">
+		            You have been logged out.-->
+		        </div>                 
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
