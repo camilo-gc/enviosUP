@@ -20,7 +20,7 @@ from personal.views import registroCliente
 
 urlpatterns = [
     path('', views.index),
-    path('registroCliente', registroCliente),
+    path('registroCliente/', registroCliente),
 
     path('admin/', include('empresa.urls')),
 ]
