@@ -9,6 +9,9 @@ class Tipo_documento(models.Model):
     td_nombre = models.CharField(max_length = 50)
     td_descripcion = models.CharField(max_length = 350, null = True, blank = True)
 
+    def __str__(self):
+        return self.td_nombre
+
 class Funcionalidad(models.Model):
     fun_id =  models.AutoField(primary_key = True)
     fun_nombre = models.CharField(max_length = 100)
@@ -18,6 +21,7 @@ class Rol(models.Model):
     rol_id =  models.AutoField(primary_key = True)
     rol_nombre = models.CharField(max_length = 50)
     rol_descripcion = models.CharField(max_length = 350, null = True, blank = True)
+
 
 class Funcionalidad_rol(models.Model):
     fun_id = models.ForeignKey(Funcionalidad, on_delete = models.PROTECT)
@@ -30,7 +34,7 @@ class Persona(models.Model):
     per_apellido = models.CharField(max_length = 50)
     per_fecha_naci = models.DateField()
     per_email = models.EmailField(null = True)
-    per_contrasena = models.TextField()
+    per_contrasena = models.CharField(max_length = 512)
     per_telefono = models.CharField(max_length = 10, null = True, blank = True)
     per_celular = models.CharField(max_length = 10, null = True, blank = True)
     per_direccion = models.CharField(max_length = 100)

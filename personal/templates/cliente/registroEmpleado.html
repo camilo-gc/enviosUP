@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Registro Cliente</title>
+    <title>Registro Empleado</title>
     {% load static %}
     <!--JQUERY-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -15,7 +15,7 @@
     <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
 
     <!-- estilo registro -->
-    <link rel="stylesheet" type="text/css" href="{% static 'personal/css/index.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'personal/css/estilo_registro.css' %}">
 
    <script type="text/javascript">
 
@@ -36,22 +36,35 @@
 
 });
    </script>
-   {% include "empresa/header.html" %}
+  {% include "empresa/header.html" %}
 </head>
-<body style="background-color: cadetblue">
-     {% include "empresa/nav.html" %} 
+<body id="cuerpo_registro"style="background-color: cadetblue">
+    {% include "empresa/nav.html" %}
     <div class="modal-dialog text-center">
-        <div class="col-sm-10 main-section">
-            <div class="modal-content">
+        <div class="col-sm-10 " id="section">
+            <div class="modal-content" id="content">
                 <div class="col-12 user-img">
-                    <img src="{% static 'personal/img/usuario_envia.png' %}" th:src="@{% static 'personal/img/usuario_envia.png' %}"/>
+                    <img src="{% static 'personal/img/usuario.png' %}" th:src="@{% static 'personal/img/usuario_envia.png' %}"/>
                 </div>
-                <form class="col-12" th:action="" method="get" name="f1">
+                <form class="col-12" action="{% url 'registrarEmpleado' %}" method="POST" name="f1">{% csrf_token %}
+                    <div class="form-group" id="T_documento" >
+                        <select name="roles" >
+                            {% for rol in roles %}
+                                <option value="{{rol.rol_id}}">{{rol.rol_nombre}}</option>
+                            {% endfor%}
+                        </select>
+                        <select name="sucursales" >
+                            {% for sucu in suc %}
+                                <option value="{{sucu.suc_id}}">{{sucu.suc_nombre}}</option>
+                            {% endfor%}
+                        </select>
+                    </div>
+                    
                     <div class="form-group" id="Nombre_cliente">
                         <input type="text" class="form-control" placeholder="Nombres" name="nombre" required/>
                     </div>
 
-                    <div class="form-group" id= Apellido_cliente >
+                    <div class="form-group" id= "Apellido_cliente" >
                         <input type="text" class="form-control" placeholder="Apellidos" name="apellido" required/>
                     </div>
 
@@ -71,21 +84,30 @@
                         <input type="number" class="form-control" placeholder="Celular" name="celular" required/>
                     </div>
 
-                     <div class="form-group" id="T_documento" >
-                        <select name="tipo de documento" >
-                            <option value="tarjeta de identidad" > Tarjeta de identidad</option>
-                            <option value="Cedula de ciudadania"> Cédula de ciudadanía</option>
-                            <option value="Cedula Extranjera" > Cédula de Extranjería</option>
-                            <option value="Pasaporte" > Pasaporte</option>
+                    <div class="form-group" id="T_documento" >
+                        <select name="tipo_documento" >
+                            {% for tipo in tipos %}
+                                <option value="{{tipo.td_id}}">{{tipo.td_nombre}}</option>
+                            {% endfor%}
                         </select>
                     </div>
 
                     <div class="form-group" id="N_documento">
-                        <input type="number" class="form-control" placeholder="Numero de documento" name="N_documento" required/>
+                        <input type="number" class="form-control" placeholder="Numero de documento" name="documento" required/>
+                    </div>
+
+                    <div class="form-group" id="F_inicio" >
+                        <input type="date" class="form-control" placeholder="Fecha Inicio de Contrato" name="fecha_inicio" required/>
+                    </div>
+                    <div class="form-group" id="F_fin" >
+                        <input type="date" class="form-control" placeholder="Fecha Fin de Contrato" name="fecha_fin" required/>
+                    </div>
+                    <div class="form-group" id="Salario">
+                        <input type="number" class="form-control" placeholder="Salario Mensual" name="salario" required/>
                     </div>
 
                     <div class="form-group" >
-                        <input type="email" class="form-control" placeholder="Corre Electronico" name="Correo" required/>
+                        <input type="email" class="form-control" placeholder="Corre Electronico" name="correo" required/>
                     </div>
 
                     <div class="form-group" id="Con_cliente" for="pass1">
@@ -101,14 +123,6 @@
                 </form>
 
 
-               <!-- <div class="col-12 forgot">
-                    <a href="#">Recordar contrasena?</a>
-                </div> 
-                <div th:if="${param.error}" class="alert alert-danger" role="alert">*\
-		            Invalid username and password.
-		        </div>
-		        <div th:if="${param.logout}" class="alert alert-success" role="alert">
-		            You have been logged out.-->
 		        </div>                 
             </div>
         </div>

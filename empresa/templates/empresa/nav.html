@@ -20,12 +20,12 @@
 		<div class="gtco-container">
 			<div class="row">
 				<div class="col-sm-4 col-xs-12">
-					<div id="gtco-logo"><a href="">ENVIOS UP</a></div>
+					<div id="gtco-logo"><a href="/">ENVIOS UP</a></div>
 				</div>
 				<div class="col-xs-8 text-right menu-1">
 					<ul>
 						<li class="has-dropdown">
-							<a href="#">Tarifas</a>
+							<a href="{% url 'tarifas' %}">Tarifas</a>
 						</li>
 						<button id="inicio"type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#loginModal">
 						Iniciar Sesión</button>
@@ -40,28 +40,26 @@
 		<div class="modal-dialog" role="document">
 		  <div class="modal-content">
 			<div class="modal-header">
-			  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			 <center> <h4  class="modal-title" id="myModalLabel">LOGIN USUARIO</h4></center>
+			  <h4 align="center" class="modal-title" id="myModalLabel">LOGIN USUARIO</h4>
 			</div>
 			<div class="modal-body">
 					  
 					   <form class="col-12" th:action="@{/login}" method="get">
-						  <div class="form-group" id="user-group">
+						  <div class="form-group" id="user-group" >
 							  <input type="text" class="form-control" placeholder="Nombre de usuario" name="username"/>
 						  </div>
-						  <div class="form-group" id="contrasena-group">
+						  <div class="form-group" id="contrasena-group" >
 							  <input type="password" class="form-control" placeholder="Contrasena" name="password"/>
 						  </div>
 							  <button id="ingresar" class="col-md-4 col-md-offset-4" type="submit" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i>Ingresar </button>
 					  </form>
 						<div class="col-12 forgot">
-						  <a href="registroCliente/">Crea una cuenta</a>
+						  <a href="{% url 'register' %}">Crea una cuenta</a>
 					  </div>
 	  
 			</div>
 			<div class="modal-footer">
-			  <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-			 
+			  <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>		 
 			</div>
 		  </div>
 		</div>

@@ -1,7 +1,7 @@
 
 .main-section{
     margin:0 auto;
-    margin-top:25%;
+    margin-top:75%;
     padding: 0;
 }
 
@@ -35,11 +35,19 @@
 .forgot a{
     font-size: 22px;
     bottom:-70px;
-    left:-350px;
+    left:-300px;
     position: relative;
+    opacity: .75;
 }
 
 .modal-tittle{
+    position: relative;
+    font-size:60;
+    left:-250%;
+    float:left;
+    margin-left: 50px;
+}
+h4{
     text-align: center;
-    font-size:40;
+    position: relative;
 }
