@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from personal.models import Tipo_documento, Persona, Rol, Empleado
 from empresa.models import Sucursal
 from base64 import b64encode, b64decode

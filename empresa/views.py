@@ -15,3 +15,9 @@ def tarifas(request):
     tarifas = Tarifa.objects.all()
     tiposMercancias = Tipo_mercancia.objects.all()
     return render(request, 'empresa/tarifas.html', {'tar':tarifas[0] , 'tms':tiposMercancias})
+
+def descubrenos(request):
+    return render(request, 'empresa/nosotros.html',{})
+
+def politicas(request):
+    return render(request, 'empresa/legal.html',{})
