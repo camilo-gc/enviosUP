@@ -4,5 +4,7 @@ from personal import views
 
 urlpatterns = [
     path('registroEmpleado/', views.registroEmpleado, name='registrarEmpleado'),
-    path('login/', views.login_user, name= 'inicio_sesion'),
+    path('validacion/', views.login_user, name= 'inicio_sesion'),
+    path('validacion/', views.login_user, name= 'validacion'),
+    path('logout/', views.logout, name= 'logout'),
 ]
