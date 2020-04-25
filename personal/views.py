@@ -28,17 +28,21 @@ def registroEmpleado(request):
         inicioContrato = request.POST.get('fecha_inicio', None)
         finContrato = request.POST.get('fecha_fin', None)
         salario = request.POST.get('salario', None)
+        existe = Persona.objects.filter(per_documento = documento).exists()
         try:
-            persona = Persona(per_documento=documento, per_nombre=nombre, per_apellido=apellido, per_fecha_naci=fecha_nac,
-                        per_email=correo, per_telefono=telefono, per_celular=celular, per_direccion=direccion, td_id_id=tipo_doc, per_contrasena=contrasena)
-            persona.save()
+            if(existe):
+                messages.info(request, 'Ya se encuentra registrado.')
+            else:
+                persona = Persona(per_documento=documento, per_nombre=nombre, per_apellido=apellido, per_fecha_naci=fecha_nac,
+                            per_email=correo, per_telefono=telefono, per_celular=celular, per_direccion=direccion, td_id_id=tipo_doc, per_contrasena=contrasena)
+                persona.save()
 
-            empleado = Empleado(per_documento_id=documento, suc_id_id=sucursal, rol_id_id=rol, emp_inicio_contrato=inicioContrato,
-                        emp_fin_contrato=finContrato, emp_salario=salario, emp_estado=1)
-            empleado.save()
+                empleado = Empleado(per_documento_id=documento, suc_id_id=sucursal, rol_id_id=rol, emp_inicio_contrato=inicioContrato,
+                            emp_fin_contrato=finContrato, emp_salario=salario, emp_estado=1)
+                empleado.save()
 
-            messages.success(request, 'Registro exitoso.')
-        except:
+                messages.success(request, 'Registro exitoso.')
+        except:''
             messages.error(request, 'Ocurrio un error.')
     else:''
 
