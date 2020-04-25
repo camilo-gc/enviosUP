@@ -7,6 +7,12 @@ from envio.models import Tipo_mercancia
 def index(request):
     return render(request, 'empresa/index.html', {})
 
+def administracion(request):
+    return render(request, 'administracion.html', {})
+
+def operacional(request):    
+    return render(request, 'operacional.html', {})
+
 def puntosServicios(request):
     sucursales = Sucursal.objects.all().order_by('mun_id')
     return render(request, 'empresa/', {'suc':sucursales})

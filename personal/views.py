@@ -1,11 +1,11 @@
-from django.shortcuts import render, redirect
-from personal.models import Tipo_documento, Persona, Rol, Empleado
-from empresa.models import Sucursal
 from base64 import b64encode, b64decode
+from django.shortcuts import render, redirect
 from django.contrib.auth import logout as do_logout, login, authenticate
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.urls import reverse_lazy
+from empresa.models import Sucursal
+from personal.models import Tipo_documento, Rol, Sucursal
 
 # Create your views here.
 def registroEmpleado(request):
@@ -42,7 +42,8 @@ def registroEmpleado(request):
             messages.error(request, 'Ocurrio un error.')
     else:''
 
-    return render(request, 'cliente/registroEmpleado.html', {'tipos': tiposDoc, 'roles':roles, 'suc':sucursales})
+    return render(request, 'registroEmpleado.html', {'tipos': tiposDoc, 'roles':roles, 'suc':sucursales})
+
 
 def login_user(request):
     if request.method == 'POST':
@@ -52,17 +53,20 @@ def login_user(request):
         if user is not None:
             login(request, user)
             if request.user.is_staff is not False:
-                return redirect(reverse_lazy('admin:index'))#Redirecciona panel admin #acordar lo de app_name para la rutas
-#            else:
+                print('Administrador')
+                return redirect(reverse_lazy('administracion'))#Redirecciona panel admin #acordar lo de app_name para la rutas
+            else:
                 #Se deve validar que rol tiene el usuario para redireccionarlo despues
-#                return redirect(reverse_lazy('home'))#Redireccionar Panel NO administrador
+                print('empleado')
+                return redirect(reverse_lazy('operacion'))#Redireccionar Panel NO administrador
         else:
+            print('credenciales incorrectas')
             messages.error(request, 'Usuario o contraseña incorrectos')
             return render(request, 'empresa/index.html')#De prueba, se debe modificar.
 #    if request.user.is_active:
-#        return redirect(reverse_lazy('home'))
+#        return redirect(reverse_lazy('administracion'))
 #    else:
-#        return render(request, "")
+#        return render(request, empresa/index.html') #Probaaaaaar!!!
 
 def logout(request):
     # Finalizamos la sesión
