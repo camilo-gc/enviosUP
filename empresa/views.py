@@ -17,7 +17,8 @@ def tarifas(request):
     return render(request, 'empresa/tarifas.html', {'tar':tarifas[0] , 'tms':tiposMercancias})
 
 def descubrenos(request):
-    return render(request, 'empresa/nosotros.html',{})
+    sucursales = Sucursal.objects.all()
+    return render(request, 'empresa/nosotros.html',{'sucu':sucursales})
 
 def politicas(request):
     return render(request, 'empresa/legal.html',{})

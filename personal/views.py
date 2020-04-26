@@ -42,7 +42,7 @@ def registroEmpleado(request):
                 empleado.save()
 
                 messages.success(request, 'Registro exitoso.')
-        except:''
+        except:
             messages.error(request, 'Ocurrio un error.')
     else:''
 
