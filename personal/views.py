@@ -8,6 +8,8 @@ from empresa.models import Sucursal
 from personal.models import Tipo_documento, Rol, Persona, Empleado
 
 # Create your views here.
+
+
 def registroEmpleado(request):
     tiposDoc = Tipo_documento.objects.all()
     roles = Rol.objects.all()
@@ -28,7 +30,7 @@ def registroEmpleado(request):
         inicioContrato = request.POST.get('fecha_inicio', None)
         finContrato = request.POST.get('fecha_fin', None)
         salario = request.POST.get('salario', None)
-        existe = Persona.objects.filter(per_documento = documento).exists()
+        existe = Persona.objects.filter(per_documento=documento).exists()
         try:
             if(existe):
                 messages.info(request, 'Ya se encuentra registrado.')
@@ -42,48 +44,50 @@ def registroEmpleado(request):
                 messages.success(request, 'Registro exitoso.')
         except:
             messages.error(request, 'Ocurrio un error.')
-    else:''
+    else:
+        ''
 
-    return render(request, 'registroEmpleado.html', {'tipos': tiposDoc, 'roles':roles, 'suc':sucursales})
+    return render(request, 'registroEmpleado.html', {'tipos': tiposDoc, 'roles': roles, 'suc': sucursales})
 
 
 def login_user(request):
-    if request.method == 'POST':
-        username = request.POST.get('username', None)
-        password = request.POST.get('password', None)
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            if request.user.is_staff is not False:
-                print('Administrador')
-                return redirect(reverse_lazy('administracion'))#Redirecciona panel admin #acordar lo de app_name para la rutas
-            else:
-                #Se deve validar que rol tiene el usuario para redireccionarlo despues
-                print('empleado')
-                return redirect(reverse_lazy('operacion'))#Redireccionar Panel NO administrador
+
+    username = request.POST.get('username', None)
+    password = request.POST.get('password', None)
+    user = authenticate(request, username=username, password=password)
+    if user is not None:
+        login(request, user)
+        if request.user.is_staff is not False:
+            # Redirecciona panel admin #acordar lo de app_name para la rutas
+            return redirect(reverse_lazy('administracion'))
         else:
-            print('credenciales incorrectas')
-            messages.error(request, 'Usuario o contraseña incorrectos')
-            return render(request, 'empresa/index.html')#De prueba, se debe modificar.
-#    if request.user.is_active:
-#        return redirect(reverse_lazy('administracion'))
-#    else:
-#        return render(request, empresa/index.html') #Probaaaaaar!!!
+            # Se deve validar que rol tiene el usuario para redireccionarlo despues
+            # Redireccionar Panel NO administrador
+            return redirect(reverse_lazy('operacion'))
+    else:
+        print('credenciales incorrectas')
+        messages.error(request, 'Usuario o contraseña incorrectos')
+        # De prueba, se debe modificar.
+        return render(request, 'empresa/index.html')
+
 
 def logout(request):
     # Finalizamos la sesión
     do_logout(request)
     # Redireccionamos a la portada
-    return redirect(reverse_lazy('home'))
+    return redirect(reverse_lazy('login'))
+
 
 def codificarContrasena(cadena):
-    b = cadena.encode("UTF-8") # codificando la cadena en bytes
-    e = b64encode(b) # codificar los bytes Base64
-    con = e.decode("UTF-8") # decodificando los bytes Base64 a cadena
+    b = cadena.encode("UTF-8")  # codificando la cadena en bytes
+    e = b64encode(b)  # codificar los bytes Base64
+    con = e.decode("UTF-8")  # decodificando los bytes Base64 a cadena
     return con
 
+
 def decodificarContrasena(cadena):
-    b1 = cadena.encode("UTF-8")# codificar la cadena codificaada Base64 en bytes
-    d = b64decode(b1)# decodificando los bytes Base64
-    con2 = d.decode("UTF-8") # decodificando los bytes a cadena
+    # codificar la cadena codificaada Base64 en bytes
+    b1 = cadena.encode("UTF-8")
+    d = b64decode(b1)  # decodificando los bytes Base64
+    con2 = d.decode("UTF-8")  # decodificando los bytes a cadena
     return con2

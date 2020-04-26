@@ -9,5 +9,6 @@ urlpatterns = [
     path('politicas/', views.politicas, name='politicas'),
     path('administracion/', views.administracion, name= 'administracion'),
     path('operacion/', views.operacional, name= 'operacion'),
+    path('login/', views.login, name= 'login'),
 
 ]
