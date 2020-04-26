@@ -123,48 +123,16 @@
 						<td>Carrera 10 No. 89 norte 12</td>
 						<td>7659087</td>
 				</tr>
-				<tr>
-						<td>Antioquia</td>
-						<td>Envigado</td>
-						<td>Calle 56 No. 78-31</td>
-						<td>5893145</td>
-				</tr>
-				<tr>
-					<td>Atlántico</td>
-					<td>Barranquilla</td>
-					<td>Calle 50 No. 45-12</td>
-					<td>6784510</td>
-				</tr>
-				<tr>
-						<td>Bolívar</td>
-						<td>Cartagena</td>
-						<td>Av Principal del Bosque DG 12 N° 90-31</td>
-						<td>6693419</td>
+				
+				{% for suc in sucu %}
+					<tr>
+						<td>{{suc.suc_id}}</td>
+						<td>{{suc.suc_nombre}}</td>
+						<td>{{suc.suc_direccion}}</td>
+						<td>{{suc.suc_telefono}}</td>
 					</tr>
-				<tr>
-						<td>Cundinamarca</td>
-						<td>Bogotá</td>
-						<td>Carrera 90 No. 15A-21</td>
-						<td>4565467</td>
-				</tr>
-				<tr>
-					<td>Norte de Santander</td>
-					<td>Cúcuta</td>
-					<td>Av 10 #5-89</td>
-					<td>5768930</td>
-				</tr>
-				<tr>
-					<td>Norte de Santander</td>
-					<td>Pamplona</td>
-					<td>Calle 34 # 4-89</td>
-					<td>5778930</td>
-				</tr>
-				<tr>
-					<td>Valle del Cauca</td>
-					<td>Cali</td>
-					<td>Carrera 28B No. 42-298</td>
-					<td>3450924</td>
-				</tr>
+				{% endfor %}
+
 			</table>
 		</div>
 <!------------------------- ------------------------------------------------------------------------------------------------->

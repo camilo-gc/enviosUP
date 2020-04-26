@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.urls import reverse_lazy
 from empresa.models import Sucursal
-from personal.models import Tipo_documento, Rol, Sucursal
+from personal.models import Tipo_documento, Rol, Persona, Empleado
 
 # Create your views here.
 def registroEmpleado(request):
@@ -35,12 +35,10 @@ def registroEmpleado(request):
             else:
                 persona = Persona(per_documento=documento, per_nombre=nombre, per_apellido=apellido, per_fecha_naci=fecha_nac,
                             per_email=correo, per_telefono=telefono, per_celular=celular, per_direccion=direccion, td_id_id=tipo_doc, per_contrasena=contrasena)
-                persona.save()
-
                 empleado = Empleado(per_documento_id=documento, suc_id_id=sucursal, rol_id_id=rol, emp_inicio_contrato=inicioContrato,
                             emp_fin_contrato=finContrato, emp_salario=salario, emp_estado=1)
+                persona.save()
                 empleado.save()
-
                 messages.success(request, 'Registro exitoso.')
         except:
             messages.error(request, 'Ocurrio un error.')
