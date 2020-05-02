@@ -49,7 +49,9 @@ function comprueba_tel(valor){
   if(valor.value <= 0){
     valor.value = "";
   }
-  if( !(/^\d{7}$/.test(valor)) ) {
+  if( valor.value.length >7 ) {
+      alert("No es un telefono valido");
+      $("#numero").val("");
   return false;
 }
 }
@@ -60,7 +62,9 @@ function comprueba_celular(valor){
   if(valor.value <= 0){
     valor.value = "";
   }
-  if( !(/^\d{10}$/.test(valor)) ) {
+  if( valor.value.length >15 ) {
+  alert("Numero de celular invalido");
+  $("#numero_cell").val("");
   return false;
 }
 }
@@ -71,11 +75,39 @@ function comprueba_salario(valor){
   if(valor.value <= 0){
     valor.value = 877803;
   }
-  if( !(/^\d{6}$/.test(valor)) ) {
+  if( valor.value.length<6) {
+  alert("salario mal establecido");
+  $("#p_salario").val("");
   return false;
+  }
 }
-  
-}
+// validacion fecha de nacimiento
+$(document).ready(function(){
+    	$("#fecha").change(function(){
+        	var hoy= new Date();
+            var fecha=$('#fecha').val();
+            var fechaFormulario=Date.parse(fecha);			
+			if (hoy <= fechaFormulario) {
+                  alert("USTED NO A NI NACIDO!!!!");
+                  $("#fecha").val("");
+			}
+    	});
+    });
+  //validacion contrato
+  $(document).ready(function(){
+    	$("#contrato_F").change(function(){
+        	var fecha_inicio= $('#contrato_I').val();
+            var fecha_final=$('#contrato_F').val();
+            var fechaContratoF=Date.parse(fecha_final);
+            var fechaContratoI=Date.parse(fecha_inicio);				
+			if (fechaContratoF <= fechaContratoI) {
+                  alert("EL CONTRATO ESTA MAL DEFINIDO!!!!");
+                  $("#contrato_I").val("");
+                  $("#contrato_F").val("");
+                  return false;
+			}
+    	});
+    });
    </script>
   {% include "empresa/header.html" %}
 </head>
@@ -103,7 +135,7 @@ function comprueba_salario(valor){
                 <div class="col-12 user-img">
                     <img src="{% static 'personal/img/usuario.png' %}" th:src="@{% static 'personal/img/usuario_envia.png' %}"/>
                 </div>
-                <form class="col-12" action="{% url 'registrarEmpleado' %}" method="POST" name="f1">{% csrf_token %}
+                <form onsubmit="return validar();"class="col-12" action="{% url 'registrarEmpleado' %}" method="POST" name="f1">{% csrf_token %}
                     <div class="form-group" id="T_documento" >
                         <select name="roles" class="estilo_select" id="rol">
                             {% for rol in roles %}
@@ -126,7 +158,7 @@ function comprueba_salario(valor){
                     </div>
 
                     <div class="form-group" id="F_nacimiento" >
-                        <input type="date" class="form-control" placeholder="dd/mm/yyyy" name="fecha_nacimiento" required/>
+                        <input type="date" id="fecha"  class="form-control" placeholder="dd/mm/yyyy" name="fecha_nacimiento" required/>
                     </div>
 
                     <div class="form-group" id="Direccion_cliente" >
@@ -154,10 +186,10 @@ function comprueba_salario(valor){
                     </div>
 
                     <div class="form-group" id="F_inicio" >
-                        <input type="date" class="form-control" placeholder="Fecha Inicio de Contrato" name="fecha_inicio" required/>
+                        <input type="date" id="contrato_I"class="form-control" placeholder="Fecha Inicio de Contrato" name="fecha_inicio" required/>
                     </div>
                     <div class="form-group" id="F_fin" >
-                        <input type="date" class="form-control" placeholder="Fecha Fin de Contrato" name="fecha_fin" required/>
+                        <input type="date"id="contrato_F" class="form-control" placeholder="Fecha Fin de Contrato" name="fecha_fin" required/>
                     </div>
                     <div class="form-group" id="Salario">
                         <input type="number" id="P_salario" onkeypress="comprueba_salario(this)"class="form-control" minimo="877803" placeholder="Salario Mensual" name="salario" required/>
