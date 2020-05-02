@@ -39,16 +39,17 @@
    .estilo_select option {
     font-weight:normal;
    }
-   #sucursales{
+   #sucu{
        right: -15%;
        float: right;
        position: relative;
        top:-5px;
    }
-   #roles{
+   #rol{
     float: left;
     position: relative;
     top:-5px;
 }
+
    
 
