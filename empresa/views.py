@@ -43,7 +43,7 @@ def tarifas(request):
 
 
 def descubrenos(request):
-    sucursales = Sucursal.objects.all()
+    sucursales = Sucursal.objects.select_related('mun_id').order_by('mun_id')
     return render(request, 'empresa/nosotros.html',{'sucu':sucursales})
 
 def politicas(request):

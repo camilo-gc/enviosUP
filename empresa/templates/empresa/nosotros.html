@@ -113,20 +113,16 @@
 					<tr>
 						<th>Departamento</th> 
 						<th>Municipio</th> 
+						<th>Sucursal</th> 
 						<th>Dirección</th> 
 						<th>Teléfono</th>
 					</tr>
 				</thead>
-				<tr>
-						<td>Antioquia</td>
-						<td>Medellín</td>
-						<td>Carrera 10 No. 89 norte 12</td>
-						<td>7659087</td>
-				</tr>
 				
 				{% for suc in sucu %}
 					<tr>
-						<td>{{suc.suc_id}}</td>
+						<td>{{suc.mun_id.dep_id.dep_nombre}}</td>
+						<td>{{suc.mun_id.mun_nombre}}</td>
 						<td>{{suc.suc_nombre}}</td>
 						<td>{{suc.suc_direccion}}</td>
 						<td>{{suc.suc_telefono}}</td>
