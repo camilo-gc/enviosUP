@@ -22,6 +22,19 @@ def administracion(request):
     else:
         return redirect(reverse_lazy('login'))  # Probaaaaaar!!!
 
+def empleado(request):
+    usuario = request.user
+    if usuario.is_active:
+        return render(request, 'empleado.html')
+    else:
+        return redirect(reverse_lazy('login'))  # Probaaaaaar!!!
+
+def l_envios(request):
+    usuario = request.user
+    if usuario.is_active:
+        return render(request, 'l_envios.html')
+    else:
+        return redirect(reverse_lazy('login'))  # Probaaaaaar!!!       
 
 def operacional(request):
     usuario = request.user
