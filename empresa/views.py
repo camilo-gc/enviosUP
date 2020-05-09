@@ -14,6 +14,17 @@ def index(request):
 def login(request):
     return render(request, 'login.html', {})
 
+def PL_principal(request):
+    return render(request, 'PL_principal.html', {})
+
+def PL_R_Mercancia(request):
+    return render(request, 'PL_R_Mercancia.html', {})
+
+def PL_L_Mercancia(request):
+    return render(request, 'PL_L_Mercancia.html', {})
+
+def PL_L_envios(request):
+    return render(request, 'PL_L_envios.html', {})
 
 def administracion(request):
     usuario = request.user
@@ -61,3 +72,5 @@ def descubrenos(request):
 
 def politicas(request):
     return render(request, 'empresa/legal.html', {})
+
+
