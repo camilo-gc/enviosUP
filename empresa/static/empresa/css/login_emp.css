@@ -1,15 +1,16 @@
 .fondo{
     background-repeat: repeat-x;
+    background-position: center;   
 }
 .main-section{
-    margin:0 auto;
-    margin-top:25%;
-    padding: 0;
+    margin:40px auto;
+    margin-top: 2%;
+    padding: 80px 0px;
 }
 
 .modal-content{
     background-color: #3b4652;
-    opacity: .85;
+    opacity: 1;
     padding: 0 20px;
     box-shadow: 0px 0px 3px #848484;
 }
@@ -61,3 +62,16 @@ button{
 .forgot a{
     color: white;
 }
+.salida{
+    font-size: 20px;
+	text-transform: uppercase;
+	font-weight: bold;
+    color: black;
+    font-family: sans-serif;
+}
+.salid{
+    padding: 10px 30px;
+}
+.salida:hover {
+    color:#007bff;
+  }
