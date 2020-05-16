@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Admin - ENVIOS UP</title>
+  <title>Logistica - ENVIOS UP</title>
   {% load static %}
   <!-- Favicon -->
   <link rel="shortcut icon" type="image/x-icon" href="{% static 'empresa/images/favicon.ico' %}" />
@@ -22,59 +22,48 @@
     <div class="scrollbar-inner">
       <div class="sidenav-header  align-items-center">
         <a class="navbar-brand" href="javascript:void(0)">
-          <img src="{% static 'empresa/images/ENVIOS UP.png' %}" class="navbar-brand-img" alt="...">
+          <img href="{% url 'PL_principal' %}" src="{% static 'empresa/images/ENVIOS UP.png' %}" class="navbar-brand-img">
         </a>
       </div>
       <div class="navbar-inner">
         <div class="collapse navbar-collapse" id="sidenav-collapse-main">
-          <!-- Nav items -->
           <ul class="navbar-nav">
+            
             <li class="nav-item">
-              <a class="nav-link active" href="{% url 'administracion' %}">
-                <i class="ni ni-tv-2 text-primary"></i>
-                <span class="nav-link-text">Sucursales</span>
+              <a class="nav-link" href="{% url 'PL_R_Mercancia' %}">
+                <i class="ni ni-folder-17 text-red"></i>
+                <span class="nav-link-text">Registrar Mercancia</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'administracion' %}">
-                <i class="ni ni-planet text-orange"></i>
-                <span class="nav-link-text">Vehiculos</span>
+              <a class="nav-link" href="{% url 'PL_L_envios' %}">
+                <i class="ni ni-pin-3 text-green"></i>
+                <span class="nav-link-text">Listar Envios</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'l_envios' %}">
-                <i class="ni ni-pin-3 text-primary"></i>
-                <span class="nav-link-text">Envios</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'empleado' %}">
-                <i class="ni ni-single-02 text-yellow"></i>
-                <span class="nav-link-text">Empleados</span>
+              <a class="nav-link" href="{% url 'PL_L_Mercancia' %}">
+                <i class="ni ni-archive-2 text-blue"></i>
+                <span class="nav-link-text">Listar Mercancia</span>
               </a>
             </li>
           </ul>
-          <!-- Divider -->
           <hr class="my-3">
         </div>
       </div>
     </div>
   </nav>
   <div class="main-content" id="panel">
-    <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom">
+    <nav  class="navbar navbar-top navbar-expand navbar-dark bg-primary2 border-bottom">
       <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav align-items-center  ml-md-auto ">
             <li class="nav-item dropdown">
               <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <div class="media align-items-center">
-                  <div class="media-body  ml-4  d-none d-lg-block">
-                    <form class="" action="{% url 'logout' %}" method="POST">{% csrf_token %}
-                      <span>¡Bienvenido {{user.username}}!</span>
-                      <br>
-                      <button id="logout" type="submit" class="btn btn-primary"><i
-                              class="ni ni-user-run"></i>  Cerrar Sesion</button>
-                  </form>
+                  <div class="media-body  ml-2  d-none d-lg-block">
+                    <i class="ni ni-user-run"></i>
+                    <span>Cerrar Sesion</span>
                   </div>
                 </div>
               </a>
@@ -84,7 +73,7 @@
       </div>
     </nav>
  
-    <div class="header bg-primary pb-6">
+    <div class="header bg-primary2 pb-6">
       <div class="container-fluid">
         <div class="header-body">
           <div class="row align-items-center py-4">
@@ -108,11 +97,14 @@
               <table class="table align-items-center table-flush">
                 <thead class="thead-light">
                   <tr>
-                    <th scope="col" class="sort" data-sort="name">Numero de guia</th>
-                    <th scope="col" class="sort" data-sort="budget">Destinatario</th>
-                    <th scope="col" class="sort" data-sort="status">Entrega estimada</th>
-                    <th scope="col">Municipio</th>
-                    <th scope="col" class="sort" data-sort="completion">Sucursal</th>
+                    <th scope="col" >ID_envio</th>
+                    <th scope="col" >ID_mercancia</th>
+                    <th scope="col">ID_vehiculo</th>
+                    <th scope="col">ID_destinatario</th>
+                    <th scope="col">ID_empleado</th>
+                    <th scope="col">Precio_envio</th>
+                    <th scope="col">Registro_envio</th>
+                    <th scope="col">Entrega_estimada</th>
                   </tr>
                 </thead>
                 <tbody class="list">
@@ -122,10 +114,6 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                  </tr>
-                  <tr>
-                    <th></th>
-                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -136,9 +124,35 @@
                     <td></td>
                     <td></td>
                     <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                   </tr>
                   <tr>
                     <th></th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <th></th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <th></th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -148,6 +162,7 @@
               </table>
             </div>
           </div>
+          <a  href="#!" class="btn btn-sm btn-primary" style="background:rgb(15, 122, 42);">Listar Envio</a>
         </div>
       </div>      
       <!-- Footer -->

@@ -20,6 +20,29 @@ def rastreo(request):
 def login(request):
     return render(request, 'login.html', {})
 
+def PL_principal(request):
+    return render(request, 'PL_principal.html', {})
+
+def PL_R_Mercancia(request):
+    return render(request, 'PL_R_Mercancia.html', {})
+
+def PL_L_Mercancia(request):
+    return render(request, 'PL_L_Mercancia.html', {})
+
+def PL_L_envios(request):
+    return render(request, 'PL_L_envios.html', {})
+    
+def registrar_cliente(request):
+    return render(request, 'registrar_cliente.html', {})
+
+def registrar_envio(request):
+    return render(request, 'registrar_envio.html', {})
+
+def modificar_cliente(request):
+    return render(request, 'modificar_cliente.html', {})
+
+def buscar_cliente(request):
+    return render(request, 'buscar_cliente.html', {})
 
 def administracion(request):
     usuario = request.user
@@ -119,6 +142,7 @@ def politicas(request):
     return render(request, 'empresa/legal.html', {})
 
 
+
 def codificarContrasena(cadena):
     b = cadena.encode("UTF-8")  # codificando la cadena en bytes
     e = b64encode(b)  # codificar los bytes Base64
@@ -132,3 +156,4 @@ def decodificarContrasena(cadena):
     d = b64decode(b1)  # decodificando los bytes Base64
     con2 = d.decode("UTF-8")  # decodificando los bytes a cadena
     return con2
+

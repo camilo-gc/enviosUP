@@ -12,5 +12,16 @@ urlpatterns = [
     path('login/', views.login, name= 'login'),
     path('empleado/', views.empleado, name= 'empleado'),
     path('l_envios/', views.l_envios, name= 'l_envios'),
+<<<<<<< HEAD
     path('rastreo/', views.rastreo, name= 'rastreo'),
+=======
+    path('PL_principal/', views.PL_principal, name='PL_principal'),
+    path('PL_R_Mercancia/', views.PL_R_Mercancia, name='PL_R_Mercancia'),
+    path('PL_L_Mercancia/', views.PL_L_Mercancia, name='PL_L_Mercancia'),
+    path('PL_L_envios/', views.PL_L_envios, name='PL_L_envios'),
+    path('registrar_cliente/', views.registrar_cliente, name='registrar_cliente'),
+    path('registrar_envio/', views.registrar_envio, name='registrar_envio'),
+    path('modificar_cliente/', views.modificar_cliente, name='modificar_cliente'),
+    path('buscar_cliente/', views.buscar_cliente, name='buscar_cliente'),
+>>>>>>> b2e409dbd089d2ef5545835ae5a35b9f9c53eff0
 ]
