@@ -28,6 +28,18 @@ def PL_L_Mercancia(request):
 
 def PL_L_envios(request):
     return render(request, 'PL_L_envios.html', {})
+    
+def registrar_cliente(request):
+    return render(request, 'registrar_cliente.html', {})
+
+def registrar_envio(request):
+    return render(request, 'registrar_envio.html', {})
+
+def modificar_cliente(request):
+    return render(request, 'modificar_cliente.html', {})
+
+def buscar_cliente(request):
+    return render(request, 'buscar_cliente.html', {})
 
 def administracion(request):
     usuario = request.user
