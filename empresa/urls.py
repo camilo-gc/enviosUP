@@ -12,4 +12,5 @@ urlpatterns = [
     path('login/', views.login, name= 'login'),
     path('empleado/', views.empleado, name= 'empleado'),
     path('l_envios/', views.l_envios, name= 'l_envios'),
+    path('rastreo/', views.rastreo, name= 'rastreo'),
 ]

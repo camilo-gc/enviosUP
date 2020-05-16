@@ -13,6 +13,9 @@ from personal.models import Tipo_documento, Persona, Empleado, Rol
 def index(request):
     return render(request, 'empresa/index.html', {})
 
+def rastreo(request):
+    return render(request, 'rastreo.html', {})
+
 
 def login(request):
     return render(request, 'login.html', {})
