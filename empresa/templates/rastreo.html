@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- BOOTSTRAP-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <title>Rastreo envio</title>
+    {% include "empresa/header.html" %}
+    {% load static %}
+    <!--- Favicon-->
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'empresa/images/favicon.ico' %}" />
+    
+</head>
+<body style="background-color: white;">
+        {% include "empresa/nav.html" %}
+        <div id="gtco-features" style="background:cornflowerblue">
+            <div class="gtco-container">
+                <div class="row">
+                    <div class="col-md-offset-1 text-left gtco-heading animate-box">
+                        <h2>Seguimiento de tu envio</h2><br>
+                        <h3>Numero de guia:</h3>
+                        <h3>Fecha de registro::</h3>
+                        <h3>Entrega estimada:</h3>
+                        <h3>Destinatario:</h3>
+                        <h3>Remitente:</h3>
+                        <h3>Estado del envio:</h3>
+                        <h3>Origen:</h3>
+                        <h3>Destino:</h3>
+                    </div>
+                    <div class="col-md-offset-1 text-left gtco-heading animate-box">
+                        <h2>Historial de estados</h2><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <footer>
+            {% include "empresa/footer.html" %}
+        </footer>
+</body>
+
+</html>

@@ -13,6 +13,9 @@ from ubicacion.models import Departamento, Municipio
 def index(request):
     return render(request, 'empresa/index.html', {})
 
+def rastreo(request):
+    return render(request, 'rastreo.html', {})
+
 
 def login(request):
     return render(request, 'login.html', {})
