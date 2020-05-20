@@ -78,53 +78,52 @@
       </div>
     </nav>
   
-    <!----------------------------------------------------DATOS DEL REMITENTE-------------------------------------------------------------------->
+    <!--DATOS DEL REMITENTE-->
 
-    <div style="min-height: 100px;"">  </div>
-    <div class="container-fluid mt--6"style="min-height: 100px;" >
-            <div class="row">
-                    <div class="col-xl-8 order-xl-1">
-                      <div class="card">
-                        <div class="card-header">
-                          <div class="row align-items-center">
-                            <div class="col-8">
-                              <h3 class="mb-0">REMITENTE:</h3>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="card-body">
-                <form>
-                    <h6 class="heading-small text-muted mb-4"></h6>
-                    <div class="pl-lg-4">
-
-                      <div class="row">
-                        <div class="col-xs-6 col-sm-6 col-md-6 col-xl-6">
-                          <div class="form-group">
-                            <label class="form-control-label" for="clie_documento">Tipo de identificación</label>
-                            <input type="text" id="clie_documento" class="form-control" placeholder="Tipo de Documento" value="">
-                          </div>
-                        </div>
-                        <div class="col-xs-6 col-sm-6 col-md-6 col-xl-6">
-                          <div class="form-group">
-                            <label class="form-control-label" for="clie_id">Número identificación</label>
-                            <input type="text" id="clie_id" class="form-control" >
-                          </div>
-                        </div>
-                      </div>
-                      <button id="btn-envio" type="button" class="btn btn-primary ">Buscar</button>
-                      
-
-
-                      </div>
-                    </div>
-                </form>
+<div style="min-height: 80px;">  </div>
+<div class="container-fluid mt--6"style="min-height: 100px;" >
+  <div class="row">
+    <div class="col-xl-8 order-xl-1">
+      <div class="card">
+        <div class="card-header">
+          <div class="row align-items-center">
+            <div class="col-8">
+              <h3 class="mb-0">REMITENTE:</h3>
             </div>
           </div>
         </div>
+        <div class="card-body">
+          <form>
+            <h6 class="heading-small text-muted mb-4"></h6>
+            <div class="pl-lg-4">
+              <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-xl-6">
+                  <div class="form-group">
+                    <label class="form-control-label" for="clie_id">Número identificación:</label>
+                    <input type="text" id="cli_doc" class="form-control" required>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label">Forma de pago:</label>
+                    <select name="fpago" class="form-control" id="fpago">
+                      {% for f in fp %}
+                        <option value="{{f.fp_id}}">{{f.fp_nombre}}</option>
+                      {% endfor%}
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
-<!----------------------------------------------------------DATOS DEL DESTINATARIO------------------------------------------------------------->
+    </div>
+  </div>
+</div>
+<!--DATOS DEL DESTINATARIO-->
       
-  <div style="min-height: 100px;"">  </div>
+  <div style="min-height: 80px;">  </div>
     <div class="container-fluid mt--6"style="min-height: 100px;" >
           <div class="row">
             <div class="col-xl-8 order-xl-1">
@@ -141,25 +140,65 @@
             <h6 class="heading-small text-muted mb-4"></h6>
             <div class="pl-lg-4">
 
-              <div class="row">
+              <div class="row">            
                 <div class="col-lg-6">
                   <div class="form-group">
-                    <label class="form-control-label" for="clie_documento">Tipo de identificación</label>
-                    <input type="text" id="clie_documento" class="form-control" placeholder="Tipo de Documento" value="">
+                    <label class="form-control-label" >Documento de identificación:</label>
+                    <input type="text" id="cli_doc" class="form-control" required>
                   </div>
                 </div>
-               
-
                 <div class="col-lg-6">
                   <div class="form-group">
-                    <label class="form-control-label" for="clie_id">Número identificación</label>
-                    <input type="text" id="clie_id" class="form-control" >
+                    <label class="form-control-label" >Nombre del Destinatario:</label>
+                    <input type="text" id="cli_nom" class="form-control" required>
+                  </div>
+                </div>
+              </div>
+              <div class="row">            
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label" >Número Celular de Contacto:</label>
+                    <input type="text" id="cli_cel" class="form-control" required>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label" >Nombre Telefono de Contacto:</label>
+                    <input type="text" id="cli_tel" class="form-control" required>
+                  </div>
+                </div>
+              </div>
+              <div class="row">            
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label">Departamento:</label>
+                    <select name="dep" class="form-control" id="dep">
+                        {% for d in dep %}
+                          <option value="{{d.dep_id}}">{{d.dep_nombre}}</option>
+                        {% endfor%}
+                      </select>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label">Municipio:</label>
+                    <select name="mun" class="form-control" id="mun">
+                        {% for m in mun %}
+                          <option value="{{m.mun_id}}">{{m.mun_nombre}}</option>
+                        {% endfor%}
+                      </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">            
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label" >Dirección:</label>
+                    <input type="text" id="cli_dir" class="form-control" required>
                   </div>
                 </div>
               </div>
 
-              <button id="btn-envio" type="button" class="btn btn-primary ">Buscar</button>
-              
               </div>
             </div>
 
@@ -169,11 +208,11 @@
 </div>
 </div>
 
-<!----------------------------------------------------------DATOS DE LA MERCANCIA------------------------------------------------------------->
+<!--DATOS DE LA MERCANCIA-->
 
-<div style="min-height: 100px;"">  </div>
+<div style="min-height: 80px;">  </div>
 <div class="container-fluid mt--6"style="min-height: 100px;" >
-<div class="row">
+  <div class="row">
     <div class="col-xl-8 order-xl-1">
       <div class="card">
         <div class="card-header">
@@ -184,47 +223,79 @@
           </div>
         </div>
         <div class="card-body">
-<form>
-    <h6 class="heading-small text-muted mb-4"></h6>
-    <div class="pl-lg-4">
-      <div class="row">
-        <div class="col-lg-6">
-          <div class="form-group">
-            <label class="form-control-label" for="peso">Peso:</label>
-            <input type="text" id="peso" class="form-control" >
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <div class="form-group">
-            <label class="form-control-label" for="peso_v">Peso Volumen:</label>
-            <input type="text" id="peso_v" class="form-control" placeholder="Volumen">
-          </div>
-        </div>
-      </div>
-      <div class="row">
-          <div class="col-lg-6">
-              <div class="form-group">
-                <label class="form-control-label" for="unidades">Unidades:</label>
-                <input type="text" id="unidades" class="form-control">
-              </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="form-group">
-                  <label class="form-control-label" for="v_declarado">Valor declarado:</label>
-                  <input type="text" id="v_declarado" class="form-control" >
+          <form>
+            <h6 class="heading-small text-muted mb-4"></h6>
+            <div class="pl-lg-4">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label">Tipo de mercancía:</label>
+                    <select name="tmer" class="form-control" id="tmer">
+                      {% for t in tm %}
+                        <option value="{{t.tm_id}}">{{t.tm_nombre}}</option>
+                      {% endfor%}
+                    </select>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label">Contenido de la mercancía:</label>
+                    <input type="text" id="contenido" class="form-control" >
+                  </div>
                 </div>
               </div>
-      </div>
-    </div>
-              </form>
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label" for="unidades">Peso (kg):</label>
+                    <input type="text" id="peso" class="form-control">
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label" for="v_declarado">Alto (cm):</label>
+                    <input type="text" id="alto" class="form-control" >
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label" for="unidades">Ancho (cm):</label>
+                    <input type="text" id="ancho" class="form-control">
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label" for="v_declarado">Largo (cm):</label>
+                    <input type="text" id="largo" class="form-control" >
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label" for="unidades">Precio declarado:</label>
+                    <input type="text" id="declarado" class="form-control">
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label" for="v_declarado">Precio envío:</label>
+                    <input type="text" id="precio" class="form-control" >
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>
-<!----------------------------------------------------------INFORMACIÒN DEL ENVÍO------------------------------------------------------------->
+  </div>
+</div>
+<!--INFORMACIÒN DEL ENVÍO
 
-<div style="min-height: 100px;"">  </div>
+<div style="min-height: 80px;">  </div>
 <div class="container-fluid mt--6"style="min-height: 100px;" >
 <div class="row">
     <div class="col-xl-8 order-xl-1">
@@ -244,7 +315,7 @@
         <div class="col-lg-6">
           <div class="form-group">
             <label class="form-control-label" for="num_guia">Número de guía:</label>
-            <input type="text" id="num_guia" class="form-control" ">
+            <input type="text" id="num_guia" class="form-control" >
           </div>
         </div>
         <div class="col-lg-6">
@@ -276,23 +347,71 @@
       </div>
     </div>
     <button  id="btn-envio" type="button" class="btn btn-primary ">Registrar envío</button>
-  </div>
+  </div>-->
  
-<!--------------------------------------------------------------------------------------------------------------------------------------------------->
+<!-- Emplado que realiza el registro de la mercancía-->
 
-      <!-- Footer -->
-      <footer class="footer pt-0">
-        <div class="row align-items-center justify-content-lg-between">
-          <div class="col-lg-6">
-            <div class="copyright text-center  text-lg-left  text-muted">
-              &copy; 2020 - Envios UP 
+
+<div style="min-height: 80px;">  </div>
+  <div class="container-fluid mt--6"style="min-height: 100px;" >
+    <div class="row">
+      <div class="col-xl-8 order-xl-1">
+        <div class="card">
+          <div class="card-header">
+            <div class="row align-items-center">
+              <div class="col-8">
+                <h3 class="mb-0">Empleado:</h3>
+              </div>
             </div>
           </div>
-        </div>
-      </footer>
+        <div class="card-body">
+        <form action="{% url 'registrar_envio' %}" method="POST" name="f1">{% csrf_token %}
+          <h6 class="heading-small text-muted mb-4"></h6>
+          <div class="pl-lg-4">
+            <div class="row">
+              <div class="col-xs-6 col-sm-6 col-md-6 col-xl-6">
+                <div class="form-group">
+                  <label class="form-control-label" for="clie_id">Número identificación:</label>
+                  <input type="text" id="cli_doc" class="form-control" required>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <button type="submit" style="margin:40px"  class="btn btn-sm btn-primary">Registrar Mercancía</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
+</div>
+
+      <!-- Footer -->
+    <footer class="footer pt-0">
+      <div class="row align-items-center justify-content-lg-between">
+        <div class="col-lg-6">
+          <div class="copyright text-center  text-lg-left  text-muted">
+            &copy; 2020 - Envios UP 
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+</div>
   <!--Scripts -->
   <script src="../assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script type="text/javascript">
+    var doc_cli = document.getElementById('cli_doc');
+    console.log(doc_cli);
+    $('#cli_doc').keypress(function(e) {
+      var keycode = (e.keyCode ? e.keyCode : e.which);
+      if (keycode == '13') {
+        console.log(doc_cli);
+        toastr.info("El documento es: " + doc_cli)
+        return false;
+      }
+    });
+  
+  </script>
 </body>
 </html>

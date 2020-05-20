@@ -4,9 +4,9 @@ from django.urls import reverse_lazy
 from django.http import HttpResponse
 from django.contrib import messages
 from empresa.models import Sucursal, Tarifa
-from envio.models import Tipo_mercancia
+from envio.models import Tipo_mercancia, Forma_pago, Tipo_mercancia
 from personal.models import Tipo_documento, Persona, Empleado, Rol
-
+from ubicacion.models import Departamento, Municipio
 # Create your views here.
 
 
@@ -33,7 +33,13 @@ def registrar_cliente(request):
     return render(request, 'registrar_cliente.html', {})
 
 def registrar_envio(request):
-    return render(request, 'registrar_envio.html', {})
+
+    formapago = Forma_pago.objects.all()
+    tipomer = Tipo_mercancia.objects.all()
+    depa = Departamento.objects.all().filter(dep_estado=1)
+    muni = Municipio.objects.all().filter(mun_estado = 1)
+
+    return render(request, 'registrar_envio.html', {'fp':formapago, 'tm':tipomer, 'dep':depa, 'mun':muni })
 
 def modificar_cliente(request):
     return render(request, 'modificar_cliente.html', {})
@@ -72,17 +78,6 @@ def empleado(request):
             finContrato = request.POST.get('emp_finContrato', None)
             salario = request.POST.get('emp_salario', None)
             existe = Persona.objects.filter(per_documento=documento).exists()
-            print(nombre)
-            print(rol)
-            print(sucursal)
-            print(tipo_doc)
-            print(existe)
-            print(apellido)
-            print(correo)
-            print(fecha_nac)
-            print(inicioContrato)
-            print(finContrato)
-            print(salario)
             try:
                 if(existe):
                     messages.info(request, 'Ya se encuentra registrado.')
