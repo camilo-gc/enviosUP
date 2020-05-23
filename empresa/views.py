@@ -23,7 +23,8 @@ def login(request):
     return render(request, 'login.html', {})
 
 def eliminar_emp(request):
-    return render(request, 'eliminar_empleado.html', {})
+    tiposDoc = Tipo_documento.objects.all()
+    return render(request, 'eliminar_empleado.html', {'tipo':tiposDoc})
 
 def PL_principal(request):
     return render(request, 'PL_principal.html', {})
@@ -126,6 +127,17 @@ def empleado(request):
     else:
         return redirect(reverse_lazy('login'))  # Probaaaaaar!!!
 
+def buscar_empleado(request):
+    documento = request.POST.get('td_id', None)
+    emp = Empleado.objects.filter(per_documento_id=documento)
+
+    if emp.exists():
+        per = Persona.objects.filter(per_documento=documento)
+        rol = Rol.objects.filter(rol_id=emp.rol_id)
+        return render(request, 'eliminar_empleado.html', {'per': per}, {'rol': rol}, {'emp':emp})
+    else:
+        messages.info(request, 'Empleado no encontrado.')
+    
 
 def l_envios(request):
     usuario = request.user
