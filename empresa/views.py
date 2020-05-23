@@ -22,6 +22,8 @@ def rastreo(request):
 def login(request):
     return render(request, 'login.html', {})
 
+def eliminar_emp(request):
+    return render(request, 'eliminar_empleado.html', {})
 
 def PL_principal(request):
     return render(request, 'PL_principal.html', {})

@@ -21,6 +21,7 @@
   <link rel="stylesheet" href="{% static 'empresa/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css' %}" type="text/css">
   <!-- CSS -->
   <link rel="stylesheet" href="{% static 'empresa/css/argon2.css' %}" type="text/css">
+  <link rel="stylesheet" href="{% static 'empresa/css/empleado.css' %}" type="text/css">
 <!--Validaciones-->
 <script type="text/javascript">
 
@@ -203,6 +204,12 @@
               <div class="row align-items-center">
                 <div class="col-8">
                   <h3 class="mb-0">Empleado</h3>
+                </div>
+                <div class="text-right">
+                  <a class="nav-link" href="#">
+                  <span class="btn btn-sm" style="background-color:yellow;color:white;">Modificar Empleado</span></a>
+                  <a class="nav-link" href="{% url 'eliminar_empleado' %}">
+                  <span class="btn btn-sm" style="background-color:red; color:white;">Eliminar Empleado</span></a>
                 </div>
               </div>
             </div>
