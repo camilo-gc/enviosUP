@@ -68,7 +68,7 @@
                 <div class="media align-items-center">
                   <div class="media-body  ml-4  d-none d-lg-block">
                     <form class="" action="{% url 'logout' %}" method="POST">{% csrf_token %}
-                      <span>¡Bienvenido {{user.username}}!</span>
+                      <span>¡Bienvenido {{user.first_name}}!</span>
                       <br>
                       <button id="logout" type="submit" class="btn btn-primary"><i
                               class="ni ni-user-run"></i>  Cerrar Sesion</button>

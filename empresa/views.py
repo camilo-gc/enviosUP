@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.http import HttpResponse
 from django.contrib import messages
+from django.contrib.auth.models import User
 from empresa.models import Sucursal, Tarifa
 from envio.models import Tipo_mercancia, Forma_pago, Tipo_mercancia
 from personal.models import Tipo_documento, Persona, Empleado, Rol
@@ -13,6 +14,7 @@ from ubicacion.models import Departamento, Municipio
 def index(request):
     return render(request, 'empresa/index.html', {})
 
+
 def rastreo(request):
     return render(request, 'rastreo.html', {})
 
@@ -20,35 +22,44 @@ def rastreo(request):
 def login(request):
     return render(request, 'login.html', {})
 
+
 def PL_principal(request):
     return render(request, 'PL_principal.html', {})
+
 
 def PL_R_Mercancia(request):
     return render(request, 'PL_R_Mercancia.html', {})
 
+
 def PL_L_Mercancia(request):
     return render(request, 'PL_L_Mercancia.html', {})
 
+
 def PL_L_envios(request):
     return render(request, 'PL_L_envios.html', {})
-    
+
+
 def registrar_cliente(request):
     return render(request, 'registrar_cliente.html', {})
+
 
 def registrar_envio(request):
 
     formapago = Forma_pago.objects.all()
     tipomer = Tipo_mercancia.objects.all()
     depa = Departamento.objects.all().filter(dep_estado=1)
-    muni = Municipio.objects.all().filter(mun_estado = 1)
+    muni = Municipio.objects.all().filter(mun_estado=1)
 
-    return render(request, 'registrar_envio.html', {'fp':formapago, 'tm':tipomer, 'dep':depa, 'mun':muni })
+    return render(request, 'registrar_envio.html', {'fp': formapago, 'tm': tipomer, 'dep': depa, 'mun': muni})
+
 
 def modificar_cliente(request):
     return render(request, 'modificar_cliente.html', {})
 
+
 def buscar_cliente(request):
     return render(request, 'buscar_cliente.html', {})
+
 
 def administracion(request):
     usuario = request.user
@@ -56,6 +67,7 @@ def administracion(request):
         return render(request, 'administracion.html', {'user': usuario})
     else:
         return redirect(reverse_lazy('login'))  # Probaaaaaar!!!
+
 
 def empleado(request):
     usuario = request.user
@@ -86,29 +98,40 @@ def empleado(request):
                     messages.info(request, 'Ya se encuentra registrado.')
                 else:
                     persona = Persona(per_documento=documento, per_nombre=nombre, per_apellido=apellido, per_fecha_naci=fecha_nac,
-                                per_email=correo, per_telefono=telefono, per_celular=celular, per_direccion=direccion, td_id_id=tipo_doc, per_contrasena=contrasena)
+                                      per_email=correo, per_telefono=telefono, per_celular=celular, per_direccion=direccion, td_id_id=tipo_doc, per_contrasena=contrasena)
                     empleado = Empleado(per_documento_id=documento, suc_id_id=sucursal, rol_id_id=rol, emp_inicio_contrato=inicioContrato,
-                                emp_fin_contrato=finContrato, emp_salario=salario, emp_estado=1)
+                                        emp_fin_contrato=finContrato, emp_salario=salario, emp_estado=1)
+                    usuario = User.objects.create_user(correo, correo, contrasena)
+                    usuario.first_name = nombre
+                    usuario.last_name = apellido
+                    usuario.is_staff = True
+                    
+
+                    if rol == '1':
+                        usuario.is_superuser = True
+
                     persona.save()
                     empleado.save()
+                    usuario.save()
                     messages.success(request, 'Registro exitoso.')
             except Exception as e:
                 messages.error(request, "Algo ha salido mal")
-                print (e)
+                print(e)
         else:
             ''
-
 
         return render(request, 'empleado.html', {'tipos': tiposDoc, 'roles': roles, 'suc': sucursales})
     else:
         return redirect(reverse_lazy('login'))  # Probaaaaaar!!!
+
 
 def l_envios(request):
     usuario = request.user
     if usuario.is_active:
         return render(request, 'l_envios.html')
     else:
-        return redirect(reverse_lazy('login'))  # Probaaaaaar!!!       
+        return redirect(reverse_lazy('login'))  # Probaaaaaar!!!
+
 
 def operacional(request):
     usuario = request.user
@@ -131,11 +154,11 @@ def tarifas(request):
 
 def descubrenos(request):
     sucursales = Sucursal.objects.select_related('mun_id').order_by('mun_id')
-    return render(request, 'empresa/nosotros.html',{'sucu':sucursales})
+    return render(request, 'empresa/nosotros.html', {'sucu': sucursales})
+
 
 def politicas(request):
     return render(request, 'empresa/legal.html', {})
-
 
 
 def codificarContrasena(cadena):
@@ -151,4 +174,3 @@ def decodificarContrasena(cadena):
     d = b64decode(b1)  # decodificando los bytes Base64
     con2 = d.decode("UTF-8")  # decodificando los bytes a cadena
     return con2
-
