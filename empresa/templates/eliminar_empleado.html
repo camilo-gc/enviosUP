@@ -83,47 +83,149 @@
                 </div>
             </div>
         </nav>
+        <div style="min-height: 100px;"> </div>
+        <div class="container-fluid mt--6" style="min-height: 100px;">
+            <div class="row">
+              <div class="col-xl-8 order-xl-1">
+                <div class="card">
         <div class="card-body">
-            <div class="pl-lg-4">
-                <h2> Eliminar Empleado</h2>
+            <h2>Datos del Empleado</h2><br>
+            <form onsubmit="return validar();" class="col-12" action="{% url 'empleado' %}" method="POST"
+              name="f1">
+              {% csrf_token %}
+              <h6 class="heading-small text-muted mb-4">Informacion Personal</h6>
+              <div class="pl-lg-4">
                 <div class="row">
-                    <div class="col-lg-4">
-                        <div class="form-group">
-                            <label class="form-control-label" for="td_id">Tipo de Documento</label>
-                            <select id="td_id" name="tipo_documento" class="form-control">
-                                {% for tipo in tipos %}
-                                <option value="{{tipo.td_id}}">{{tipo.td_nombre}}</option>
-                                {% endfor%}
-                            </select>
-                            <br>
-                        </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="td_id">Tipo de Documento</label>
+                      <select id="td_id" name="tipo_documento" class="form-control">
+                        {% for tipo in tipos %}
+                        <option value="{{tipo.td_id}}">{{tipo.td_nombre}}</option>
+                        {% endfor%}
+                      </select>
                     </div>
-                    <div class="col-lg-4">
-                        <div class="form-group">
-                            <label class="form-control-label" for="per_documento">Documento</label>
-                            <input type="text" id="per_documento" name="per_documento" class="form-control"
-                                placeholder="Documento" value="" required>
-                            <div class="text-right">
-                                <br>
-                                <button type="submit" class="btn btn-sm btn-primary">Buscar</button></div>
-                        </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="per_documento">Documento</label>
+                      <input type="text" id="per_documento" name="per_documento" class="form-control"
+                        placeholder="Documento" value="" required>
                     </div>
-
+                  </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-4">
-                        <div class="form-group">
-                            <h3>Documento: : {{per.per_documento}}</h3>
-                            <h3>Nombres: {{per.per_nombre}}</h3>
-                            <h3>Apellidos: {{per.per_apellido}}</h3>
-                            <h3>Rol: {{emp.rol_id}}</h3>
-                            <button type="submit" class="btn btn-sm"
-                                style="background-color: red; color:white">Eliminar</button>
-                        </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="per_nombre">Nombres</label>
+                      <input type="text" id="per_nombre" name="per_nombre" class="form-control"
+                        placeholder="Nombres" value="" required>
                     </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="per_apellido">Apellidos</label>
+                      <input type="text" id="per_apellido" name="per_apellido" class="form-control"
+                        placeholder="Apellidos" value="" required>
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="per_telefono">Telefono</label>
+                      <input type="text" id="per_telefono" name="per_telefono" onkeypress="comprueba_tel(this)"
+                        class="form-control" placeholder="Telefono" required>
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="per_email">Correo Electronico</label>
+                      <input type="text" id="per_email" name="per_email" class="form-control"
+                        placeholder="Correo Electronico" value="" required>
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="per_celular">Telefono Celular</label>
+                      <input type="text" id="per_celular" name="per_celular" onkeypress="comprueba_celular(this)"
+                        class="form-control" placeholder="Telefono Celular" required>
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="per_fechanaci">Fecha de Nacimiento</label>
+                      <input type="date" id="per_fechanaci" name="per_fechanaci" class="form-control"
+                        placeholder="Fecha de Nacimiento" value="" required>
+                    </div>
+                  </div>
                 </div>
+              </div>
+              <hr class="my-4" />
+              <h6 class="heading-small text-muted mb-4">Ubicacion</h6>
+              <div class="pl-lg-4">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="dep_id">Sucursales</label>
+                      <select name="suc_id" class="form-control" id="suc_id">
+                        {% for sucu in suc %}
+                        <option value="{{sucu.suc_id}}">{{sucu.suc_nombre}}</option>
+                        {% endfor%}
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="per_direccion">Direccion</label>
+                      <input id="per_direccion" name="per_direccion" class="form-control" placeholder="Direccion"
+                        value="" type="text" required>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr class="my-4" />
+              <h6 class="heading-small text-muted mb-4">Vinculacion</h6>
+              <div class="pl-lg-4">
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="emp_finContrato">Fin de Contrato</label>
+                      <input type="date" id="emp_finContrato" name="emp_finContrato" class="form-control"
+                        placeholder="Fin de Contrato" required>
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="rol_rol_id">Rol</label>
+                      <select name="roles" class="form-control" id="rol_rol_id">
+                        {% for rol in roles %}
+                        <option value="{{rol.rol_id}}">{{rol.rol_nombre}}</option>
+                        {% endfor%}
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="emp_salario">Salario</label>
+                      <input type="number" id="emp_salario" name="emp_salario"
+                        onkeypress="comprueba_salario(this)" class="form-control" placeholder="Salario" value=""
+                        required>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 text-right">
+                <button type="submit" class="btn btn-sm" style="background-color: rgb(45, 2, 145); color: whitesmoke;">Modificar</button>
+                <button type="submit" class="btn btn-sm" style="background-color: red; color: whitesmoke;">Eliminar</button>
+              </div>
+            </form>
+          </div>
+                </div>
+              </div>
             </div>
         </div>
+    </div>
 </body>
 
 </html>
