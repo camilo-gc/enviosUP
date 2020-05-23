@@ -487,13 +487,11 @@
     $('#peso').on('change', calcularPrecio);
 
     function buscarCliente(doc){
-      console.log("Funciion " + doc);
       $.ajax({
         data: {'doc' : doc},
         url: '/buscar_cliente_ajax/',
         type: 'get',
         success: function (response){
-          console.log(response.length);
           if(response.length == 0){ 
             $('#datosPerson').removeAttr("style");
 
@@ -505,22 +503,17 @@
             $('#cli_tel').val(response[0].fields.per_telefono);
             $('#cli_cor').val(response[0].fields.per_email);
             $('#cli_dir').val(response[0].fields.per_direccion);
-
-
-            console.log(response[0].fields.per_nombre);
           }
         },
       });
     }
 
     function buscarDestinatario(doc){
-      console.log("Funciion " + doc);
       $.ajax({
         data: {'doc' : doc},
         url: '/buscar_destinatario_ajax/',
         type: 'get',
         success: function (response){
-          console.log(response.length);
           if(response.length == 0){ 
             $('#divNombreDes').removeAttr("style");
             $('#datosDesUno').removeAttr("style");
@@ -538,9 +531,6 @@
             $('#des_cor').val(response[0].fields.des_email);
             $('#des_dir').val(response[0].fields.des_direccion);
             $('#des_cor').val(response[0].fields.des_email);
-
-
-            console.log(response[0].fields.des_nombre);
           }
         },
       });
@@ -562,13 +552,10 @@
             $('#ancho').removeAttr("disabled");
             $('#largo').removeAttr("disabled");
           }
-
-          console.log(response)
           var precio = parseInt(response[0].fields.tm_precio);
           var adicional = parseInt(response[0].fields.tm_precio_adicional);
           //$('#precio').val( precio + adicional );
           $('#precio').attr("value", (precio + adicional));
-          console.log( precio + adicional );
         },
       });
     }
@@ -593,14 +580,11 @@
     }
 
     function buscarEmpleado(doc){
-      console.log("Funciion " + doc);
       $.ajax({
         data: {'doc' : doc},
         url: '/buscar_empleado_ajax/',
         type: 'get',
         success: function (response){
-          console.log(response.length);
-          console.log(response);
           if(response.length == 1 && parseInt(response[0].fields.emp_estado) == 1){ 
              $('#register').removeAttr("disabled");
           }else if(response.length == 1 && parseInt(response[0].fields.emp_estado) != 1){
