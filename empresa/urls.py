@@ -20,4 +20,5 @@ urlpatterns = [
     path('registrar_envio/', views.registrar_envio, name='registrar_envio'),
     path('modificar_cliente/', views.modificar_cliente, name='modificar_cliente'),
     path('buscar_cliente/', views.buscar_cliente, name='buscar_cliente'),
+    path('Guia/', views.Guia, name='Guia'), 
 ]

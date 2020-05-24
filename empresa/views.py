@@ -6,8 +6,15 @@ from django.contrib import messages
 from empresa.models import Sucursal, Tarifa
 from envio.models import Tipo_mercancia
 from personal.models import Tipo_documento, Persona, Empleado, Rol
-
+from django.views.generic import View
 # Create your views here.
+from enviosUP.utileria_r import render_to_pdf #created in step 4
+
+ 
+     
+def Guia(request):
+    pdf = render_to_pdf('Guia.html')
+    return HttpResponse(pdf, content_type='application/pdf')
 
 
 def index(request):
