@@ -17,24 +17,26 @@
   <!-- Fonts -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
   <!-- Icons -->
-  <link rel="stylesheet" href="{% static 'empresa/assets/vendor/nucleo/css/nucleo.css' %}"type="text/css">
-  <link rel="stylesheet" href="{% static 'empresa/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css' %}" type="text/css">
+  <link rel="stylesheet" href="{% static 'empresa/assets/vendor/nucleo/css/nucleo.css' %}" type="text/css">
+  <link rel="stylesheet" href="{% static 'empresa/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css' %}"
+    type="text/css">
   <!-- CSS -->
   <link rel="stylesheet" href="{% static 'empresa/css/argon2.css' %}" type="text/css">
-<!--Validaciones-->
-<script type="text/javascript">
+  <link rel="stylesheet" href="{% static 'empresa/css/empleado.css' %}" type="text/css">
+  <!--Validaciones-->
+  <script type="text/javascript">
 
-    $(document).ready(function() {
+    $(document).ready(function () {
 
-    $('#pass2').keyup(function() {
+      $('#pass2').keyup(function () {
 
         var pass1 = $('#per_contraseña').val();
         var pass2 = $('#per_repetir_contraseña').val();
 
-        if ( pass1 == pass2 ) {
-            $('#error2').css("background", "url({% static 'personal/img/check.png' %})");
+        if (pass1 == pass2) {
+          $('#error2').css("background", "url({% static 'personal/img/check.png' %})");
         } else {
-            $('#error2').css("background", "url({% static 'personal/img/check-.png' %})");
+          $('#error2').css("background", "url({% static 'personal/img/check-.png' %})");
         }
 
       });
@@ -43,87 +45,87 @@
     /* Validacion telefono */
     var numero = document.getElementById('per_telefono');
 
-    function comprueba_tel(valor){
-      if(valor.value <= 0){
+    function comprueba_tel(valor) {
+      if (valor.value <= 0) {
         valor.value = "";
       }
-      if( valor.value.length >7 ) {
-          alert("No es un telefono valido");
-          $("#per_telefono").val("");
-      return false;
-    }
+      if (valor.value.length > 7) {
+        alert("No es un telefono valido");
+        $("#per_telefono").val("");
+        return false;
+      }
     }
     /* Validacion celular */
     var numero = document.getElementById('per_celular');
 
-    function comprueba_celular(valor){
-      if(valor.value <= 0){
+    function comprueba_celular(valor) {
+      if (valor.value <= 0) {
         valor.value = "";
       }
-      if( valor.value.length >15 ) {
-      alert("Numero de celular invalido");
-      $("#per_celular").val("");
-      return false;
-    }
+      if (valor.value.length > 15) {
+        alert("Numero de celular invalido");
+        $("#per_celular").val("");
+        return false;
+      }
     }
     /* Validacion salario */
     var numero = document.getElementById('emp_salario');
 
-    function comprueba_salario(valor){
-      if(valor.value <= 0){
-        valor.value = 877803;
+    function comprueba_salario(valor) {
+      if (valor.value <= 0) {
+        valor.value = 980657;
       }
-      if( valor.value.length<6) {
-      alert("Salario mal establecido");
-      $("#emp_salario").val("");
-      return false;
+      if (valor.value.length < 6) {
+        alert("Salario mal establecido");
+        $("#emp_salario").val("");
+        return false;
       }
     }
     // validacion fecha de nacimiento
-    $(document).ready(function(){
-          $("#per_fechanaci").change(function(){
-              var hoy= new Date();
-                var fecha=$('#per_fechanaci').val();
-                var fechaFormulario=Date.parse(fecha);			
-          if (hoy <= fechaFormulario) {
-                      alert("Fecha de nacimiento invalida");
-                      $("#per_fechanaci").val("");
-          }
-          });
-        });
-      //validacion contrato
-      $(document).ready(function(){
-          $("#emp_finContrato").change(function(){
-              var fecha_inicio= $('#emp_inicioContrato').val();
-                var fecha_final=$('#emp_finContrato').val();
-                var fechaContratoF=Date.parse(fecha_final);
-                var fechaContratoI=Date.parse(fecha_inicio);				
-          if (fechaContratoF <= fechaContratoI) {
-                      alert("El contrato esta mal definido");
-                      $("#emp_inicioContrato").val("");
-                      $("#emp_finContrato").val("");
-                      return false;
-          }
-          });
-        });
-   </script>
+    $(document).ready(function () {
+      $("#per_fechanaci").change(function () {
+        var hoy = new Date();
+        var fecha = $('#per_fechanaci').val();
+        var fechaFormulario = Date.parse(fecha);
+        if (hoy <= fechaFormulario) {
+          alert("Fecha de nacimiento invalida");
+          $("#per_fechanaci").val("");
+        }
+      });
+    });
+    //validacion contrato
+    $(document).ready(function () {
+      $("#emp_finContrato").change(function () {
+        var fecha_inicio = $('#emp_inicioContrato').val();
+        var fecha_final = $('#emp_finContrato').val();
+        var fechaContratoF = Date.parse(fecha_final);
+        var fechaContratoI = Date.parse(fecha_inicio);
+        if (fechaContratoF <= fechaContratoI) {
+          alert("El contrato esta mal definido");
+          $("#emp_inicioContrato").val("");
+          $("#emp_finContrato").val("");
+          return false;
+        }
+      });
+    });
+  </script>
 </head>
 
 <body>
 
   {% if messages %}
-        {% for message in messages %}
-            {% if message.tags == 'success'%}
-                <script type=text/javascript>toastr.{{ message.tags }}('{{ message }}')</script>
-            {% elif message.tags == 'info' %}
-                <script type=text/javascript>toastr.{{ message.tags }}('{{ message }}')</script>
-            {% elif message.tags == 'warning' %}
-                <script type=text/javascript>toastr.{{ message.tags }}('{{ message }}')</script>
-            {% elif message.tags == 'error' %}
-                <script type=text/javascript>toastr.{{ message.tags }}('{{ message }}')</script>
-            {% endif %}
-        {% endfor %}
-    {% endif %}
+  {% for message in messages %}
+  {% if message.tags == 'success'%}
+  <script type=text/javascript>toastr.{{ message.tags }}('{{ message }}')</script>
+  {% elif message.tags == 'info' %}
+  <script type=text/javascript>toastr.{{ message.tags }}('{{ message }}')</script>
+  {% elif message.tags == 'warning' %}
+  <script type=text/javascript>toastr.{{ message.tags }}('{{ message }}')</script>
+  {% elif message.tags == 'error' %}
+  <script type=text/javascript>toastr.{{ message.tags }}('{{ message }}')</script>
+  {% endif %}
+  {% endfor %}
+  {% endif %}
   <!-- Sidenav -->
   <nav class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white" id="sidenav-main">
     <div class="scrollbar-inner">
@@ -177,15 +179,16 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav align-items-center  ml-md-auto ">
             <li class="nav-item dropdown">
-              <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
                 <div class="media align-items-center">
                   <div class="media-body  ml-4  d-none d-lg-block">
                     <form class="" action="{% url 'logout' %}" method="POST">{% csrf_token %}
                       <span>¡Bienvenido {{user.username}}!</span>
                       <br>
-                      <button id="logout" type="submit" class="btn btn-primary"><i
-                              class="ni ni-user-run"></i>  Cerrar Sesion</button>
-                  </form>
+                      <button id="logout" type="submit" class="btn btn-primary"><i class="ni ni-user-run"></i> Cerrar
+                        Sesion</button>
+                    </form>
                   </div>
                 </div>
               </a>
@@ -194,170 +197,219 @@
         </div>
       </div>
     </nav>
-    <div style="min-height: 100px;">  </div>
-    <div class="container-fluid mt--6"style="min-height: 100px;" >
+    <div style="min-height: 100px;"> </div>
+    <div class="container-fluid mt--6" style="min-height: 100px;">
       <div class="row">
         <div class="col-xl-8 order-xl-1">
           <div class="card">
             <div class="card-header">
               <div class="row align-items-center">
                 <div class="col-8">
-                  <h3 class="mb-0">Empleado</h3>
+                  <h2> Buscar Empleado</h2>
+                  <div class="row">
+                    <div class="card-body">
+                      <div class="pl-lg-2">
+                        <div class="row">
+                          <div class="col-lg-6">
+                            <div class="form-group">
+                              <label class="form-control-label" for="td_id">Tipo de Documento</label>
+                              <select id="td_id" name="tipo_documento" class="form-control">
+                                {% for tipo in tipos %}
+                                <option value="{{tipo.td_id}}">{{tipo.td_nombre}}</option>
+                                {% endfor%}
+                              </select>
+                            </div>
+                          </div>
+                          <div class="col-lg-6">
+                            <div class="form-group">
+                              <label class="form-control-label" for="per_documento">Documento</label>
+                              <input type="text" id="per_documento" name="per_documento" class="form-control"
+                                placeholder="Documento" value="" required>
+                                <br>
+                                <div class="text-right">
+                                  <button type="submit" class="btn btn-sm "
+                                    style="background-color: rgb(2, 145, 2); color: white;">Buscar</button>
+                                </div>
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+                      <h2 class="mb-0">Registrar Empleado</h2>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="card-body">
-              <form onsubmit="return validar();"class="col-12" action="{% url 'empleado' %}" method="POST" name="f1">{% csrf_token %}
-                <h6 class="heading-small text-muted mb-4">Informacion Personal</h6>
-                <div class="pl-lg-4">
-                  <div class="row">
-                  <div class="col-lg-6">
-                      <div class="form-group">
-                        <label class="form-control-label" for="td_id">Tipo de Documento</label>
-                        <select id="td_id" name="tipo_documento" class="form-control" >
-                          {% for tipo in tipos %}
-                            <option value="{{tipo.td_id}}">{{tipo.td_nombre}}</option>
-                          {% endfor%}
-                        </select>
+                <div class="card-body">
+                  <form onsubmit="return validar();" class="col-12" action="{% url 'empleado' %}" method="POST"
+                    name="f1">
+                    {% csrf_token %}
+                    <h6 class="heading-small text-muted mb-4">Informacion Personal</h6>
+                    <div class="pl-lg-4">
+                      <div class="row">
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label class="form-control-label" for="td_id">Tipo de Documento</label>
+                            <select id="td_id" name="tipo_documento" class="form-control">
+                              {% for tipo in tipos %}
+                              <option value="{{tipo.td_id}}">{{tipo.td_nombre}}</option>
+                              {% endfor%}
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label class="form-control-label" for="per_documento">Documento</label>
+                            <input type="text" id="per_documento" name="per_documento" class="form-control"
+                              placeholder="Documento" value="" required>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label class="form-control-label" for="per_nombre">Nombres</label>
+                            <input type="text" id="per_nombre" name="per_nombre" class="form-control"
+                              placeholder="Nombres" value="" required>
+                          </div>
+                        </div>
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label class="form-control-label" for="per_apellido">Apellidos</label>
+                            <input type="text" id="per_apellido" name="per_apellido" class="form-control"
+                              placeholder="Apellidos" value="" required>
+                          </div>
+                        </div>
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label class="form-control-label" for="per_telefono">Telefono</label>
+                            <input type="text" id="per_telefono" name="per_telefono" onkeypress="comprueba_tel(this)"
+                              class="form-control" placeholder="Telefono" required>
+                          </div>
+                        </div>
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label class="form-control-label" for="per_email">Correo Electronico</label>
+                            <input type="text" id="per_email" name="per_email" class="form-control"
+                              placeholder="Correo Electronico" value="" required>
+                          </div>
+                        </div>
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label class="form-control-label" for="per_celular">Telefono Celular</label>
+                            <input type="text" id="per_celular" name="per_celular" onkeypress="comprueba_celular(this)"
+                              class="form-control" placeholder="Telefono Celular" required>
+                          </div>
+                        </div>
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label class="form-control-label" for="per_fechanaci">Fecha de Nacimiento</label>
+                            <input type="date" id="per_fechanaci" name="per_fechanaci" class="form-control"
+                              placeholder="Fecha de Nacimiento" value="" required>
+                          </div>
+                        </div>
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label class="form-control-label" for="per_fechanaci">Contraseña</label>
+                            <input type="password" id="per_contraseña" name="per_contraseña" class="form-control"
+                              placeholder="Contraseña" value="" required>
+                          </div>
+                        </div>
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label class="form-control-label" for="per_fechanaci">Repetir contraseña</label>
+                            <input type="password" id="per_repetir_contraseña" class="form-control"
+                              placeholder="Repetir contraseña" value="" required>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label class="form-control-label" for="per_documento">Documento</label>
-                        <input type="text" id="per_documento" name="per_documento" class="form-control" placeholder="Documento" value="" required>
+                    <hr class="my-4" />
+                    <h6 class="heading-small text-muted mb-4">Ubicacion</h6>
+                    <div class="pl-lg-4">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label class="form-control-label" for="dep_id">Sucursales</label>
+                            <select name="suc_id" class="form-control" id="suc_id">
+                              {% for sucu in suc %}
+                              <option value="{{sucu.suc_id}}">{{sucu.suc_nombre}}</option>
+                              {% endfor%}
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label class="form-control-label" for="per_direccion">Direccion</label>
+                            <input id="per_direccion" name="per_direccion" class="form-control" placeholder="Direccion"
+                              value="" type="text" required>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label class="form-control-label" for="per_nombre">Nombres</label>
-                        <input type="text" id="per_nombre" name="per_nombre" class="form-control" placeholder="Nombres" value="" required>
+                    <hr class="my-4" />
+                    <h6 class="heading-small text-muted mb-4">Vinculacion</h6>
+                    <div class="pl-lg-4">
+                      <div class="row">
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label class="form-control-label" for="emp_inicioContrato">Inicio de Contrato</label>
+                            <input type="date" id="emp_inicioContrato" name="emp_inicioContrato" class="form-control"
+                              placeholder="Inicio de Contrato" required>
+                          </div>
+                        </div>
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label class="form-control-label" for="emp_finContrato">Fin de Contrato</label>
+                            <input type="date" id="emp_finContrato" name="emp_finContrato" class="form-control"
+                              placeholder="Fin de Contrato" required>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label class="form-control-label" for="rol_rol_id">Rol</label>
+                            <select name="roles" class="form-control" id="rol_rol_id">
+                              {% for rol in roles %}
+                              <option value="{{rol.rol_id}}">{{rol.rol_nombre}}</option>
+                              {% endfor%}
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label class="form-control-label" for="emp_salario">Salario</label>
+                            <input type="number" id="emp_salario" name="emp_salario"
+                              onkeypress="comprueba_salario(this)" class="form-control" placeholder="Salario" value=""
+                              required>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label class="form-control-label" for="per_apellido">Apellidos</label>
-                        <input type="text" id="per_apellido" name="per_apellido" class="form-control" placeholder="Apellidos" value="" required>
-                      </div>
+                    <div class="col-12 text-right">
+                      <button type="submit" class="btn btn-sm btn-primary">Añadir Empleado</button>
                     </div>
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label class="form-control-label" for="per_telefono">Telefono</label>
-                        <input type="text" id="per_telefono" name="per_telefono" onkeypress="comprueba_tel(this)" class="form-control" placeholder="Telefono" required>
-                      </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label class="form-control-label" for="per_email">Correo Electronico</label>
-                        <input type="text" id="per_email" name="per_email" class="form-control" placeholder="Correo Electronico" value="" required>
-                      </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label class="form-control-label" for="per_celular">Telefono Celular</label>
-                        <input type="text" id="per_celular" name="per_celular" onkeypress="comprueba_celular(this)" class="form-control" placeholder="Telefono Celular" required>
-                      </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label class="form-control-label" for="per_fechanaci">Fecha de Nacimiento</label>
-                        <input type="date" id="per_fechanaci" name="per_fechanaci" class="form-control" placeholder="Fecha de Nacimiento" value="" required>
-                      </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label class="form-control-label" for="per_fechanaci">Contraseña</label>
-                        <input type="password" id="per_contraseña" name="per_contraseña" class="form-control" placeholder="Contraseña" value="" required>
-                      </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label class="form-control-label" for="per_fechanaci">Repetir contraseña</label>
-                        <input type="password" id="per_repetir_contraseña" class="form-control" placeholder="Repetir contraseña" value="" required>
-                      </div>
-                    </div>
-                  </div>
+                  </form>
                 </div>
-                <hr class="my-4" />
-                <h6 class="heading-small text-muted mb-4">Ubicacion</h6>
-                <div class="pl-lg-4">
-                  <div class="row">
-                  <div class="col-md-6">
-                      <div class="form-group">
-                        <label class="form-control-label" for="dep_id">Sucursales</label>
-                        <select name="suc_id" class="form-control" id="suc_id">
-                          {% for sucu in suc %}
-                            <option value="{{sucu.suc_id}}">{{sucu.suc_nombre}}</option>
-                          {% endfor%}
-                        </select>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label class="form-control-label" for="per_direccion">Direccion</label>
-                        <input id="per_direccion" name="per_direccion" class="form-control" placeholder="Direccion" value="" type="text" required>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <hr class="my-4" />
-                <h6 class="heading-small text-muted mb-4">Vinculacion</h6>
-                <div class="pl-lg-4">
-                  <div class="row">
-                  <div class="col-lg-6">
-                    <div class="form-group">
-                      <label class="form-control-label" for="emp_inicioContrato">Inicio de Contrato</label>
-                      <input type="date" id="emp_inicioContrato" name="emp_inicioContrato" class="form-control" placeholder="Inicio de Contrato" required>
-                    </div>
-                  </div>
-                  <div class="col-lg-6">
-                    <div class="form-group">
-                      <label class="form-control-label" for="emp_finContrato">Fin de Contrato</label>
-                      <input type="date" id="emp_finContrato" name="emp_finContrato" class="form-control" placeholder="Fin de Contrato" required>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                <div class="col-lg-6">
-                    <div class="form-group">
-                      <label class="form-control-label" for="rol_rol_id">Rol</label>
-                      <select name="roles" class="form-control" id="rol_rol_id">
-                        {% for rol in roles %}
-                          <option value="{{rol.rol_id}}">{{rol.rol_nombre}}</option>
-                        {% endfor%}
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-lg-6">
-                    <div class="form-group">
-                      <label class="form-control-label" for="emp_salario">Salario</label>
-                      <input type="number" id="emp_salario" name="emp_salario" onkeypress="comprueba_salario(this)" class="form-control" placeholder="Salario" value="" required>
-                    </div>
-                  </div>
-                </div>
-                </div>
-                <div class="col-12 text-right">
-                  <button type="submit"  class="btn btn-sm btn-primary">Añadir Empleado</button>
-                </div>
-              </form>
+              </div>
             </div>
           </div>
+          <!-- Footer -->
+          <footer class="footer pt-0">
+            <div class="row align-items-center justify-content-lg-between">
+              <div class="col-lg-6">
+                <div class="copyright text-center  text-lg-left  text-muted">
+                  &copy; 2020 - Envios UP
+                </div>
+              </div>
+            </div>
+          </footer>
         </div>
       </div>
-      <!-- Footer -->
-      <footer class="footer pt-0">
-        <div class="row align-items-center justify-content-lg-between">
-          <div class="col-lg-6">
-            <div class="copyright text-center  text-lg-left  text-muted">
-              &copy; 2020 - Envios UP 
-            </div>
-          </div>
-        </div>
-      </footer>
-    </div>
-  </div>
-  <!--Scripts -->
-  <script src="../assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+      <!--Scripts -->
+      <script src="../assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

@@ -7,7 +7,6 @@ from vehiculo.models import Vehiculo
 # 0 -> Inactivo
 # 1 -> Activo
 
-#  envio, estado, estado envio
 class Forma_pago(models.Model):
     fp_id = models.AutoField(primary_key = True)
     fp_nombre = models.CharField(max_length = 50)
@@ -24,27 +23,29 @@ class Tipo_mercancia(models.Model):
     tv_estado =  models.IntegerField()
 
 class Destinatario(models.Model):
-    des_id = models.AutoField(primary_key = True)
     mun_id = models.ForeignKey(Municipio, on_delete = models.PROTECT)
-    des_documento = models.CharField(max_length = 15)
+    des_documento = models.CharField(max_length = 15, primary_key = True)
     des_nombre = models.CharField(max_length = 100)
     des_direccion = models.CharField(max_length = 50)
     des_telefono = models.CharField(max_length = 15, blank = True)
-    des_celular = models.CharField(max_length = 15)
+    des_celular = models.CharField(max_length=15)
+    des_email = models.CharField(max_length = 50, null = True)
 
 class Mercancia(models.Model):
-    mer_id = models.AutoField(primary_key = True)
+    mer_id = models.AutoField(max_length = 15, primary_key  = True)
     cli_documento = models.ForeignKey(Cliente, on_delete = models.PROTECT)
     des_documento = models.ForeignKey(Destinatario, on_delete = models.PROTECT)
     tm_id = models.ForeignKey(Tipo_mercancia, on_delete = models.PROTECT)
     emp_id = models.ForeignKey(Empleado, on_delete = models.PROTECT)
     fp_id = models.ForeignKey(Forma_pago, on_delete = models.PROTECT)
     mer_peso = models.DecimalField(max_digits = 10, decimal_places = 2)
-    mer_alto = models.DecimalField(max_digits = 10, decimal_places = 2, null = True, blank = True)
-    mer_ancho = models.DecimalField(max_digits = 10, decimal_places = 2, null = True, blank = True)
-    mer_largo = models.DecimalField(max_digits = 10, decimal_places = 2, null = True, blank = True)
+    mer_alto = models.DecimalField(max_digits = 10, decimal_places = 2, null = True, blank = True, default = 0)
+    mer_ancho = models.DecimalField(max_digits = 10, decimal_places = 2, null = True, blank = True, default = 0)
+    mer_largo = models.DecimalField(max_digits = 10, decimal_places = 2, null = True, blank = True, default = 0)
     mer_precio = models.DecimalField(max_digits = 10, decimal_places = 2)
-    mer_precio_envio = models.DecimalField(max_digits = 10, decimal_places = 2)
+    mer_precio_envio = models.DecimalField(max_digits=10, decimal_places=2)
+    mer_contenido = models.CharField(max_length=350, null=True)
+    mer_num_guia = models.CharField(max_length = 15, default = 0)
 
 class Envio(models.Model):
     env_id = models.AutoField(primary_key = True)

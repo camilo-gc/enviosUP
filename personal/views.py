@@ -57,13 +57,17 @@ def login_user(request):
     user = authenticate(request, username=username, password=password)
     if user is not None:
         login(request, user)
-        if request.user.is_staff is not False:
+        if request.user.is_superuser is not False:
             # Redirecciona panel admin #acordar lo de app_name para la rutas
             return redirect(reverse_lazy('administracion'))
-        else:
+        elif request.user.is_staff is not False:
             # Se deve validar que rol tiene el usuario para redireccionarlo despues
-            # Redireccionar Panel NO administrador
+            # Redireccionar Panel NO administrador            
             return redirect(reverse_lazy('operacion'))
+        else:
+            messages.error(request, 'Esta intentando ingresar al sistema desde un lugar no permitido')
+            # De prueba, se debe modificar.
+            return render(request, 'empresa/index.html')
     else:
         print('credenciales incorrectas')
         messages.error(request, 'Usuario o contraseña incorrectos')
