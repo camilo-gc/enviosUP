@@ -126,7 +126,7 @@ def registrar_mercancia(request):
     else: ''
 
 
-    return render(request, 'registrar_envio.html', {'fp': formapago, 'tm': tipomer, 'mun': muni})
+    return render(request, 'registrar_mercancia.html', {'fp': formapago, 'tm': tipomer, 'mun': muni})
     
 def buscar_cliente_ajax(request):
     doc = request.GET.get('doc')
@@ -137,7 +137,7 @@ def buscar_cliente_ajax(request):
 def buscar_destinatario_ajax(request):
     doc = request.GET.get('doc')
     destinatario = Destinatario.objects.filter(des_documento = doc)
-    data = serializers.serialize('json', destinatario, fields = ('des_documento', 'des_nombre', 'des_telefono', 'des_celular', 'des_direccion', 'des_email'))
+    data = serializers.serialize('json', destinatario, fields = ('des_documento', 'mun_id', 'des_nombre', 'des_telefono', 'des_celular', 'des_direccion', 'des_email'))
     return HttpResponse(data, content_type='application/json')
 
 def buscar_empleado_ajax(request):

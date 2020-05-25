@@ -525,6 +525,7 @@
             $('#datosDesUno').removeAttr("style");
             $('#datosDesDos').removeAttr("style");
             $('#datosDesTres').removeAttr("style");
+            $('select option[value="'+response[0].fields.mun_id +'"]').attr("selected", true);
             $('#des_nom').val(response[0].fields.des_nombre);
             $('#des_cel').val(response[0].fields.des_celular);
             $('#des_tel').val(response[0].fields.des_telefono);
