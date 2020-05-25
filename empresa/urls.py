@@ -20,10 +20,12 @@ urlpatterns = [
     path('registrar_cliente/', views.registrar_cliente, name='registrar_cliente'),
     path('registrar_mercancia/', views.registrar_mercancia, name='registrar_mercancia'),
     path('modificar_cliente/', views.modificar_cliente, name='modificar_cliente'),
+    path('modificar_empleado/', views.modificar_empleado, name='modificar_empleado'),
     path('buscar_cliente/', views.buscar_cliente, name='buscar_cliente'),
+    path('buscar_empleado/', views.buscar_empleado, name='buscar_emp'),    
+    path('Guia/', views.Guia, name='Guia'), 
     path('buscar_cliente_ajax/', views.buscar_cliente_ajax, name='buscar_cliente_ajax'),
     path('buscar_destinatario_ajax/', views.buscar_destinatario_ajax, name='buscar_destinatario_ajax'),
     path('buscar_precio/', views.buscar_precio, name='buscar_precio'),
     path('buscar_empleado_ajax/', views.buscar_empleado_ajax, name='buscar_empleado_ajax'),
-    path('eliminar_empleado/', views.eliminar_emp, name='eliminar_empleado'),
 ]

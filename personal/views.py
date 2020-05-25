@@ -74,6 +74,12 @@ def login_user(request):
         # De prueba, se debe modificar.
         return render(request, 'empresa/index.html')
 
+def modificar_empleado(request):
+    return redirect(reverse_lazy('login'))
+
+def eliminar_empleado(request):
+    return redirect(reverse_lazy('home'))
+
 
 def logout(request):
     # Finalizamos la sesión
