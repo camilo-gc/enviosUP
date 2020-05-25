@@ -154,12 +154,9 @@
 
                         <select name="suc_id" class="form-control" id="suc_id">
                           {% for sucu in suc %}
-                            <option value="{{sucu.suc_id}}" 
-                            {% if sucu.suc_id == su %}
-                              selected="true"
-                            {% endif %}
-                            >
-                              {{sucu.suc_nombre}}</option>
+                          <option value="{{sucu.suc_id}}" {% if sucu.suc_id == emp.suc_id.suc_id %} selected="true" {% endif %}>
+                            {{sucu.suc_nombre}}
+                          </option>
                           {% endfor%}
                         </select>
 
@@ -182,21 +179,17 @@
                       <div class="form-group">
                         <label class="form-control-label" for="emp_finContrato">Fin de Contrato</label>
                         <input type="date" id="emp_finContrato" name="emp_finContrato" class="form-control"
-                          value="{{emp.emp_fin_contrato}}" placeholder="Fin de Contrato" required>
+                          value="{{fin_contrato}}" placeholder="Fin de Contrato" required>
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <label class="form-control-label" for="rol_rol_id">Rol: {{rol}}</label>
+                        <label class="form-control-label" for="rol_rol_id">Rol</label>
                         <select name="roles" class="form-control" id="rol_rol_id">
                           {% for rols in roles %}
-                            <option value="{{rols.rol_id}}" 
-                            {% if rols.rol_id == rol %} 
-                              selected="true" 
-                            {% endif %}
-                            >
-                              {{rols.rol_id}}: {{rols.rol_nombre}}
-                            </option>
+                          <option value="{{rols.rol_id}}" {% if rols.rol_id == emp.rol_id.rol_id %} selected="true" {% endif %}>
+                            {{rols.rol_nombre}}
+                          </option>
                           {% endfor%}
                         </select>
                       </div>
@@ -207,16 +200,18 @@
                       <div class="form-group">
                         <label class="form-control-label" for="emp_salario">Salario</label>
                         <input type="number" id="emp_salario" name="emp_salario" onkeypress="comprueba_salario(this)"
-                          class="form-control" placeholder="Salario" value="{{emp.emp_salario}}" required>
+                          class="form-control" placeholder="Salario" value="{{salario}}" required>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="col-12 text-right">
                   <input type="submit" name="modificar" value="Modificar" class="btn btn-sm"
-                    onclick=this.form.action="{% url 'modificar_empleado' %}" style="background-color: rgb(45, 2, 145); color: whitesmoke;">
-                    <input type="submit" name="eliminar" value="Eliminar" class="btn btn-sm"
-                    onclick=this.form.action="{% url 'eliminar_empleado' %}" style="background-color: red; color: whitesmoke;">
+                    onclick=this.form.action="{% url 'modificar_empleado' %}"
+                    style="background-color: rgb(45, 2, 145); color: whitesmoke;">
+                  <input type="submit" name="eliminar" value="Eliminar" class="btn btn-sm"
+                    onclick=this.form.action="{% url 'eliminar_empleado' %}"
+                    style="background-color: red; color: whitesmoke;">
                 </div>
               </form>
             </div>
