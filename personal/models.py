@@ -32,7 +32,7 @@ class Persona(models.Model):
     td_id = models.ForeignKey(Tipo_documento, on_delete = models.PROTECT)
     per_nombre = models.CharField(max_length = 50)
     per_apellido = models.CharField(max_length = 50)
-    per_fecha_naci = models.DateField()
+    per_fecha_naci = models.DateField(null = True)
     per_email = models.EmailField(null = True)
     per_contrasena = models.CharField(max_length = 512)
     per_telefono = models.CharField(max_length = 10, null = True, blank = True)
@@ -40,7 +40,8 @@ class Persona(models.Model):
     per_direccion = models.CharField(max_length = 100)
 
 class Cliente(models.Model):
-    per_documento = models.ForeignKey(Persona,  on_delete = models.PROTECT, primary_key = True)
+    cli_id = models.AutoField(primary_key = True)
+    per_documento = models.OneToOneField(Persona, on_delete = models.PROTECT)
     cli_estado = models.IntegerField(default = 1, max_length = 1)
     cli_fecha_registro = models.DateField()
 
