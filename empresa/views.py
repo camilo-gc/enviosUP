@@ -22,10 +22,10 @@ def rastreo(request):
 def login(request):
     return render(request, 'login.html', {})
 
-def eliminar_emp(request):
+"""def eliminar_emp(request):
     tiposDoc = Tipo_documento.objects.all()
     return render(request, 'eliminar_empleado.html', {'tipo':tiposDoc})
-
+"""
 def PL_principal(request):
     return render(request, 'PL_principal.html', {})
 
@@ -128,16 +128,18 @@ def empleado(request):
         return redirect(reverse_lazy('login'))  # Probaaaaaar!!!
 
 def buscar_empleado(request):
-    documento = request.POST.get('td_id', None)
+    documento = request.POST.get('bus_per_documento', None)
     emp = Empleado.objects.filter(per_documento_id=documento)
-
     if emp.exists():
-        per = Persona.objects.filter(per_documento=documento)
-        rol = Rol.objects.filter(rol_id=emp.rol_id)
-        return render(request, 'eliminar_empleado.html', {'per': per}, {'rol': rol}, {'emp':emp})
+        tiposDoc = Tipo_documento.objects.all()
+        roles = Rol.objects.all()
+        sucursales = Sucursal.objects.all()
+        per = emp[0].per_documento
+        id_rol = emp[0].rol_id.rol_id
+        return render(request, 'eliminar_empleado.html', {'tipos': tiposDoc, 'roles': roles, 'suc': sucursales, 'per':per, 'emp':emp, 'rol':id_rol})
     else:
         messages.info(request, 'Empleado no encontrado.')
-    
+        return redirect(reverse_lazy('empleado'))
 
 def l_envios(request):
     usuario = request.user
