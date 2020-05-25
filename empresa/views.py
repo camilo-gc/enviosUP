@@ -7,7 +7,7 @@ from django.http import HttpResponse
 from django.contrib import messages
 from django.core import serializers
 from django.contrib.auth.models import User
-from empresa.models import Sucursal, Tarifa
+from empresa.models import Sucursal, Tarifa, Envios_up
 from envio.models import Tipo_mercancia
 from personal.models import Tipo_documento, Persona, Empleado, Rol
 from django.views.generic import View
@@ -20,8 +20,43 @@ from enviosUP.utileria_r import render_to_pdf #created in step 4
 
  
      
-def Guia(request):
-    pdf = render_to_pdf('Guia.html')
+def Guia(request, numGuia):
+    print("NUMERO DE GUIA: " + str(numGuia))
+    mer = Mercancia.objects.all().filter(mer_num_guia = numGuia)
+    emp = Envios_up.objects.all()
+    data = {
+        'numguia': numGuia,
+        'doc_cli': str(mer[0].cli_documento.per_documento.per_documento),
+        'fp': mer[0].fp_id.fp_nombre,
+        'nom_cli': mer[0].cli_documento.per_documento.per_nombre,
+        'ape_cli': mer[0].cli_documento.per_documento.per_apellido,
+        'cel_cli': mer[0].cli_documento.per_documento.per_celular,
+        'tel_cli': mer[0].cli_documento.per_documento.per_telefono,
+        'cor_cli': mer[0].cli_documento.per_documento.per_email,
+        'dir_cli': mer[0].cli_documento.per_documento.per_direccion,
+        'doc_des': str(mer[0].des_documento.des_documento),
+        'nom_des': mer[0].des_documento.des_nombre,
+        'cel_des': mer[0].des_documento.des_celular,
+        'tel_des': mer[0].des_documento.des_telefono,
+        'mun': str(mer[0].des_documento.mun_id.mun_nombre) + " - " + str(mer[0].des_documento.mun_id.dep_id.dep_nombre),
+        'dir_des': mer[0].des_documento.des_direccion,
+        'cor_des': mer[0].des_documento.des_email,
+        'tm': mer[0].tm_id.tm_nombre,
+        'peso': str(mer[0].mer_peso),
+        'con': mer[0].mer_contenido,
+        'dec': str(mer[0].mer_precio),
+        'precio': str(mer[0].mer_precio_envio),
+        'n': [0,1,2],
+        'nombre': emp[0].eu_nombre,
+        'nit': emp[0].eu_nit,
+        'suc': mer[0].emp_id.suc_id.suc_nombre,
+        'direccion': mer[0].emp_id.suc_id.suc_direccion + ", "+ mer[0].emp_id.suc_id.mun_id.mun_nombre + " - " +mer[0].emp_id.suc_id.mun_id.dep_id.dep_nombre,
+        'correo': emp[0].eu_email,
+        'telefono': mer[0].emp_id.suc_id.suc_telefono,
+        'fecha': time.strftime("%d-%m-%Y"),
+    }
+    print(data)
+    pdf = render_to_pdf('Guia.html', data)
     return HttpResponse(pdf, content_type='application/pdf')
 
 
@@ -60,7 +95,7 @@ def registrar_cliente(request):
     return render(request, 'registrar_cliente.html', {})
 
 def registrar_mercancia(request):
-    Guia(request)
+    numGuia = "Ninguno"
     formapago = Forma_pago.objects.all()
     tipomer = Tipo_mercancia.objects.all()
     muni = Municipio.objects.select_related('dep_id').filter(mun_estado=1).order_by('mun_id')
@@ -138,7 +173,7 @@ def registrar_mercancia(request):
     else: ''
 
 
-    return render(request, 'registrar_mercancia.html', {'fp': formapago, 'tm': tipomer, 'mun': muni})
+    return render(request, 'registrar_mercancia.html', {'fp': formapago, 'tm': tipomer, 'mun': muni, 'guia': numGuia})
     
 def buscar_cliente_ajax(request):
     doc = request.GET.get('doc')
@@ -192,7 +227,8 @@ def modificar_empleado(request):
                 if(existe):
                     persona = Persona(per_documento=documento, per_nombre=nombre, per_apellido=apellido,
                                       per_email=correo, per_telefono=telefono, per_celular=celular, per_direccion=direccion)
-                    empleado = Empleado(per_documento_id=documento, suc_id_id=sucursal, rol_id_id=rol,
+                    emp = Empleado.objects.all().filter(per_documento_id = documento)
+                    empleado = Empleado(emp_id=emp[0].emp_id, suc_id_id=sucursal, rol_id_id=rol,
                                         emp_fin_contrato=finContrato, emp_salario=salario, emp_estado=1)
                    
                     persona.save()
