@@ -79,8 +79,36 @@ def login_user(request):
 def eliminar_empleado(request):
     usuario = request.user
     if usuario.is_active:
+        tiposDoc = Tipo_documento.objects.all()
+        roles = Rol.objects.all()
+        sucursales = Sucursal.objects.all()
         if request.method == "POST":
-            pass
+            documento = request.POST.get('per_documento', None)
+            rol = request.POST.get('roles', None)
+            sucursal = request.POST.get('suc_id', None)
+            fin_contrato = request.POST.get('emp_finContrato', None)
+            salario = request.POST.get('emp_salario', None)
+            emp = Empleado.objects.filter(per_documento=documento)
+            per = Persona.objects.filter(per_documento=documento)
+
+            try:             
+                empleado = Empleado(emp_id=emp[0].emp_id)                
+                empleado.emp_inicio_contrato = emp[0].emp_inicio_contrato
+                empleado.emp_fin_contrato = fin_contrato
+                empleado.emp_salario = salario
+                empleado.emp_estado = 0
+                empleado.per_documento = per[0]
+                empleado.rol_id = Rol(rol_id=rol)
+                empleado.suc_id = Sucursal(suc_id=sucursal)
+                empleado.save()
+                messages.success(request, 'El empleado se elimino con exito')
+
+            except Exception as e:
+                messages.error(request, "Algo ha salido mal")
+                print(e)
+        return render(request, 'empleado.html', {'tipos': tiposDoc, 'roles': roles, 'suc': sucursales})
+    else:
+        return redirect(reverse_lazy('login'))
  
 def modificar_empleado(request):
     usuario = request.user
@@ -119,6 +147,7 @@ def modificar_empleado(request):
                 empleado.emp_inicio_contrato = emp[0].emp_inicio_contrato
                 empleado.emp_fin_contrato = fin_contrato
                 empleado.emp_salario = salario
+                empleado.emp_estado = emp[0].emp_estado
                 empleado.per_documento = per[0]
                 empleado.rol_id = Rol(rol_id=rol)
                 empleado.suc_id = Sucursal(suc_id=sucursal)
@@ -137,10 +166,6 @@ def modificar_empleado(request):
     else:
         return redirect(reverse_lazy('login'))
 
-
-def eliminar_empleado(request):
-
-    return redirect(reverse_lazy('home'))
 
 
 def logout(request):
