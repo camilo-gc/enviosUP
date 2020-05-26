@@ -97,17 +97,6 @@
                 <div class="pl-lg-4">
                   <div class="row">
                     <div class="col-lg-6">
-                    </div>
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label class="form-control-label" for="per_documento">Documento</label>
-                        <input type="text" id="per_documento" name="per_documento" class="form-control"
-                          placeholder="Documento" value="{{per.per_documento}}" required>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="per_nombre">Nombres</label>
                         <input type="text" id="per_nombre" name="per_nombre" class="form-control" placeholder="Nombres"
@@ -121,11 +110,14 @@
                           placeholder="Apellidos" value="{{per.per_apellido}}" required>
                       </div>
                     </div>
+                    
+                  </div>
+                  <div class="row">
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <label class="form-control-label" for="per_telefono">Telefono</label>
-                        <input type="text" id="per_telefono" name="per_telefono" onkeypress="comprueba_tel(this)"
-                          class="form-control" placeholder="Telefono" value="{{per.per_telefono}}" required>
+                        <label class="form-control-label" for="per_documento">Documento</label>
+                        <input type="text" id="per_documento" name="per_documento" class="form-control"
+                          placeholder="Documento" value="{{per.per_documento}}" required>
                       </div>
                     </div>
                     <div class="col-lg-6">
@@ -133,6 +125,13 @@
                         <label class="form-control-label" for="per_email">Correo Electronico</label>
                         <input type="text" id="per_email" name="per_email" class="form-control"
                           placeholder="Correo Electronico" value="{{per.per_email}}" required>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" for="per_telefono">Telefono</label>
+                        <input type="text" id="per_telefono" name="per_telefono" onkeypress="comprueba_tel(this)"
+                          class="form-control" placeholder="Telefono" value="{{per.per_telefono}}" required>
                       </div>
                     </div>
                     <div class="col-lg-6">
