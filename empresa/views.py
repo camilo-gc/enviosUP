@@ -92,7 +92,9 @@ def PL_R_Envio(request):
 
 
 def PL_L_Mercancia(request):
-    return render(request, 'PL_L_Mercancia.html', {})
+    mers = Mercancia.objects.all()
+    print (mers[0].mer_id)
+    return render(request, 'PL_L_Mercancia.html', {'mer': mers})
 
 
 def PL_L_envios(request):
