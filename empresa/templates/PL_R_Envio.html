@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Logistica - ENVIOS UP</title>
+  {% load static %}
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/x-icon" href="{% static 'empresa/images/favicon.ico' %}" />
+  <!-- Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+  <!-- Icons -->
+  <link rel="stylesheet" href="{% static 'empresa/assets/vendor/nucleo/css/nucleo.css' %}"type="text/css">
+  <link rel="stylesheet" href="{% static 'empresa/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css' %}" type="text/css">
+  <!-- CSS -->
+  <link rel="stylesheet" href="{% static 'empresa/css/argon2.css' %}" type="text/css">
+  <!-- JQuery Primero -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+ 
+</head>
+
+<body>
+  <nav class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white" id="sidenav-main">
+    <div class="scrollbar-inner">
+      <div class="sidenav-header  align-items-center">
+        <a class="navbar-brand" href="javascript:void(0)">
+          <img href="{% url 'PL_principal' %}" src="{% static 'empresa/images/ENVIOS UP.png' %}" class="navbar-brand-img">
+        </a>
+      </div>
+      <div class="navbar-inner">
+        <div class="collapse navbar-collapse" id="sidenav-collapse-main">
+          <ul class="navbar-nav">
+            
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'PL_R_Envio' %}">
+                <i class="ni ni-folder-17 text-red"></i>
+                <span class="nav-link-text">Registrar Envio</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'PL_L_envios' %}">
+                <i class="ni ni-pin-3 text-green"></i>
+                <span class="nav-link-text">Listar Envios</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'PL_L_Mercancia' %}">
+                <i class="ni ni-archive-2 text-blue"></i>
+                <span class="nav-link-text">Listar Mercancia</span>
+              </a>
+            </li>
+          </ul>
+          <hr class="my-3">
+        </div>
+      </div>
+    </div>
+  </nav>
+  <!-- Main content -->
+  <div class="main-content" id="panel">
+    <!-- Topnav -->
+    <nav style="background-color: #065226 " class="navbar navbar-top navbar-expand navbar-dark bg-primary2 border-bottom">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav align-items-center  ml-md-auto ">
+            <li class="nav-item dropdown">
+              <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <div class="media align-items-center">
+                  <div class="media-body  ml-2  d-none d-lg-block">
+                    <i class="ni ni-user-run"></i>
+                    <span>Cerrar Sesion</span>
+                  </div>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div style="min-height: 100px;">  </div>
+    <div class="container-fluid mt--6"style="min-height: 100px;" >
+      <div class="row">
+        <div class="col-xl-11 order-xl-1">
+          <div class="card">
+            <div class="card-header">
+              <div class="row align-items-center">
+                <div class="col-8">
+                  <h3 class="mb-0">REGISTRAR ENVIO</h3>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <form>
+                <h6 class="heading-small text-muted mb-4">DATOS CONDUCTOR</h6>
+                <div class="pl-lg-4">
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group" >
+                        <label class="form-control-label" >Conductor</label>
+                        <select name="Conductor" id="id_conductor"class="form-control">
+                          <option value="1">pepito</option> 
+                          <option value="2">pepita</option>
+                          <option value="3">pepota</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group" style="display: none" >
+                        <label class="form-control-label" >Nombres </label>
+                        <input type="text"  class="form-control" placeholder="Nombres Conductor">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group" style="display: none">
+                        <label class="form-control-label" for="per_apellido">Apellidos</label>
+                        <input type="text" id="per_nombre" class="form-control" placeholder="Apellidos Conductor" value="">
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group" style="display: none">
+                        <label class="form-control-label" for="per_celular">Celular</label>
+                        <input type="number" id="per_celular" class="form-control" placeholder="Celular conductor" value="">
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group" style="display: none">
+                        <label class="form-control-label" for="per_telefono">Telefono</label>
+                        <input type="Number" id="per_telefono" class="form-control" placeholder="Telefono Conductor" value="">
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group" style="display: none">
+                        <label class="form-control-label" for="per_correo">Correo</label>
+                        <input type="email" id="per_correo" class="form-control" placeholder="Correo" value="">
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group" style="display: none">
+                        <label class="form-control-label" for="per_direccion">Direccion</label>
+                        <input type="text" id="per_direccion" class="form-control" placeholder="Direccion Conductor" value="">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <hr class="my-4" />
+                <h6 class="heading-small text-muted mb-4">Datos Vehiculo</h6>
+                <div class="pl-lg-4">
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group" >
+                        <label class="form-control-label" for="veh_vehiculo">Vehiculo</label>
+                        <select name="Vehiculo" id="veh_vehiculo"class="form-control">
+                          <option value="1">vehiculo1</option> 
+                          <option value="2">vehiculo2</option>
+                          <option value="3">vehiculo3</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group" style="display: none" >
+                        <label class="form-control-label" for="veh_marca">Marca</label>
+                        <input type="text" id="veh_marca" class="form-control" placeholder="Marca vehiculo" >
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group" style="display: none">
+                        <label class="form-control-label" for="veh_modelo">Modelo</label>
+                        <input type="text" id="veh_modelo" class="form-control" placeholder="Modelo Vehiculo" >
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group" style="display: none">
+                        <label class="form-control-label" for="veh_matricula">Matricula</label>
+                        <input type="text" id="veh_matricula" class="form-control" placeholder="Matricula Vehiculo">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group" style="display: none">
+                        <label class="form-control-label" for="veh_capacidad">Capacidad</label>
+                        <input type="number" id="veh_capacidad" class="form-control" placeholder="Capacidad maxima" >
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group" style="display: none">
+                        <label class="form-control-label" for="veh_cubicaje">Cubicaje</label>
+                        <input type="text" id="veh_cubicaje" class="form-control" placeholder="Cubicaje" >
+                      </div>
+                    </div>
+                  </div>
+                </div>    
+
+                <h6 class="heading-small text-muted mb-4">Lista de Mercancias a Asignar</h6>
+                <div class="card">
+                  <!-- Header tabla -->
+                  <div class="card-header border-0">
+                    <h3 class="mb-0">Envios Realizados</h3>
+                  </div>
+                  <!--tabla -->
+                  <div class="table-responsive">
+                    <table class="table align-items-center table-flush">
+                      <thead class="thead-light">
+                        <tr>
+                          <th scope="col">Id_Mercancia</th>
+                          <th scope="col">Docu_cli</th>
+                          <th scope="col">Docu_Des</th>
+                          <th scope="col">Peso</th>
+                          <th scope="col">Alto</th>
+                          <th scope="col">Ancho</th>
+                          <th scope="col">Largo</th>
+                          <th scope="col">Precio</th>
+                          <th scope="col">Id_tip_Mer</th>
+                          <th scope="col">Id_emp</th>
+                          <th scope="col">Id_Fpago</th>
+                        </tr>
+                      </thead>
+                      <tbody class="list">
+                        <tr>
+                          <th></th>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <th></th>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <th></th>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <th></th>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <th></th>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div style="text-align: right;"><a  href="#!"  class="btn btn-sm btn-primary" style="background:rgb(15, 122, 42);">Listar Mercancias</a></div>
+                </div>
+                <a  href="#!" class="btn btn-sm btn-primary" style="background:rgb(15, 122, 42);">Registrar Mercancia</a>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Footer -->
+      <footer class="footer pt-0">
+        <div class="row align-items-center justify-content-lg-between">
+          <div class="col-lg-6">
+            <div class="copyright text-center  text-lg-left  text-muted">
+              &copy; 2020 - Envios UP 
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+  <!--Scripts -->
+  <script src="../assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -4,6 +4,7 @@ from django.contrib.auth import logout as do_logout, login, authenticate
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.urls import reverse_lazy
+from empresa.views import buscar_empleado
 from empresa.models import Sucursal
 from personal.models import Tipo_documento, Rol, Persona, Empleado
 
@@ -36,9 +37,9 @@ def registroEmpleado(request):
                 messages.info(request, 'Ya se encuentra registrado.')
             else:
                 persona = Persona(per_documento=documento, per_nombre=nombre, per_apellido=apellido, per_fecha_naci=fecha_nac,
-                            per_email=correo, per_telefono=telefono, per_celular=celular, per_direccion=direccion, td_id_id=tipo_doc, per_contrasena=contrasena)
+                                  per_email=correo, per_telefono=telefono, per_celular=celular, per_direccion=direccion, td_id_id=tipo_doc, per_contrasena=contrasena)
                 empleado = Empleado(per_documento_id=documento, suc_id_id=sucursal, rol_id_id=rol, emp_inicio_contrato=inicioContrato,
-                            emp_fin_contrato=finContrato, emp_salario=salario, emp_estado=1)
+                                    emp_fin_contrato=finContrato, emp_salario=salario, emp_estado=1)
                 persona.save()
                 empleado.save()
                 messages.success(request, 'Registro exitoso.')
@@ -62,10 +63,11 @@ def login_user(request):
             return redirect(reverse_lazy('administracion'))
         elif request.user.is_staff is not False:
             # Se deve validar que rol tiene el usuario para redireccionarlo despues
-            # Redireccionar Panel NO administrador            
+            # Redireccionar Panel NO administrador
             return redirect(reverse_lazy('operacion'))
         else:
-            messages.error(request, 'Esta intentando ingresar al sistema desde un lugar no permitido')
+            messages.error(
+                request, 'Esta intentando ingresar al sistema desde un lugar no permitido')
             # De prueba, se debe modificar.
             return render(request, 'empresa/index.html')
     else:
@@ -73,6 +75,97 @@ def login_user(request):
         messages.error(request, 'Usuario o contraseña incorrectos')
         # De prueba, se debe modificar.
         return render(request, 'empresa/index.html')
+
+def eliminar_empleado(request):
+    usuario = request.user
+    if usuario.is_active:
+        tiposDoc = Tipo_documento.objects.all()
+        roles = Rol.objects.all()
+        sucursales = Sucursal.objects.all()
+        if request.method == "POST":
+            documento = request.POST.get('per_documento', None)
+            rol = request.POST.get('roles', None)
+            sucursal = request.POST.get('suc_id', None)
+            fin_contrato = request.POST.get('emp_finContrato', None)
+            salario = request.POST.get('emp_salario', None)
+            emp = Empleado.objects.filter(per_documento=documento)
+            per = Persona.objects.filter(per_documento=documento)
+
+            try:             
+                empleado = Empleado(emp_id=emp[0].emp_id)                
+                empleado.emp_inicio_contrato = emp[0].emp_inicio_contrato
+                empleado.emp_fin_contrato = fin_contrato
+                empleado.emp_salario = salario
+                empleado.emp_estado = 0
+                empleado.per_documento = per[0]
+                empleado.rol_id = Rol(rol_id=rol)
+                empleado.suc_id = Sucursal(suc_id=sucursal)
+                empleado.save()
+                messages.success(request, 'El empleado se elimino con exito')
+
+            except Exception as e:
+                messages.error(request, "Algo ha salido mal")
+                print(e)
+        return render(request, 'empleado.html', {'tipos': tiposDoc, 'roles': roles, 'suc': sucursales})
+    else:
+        return redirect(reverse_lazy('login'))
+ 
+def modificar_empleado(request):
+    usuario = request.user
+    if usuario.is_active:
+        tiposDoc = Tipo_documento.objects.all()
+        roles = Rol.objects.all()
+        sucursales = Sucursal.objects.all()
+        if request.method == "POST":
+            nombre = request.POST.get('per_nombre', None)
+            apellido = request.POST.get('per_apellido', None)
+            direccion = request.POST.get('per_direccion', None)
+            telefono = request.POST.get('per_telefono', None)
+            celular = request.POST.get('per_celular', None)
+            documento = request.POST.get('per_documento', None)
+            correo = request.POST.get('per_email', None)
+            rol = request.POST.get('roles', None)
+            sucursal = request.POST.get('suc_id', None)
+            fin_contrato = request.POST.get('emp_finContrato', None)
+            salario = request.POST.get('emp_salario', None)
+            emp = Empleado.objects.filter(per_documento=documento)
+            per = Persona.objects.filter(per_documento=documento)
+
+            try:
+                persona = Persona(per_documento=documento)                
+                empleado = Empleado(emp_id=emp[0].emp_id)
+                persona.per_documento_id = documento
+                persona.per_nombre = nombre
+                persona.per_apellido = apellido
+                persona.per_fecha_naci = per[0].per_fecha_naci
+                persona.per_email = correo
+                persona.per_contraseña = per[0].per_contrasena
+                persona.per_telefono = telefono
+                persona.per_celular = celular
+                persona.per_direccion = direccion
+                persona.td_id = per[0].td_id
+                empleado.emp_inicio_contrato = emp[0].emp_inicio_contrato
+                empleado.emp_fin_contrato = fin_contrato
+                empleado.emp_salario = salario
+                empleado.emp_estado = emp[0].emp_estado
+                empleado.per_documento = per[0]
+                empleado.rol_id = Rol(rol_id=rol)
+                empleado.suc_id = Sucursal(suc_id=sucursal)
+
+                persona.save()
+                empleado.save()
+                messages.success(request, 'Actualización exitosa')
+
+            except Exception as e:
+                messages.error(request, "Algo ha salido mal")
+                print(e)
+        else:
+            ''
+
+        return render(request, 'empleado.html', {'tipos': tiposDoc, 'roles': roles, 'suc': sucursales})
+    else:
+        return redirect(reverse_lazy('login'))
+
 
 
 def logout(request):

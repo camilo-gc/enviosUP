@@ -62,10 +62,10 @@
                         <div class="feature-center animate-box" data-animate-effect="fadeIn">
                             <h3>{{tm.tm_nombre}}</h3>
                             <h4>{{tm.tm_precio}}</h4>
-                            {% if tm.tm_precio_adicional < 0 %}
-                                <p>{{tm.tm_descripcion}} Y tendrá un adicional de {{tm.tm_precio_adicional}}</p>
-                            {% else %}
+                            {% if tm.tm_precio_adicional == 0 %}
                                 <p>{{tm.tm_descripcion}}</p>
+                            {% else %}
+                                <p>{{tm.tm_descripcion}} Y tendrá un adicional de {{tm.tm_precio_adicional}}</p>
                             {% endif %}
                         </div>
                     </div>
