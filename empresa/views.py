@@ -11,7 +11,7 @@ from empresa.models import Sucursal, Tarifa, Envios_up
 from envio.models import Tipo_mercancia
 from personal.models import Tipo_documento, Persona, Empleado, Rol
 from django.views.generic import View
-from envio.models import Tipo_mercancia, Forma_pago, Tipo_mercancia, Destinatario, Mercancia
+from envio.models import Tipo_mercancia, Forma_pago, Tipo_mercancia, Destinatario, Mercancia, Mercancia_envio
 from personal.models import Tipo_documento, Persona, Empleado, Rol, Cliente
 from ubicacion.models import Departamento, Municipio
 
@@ -65,8 +65,12 @@ def index(request):
     return render(request, 'empresa/index.html', {})
 
 
-def rastreo(request):
-    return render(request, 'rastreo.html', {})
+def rastreo(request, numGuia):
+    print("numero de guia: "+ str(numGuia))
+    mer = Mercancia.objects.all().filter(mer_num_guia = numGuia)
+    m = mer.__len__()
+    
+    return render(request, 'rastreo.html', {'m':m})
 
 
 def login(request):
@@ -83,8 +87,8 @@ def PL_principal(request):
     return render(request, 'PL_principal.html', {})
 
 
-def PL_R_Mercancia(request):
-    return render(request, 'PL_R_Mercancia.html', {})
+def PL_R_Envio(request):
+    return render(request, 'PL_R_Envio.html', {})
 
 
 def PL_L_Mercancia(request):

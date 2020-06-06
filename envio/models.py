@@ -49,11 +49,14 @@ class Mercancia(models.Model):
 
 class Envio(models.Model):
     env_id = models.AutoField(primary_key = True)
-    mer_id = models.ForeignKey(Mercancia, on_delete = models.PROTECT)
     veh_id = models.ForeignKey(Vehiculo, on_delete = models.PROTECT)
-    emp_id = models.ForeignKey(Empleado, on_delete = models.PROTECT)
     env_registro = models.DateField()
     env_entrega_estimada = models.DateField()
+
+class Mercancia_envio(models.Model):
+    mer_id = models.ForeignKey(Mercancia, on_delete = models.PROTECT)
+    env_id = models.ForeignKey(Envio, on_delete = models.PROTECT)
+
 
 class Estado(models.Model):
     est_id = models.AutoField(primary_key = True)
