@@ -30,9 +30,9 @@
           <ul class="navbar-nav">
             
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'PL_R_Mercancia' %}">
+              <a class="nav-link" href="{% url 'PL_R_Envio' %}">
                 <i class="ni ni-folder-17 text-red"></i>
-                <span class="nav-link-text">Registrar Mercancia</span>
+                <span class="nav-link-text">Registrar Envio</span>
               </a>
             </li>
             <li class="nav-item">
@@ -97,67 +97,29 @@
               <table class="table align-items-center table-flush">
                 <thead class="thead-light">
                   <tr>
-                    <th scope="col">ID_mercancia</th>
-                    <th scope="col">CLI_documento</th>
-                    <th scope="col">DES_documento</th>
+                    <th scope="col">Id. Mercancia</th>
+                    <th scope="col">Doc. Remitente</th>
+                    <th scope="col">Doc. Destinatario</th>
+                    <th scope="col">Tipo Mercancia</th>
                     <th scope="col">Peso</th>
-                    <th scope="col">Alto</th>
-                    <th scope="col">Ancho</th>
-                    <th scope="col">Largo</th>
-                    <th scope="col">Precio_envio</th>
+                    <th scope="col">Municipio</th>
+                    <th scope="col">Departamento</th>
+                    <th scope="col">Precio Envio</th>
                   </tr>
                 </thead>
                 <tbody class="list">
+                {% for m in mer%}
                   <tr>
-                    <th></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <th>{{m.mer_id}}</th>
+                    <td>{{m.cli_documento.per_documento.per_documento}}</td>
+                    <td>{{m.des_documento.des_documento}}</td>
+                    <td>{{m.tm_id.tm_nombre}}</td>
+                    <td>{{m.mer_peso}}</td>
+                    <td>{{m.des_documento.mun_id.mun_nombre}}</td>
+                    <td>{{m.des_documento.mun_id.dep_id.dep_nombre}}</td>
+                    <td>{{m.mer_precio_envio}}</td>
                   </tr>
-                  <tr>
-                    <th></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <th></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <th></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <th></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
+                {% endfor %}  
                 </tbody>
               </table>
             </div>

@@ -15,26 +15,32 @@
 </head>
 <body style="background-color: white;">
         {% include "empresa/nav.html" %}
-        <div id="gtco-features" style="background:cornflowerblue">
-            <div class="gtco-container">
-                <div class="row">
-                    <div class="col-md-offset-1 text-left gtco-heading animate-box">
-                        <h2>Seguimiento de tu envio</h2><br>
-                        <h3>Numero de guia:</h3>
-                        <h3>Fecha de registro::</h3>
-                        <h3>Entrega estimada:</h3>
-                        <h3>Destinatario:</h3>
-                        <h3>Remitente:</h3>
-                        <h3>Estado del envio:</h3>
-                        <h3>Origen:</h3>
-                        <h3>Destino:</h3>
-                    </div>
-                    <div class="col-md-offset-1 text-left gtco-heading animate-box">
-                        <h2>Historial de estados</h2><br>
-                    </div>
+        
+            <div id="gtco-features" style="background:cornflowerblue">
+                <div class="gtco-container">
+                    {% if m == 0%}
+                        <h1>Tu mercancía está pendiente por enviarse, por favor vuelve a consultar en unas horas.</h1><br>
+                        <h2>¡Gracias!</h2><br>
+                    {% else %}
+                        <div class="row">
+                            <div class="col-md-offset-1 text-left gtco-heading animate-box">
+                                <h2>Seguimiento de tu envio</h2><br>
+                                <h3>Numero de guia:</h3>
+                                <h3>Fecha de registro::</h3>
+                                <h3>Entrega estimada:</h3>
+                                <h3>Destinatario:</h3>
+                                <h3>Remitente:</h3>
+                                <h3>Estado del envio:</h3>
+                                <h3>Origen:</h3>
+                                <h3>Destino:</h3>
+                            </div>
+                            <div class="col-md-offset-1 text-left gtco-heading animate-box">
+                                <h2>Historial de estados</h2><br>
+                            </div>
+                        </div>
+                    {% endif %}
                 </div>
             </div>
-        </div>
     <footer>
             {% include "empresa/footer.html" %}
         </footer>
