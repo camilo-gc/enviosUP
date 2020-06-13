@@ -27,4 +27,5 @@ urlpatterns = [
     path('buscar_destinatario_ajax/', views.buscar_destinatario_ajax, name='buscar_destinatario_ajax'),
     path('buscar_precio/', views.buscar_precio, name='buscar_precio'),
     path('buscar_empleado_ajax/', views.buscar_empleado_ajax, name='buscar_empleado_ajax'),
+    path('buscar_mercancias/', views.buscar_mercancias, name='buscar_mercancias'),
 ]
