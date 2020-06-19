@@ -113,11 +113,14 @@ def PL_R_Envio(request):
         try:
             if(existen == 1 ):
                 envio = Envio(veh_id = v[0], env_registro = registro, env_entrega_estimada = estimada)
+                up_veh = Vehiculo.objects.get(veh_id = v[0].veh_id)
+                up_veh.veh_estado = 0
+                up_veh.save()
                 envio.save()
                 e = Envio.objects.last()
                 for m in mers:
                     if(m.des_documento.mun_id.dep_id.dep_id == int(dep_id)):
-                        me = Mercancia_envio(mer_id = m.mer_id, env_id = e.env_id)
+                        me = Mercancia_envio(mer_id = m, env_id = e)
                         me.save()
                         up_mer = Mercancia.objects.get(mer_id = m.mer_id)
                         up_mer.mer_estado = 1
