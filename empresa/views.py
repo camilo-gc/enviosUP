@@ -434,7 +434,9 @@ def buscar_empleado(request):
 def l_envios(request):
     usuario = request.user
     if usuario.is_active:
-        return render(request, 'l_envios.html')
+        envios = Envio.objects.all()
+        mer_env = Mercancia_envio.objects.all()
+        return render(request, 'l_envios.html', {'envios':envios, 'mer_env':mer_env})
     else:
         return redirect(reverse_lazy('login'))  # Probaaaaaar!!!
 
@@ -442,7 +444,7 @@ def l_envios(request):
 def operacional(request):
     usuario = request.user
     if usuario.is_active:
-        return render(request, 'operacional.html', {'user': usuario})
+        return render(request, 'PL_principal.html', {'user': usuario})
     else:
         return redirect(reverse_lazy('login'))  # Probaaaaaar!!!
 
