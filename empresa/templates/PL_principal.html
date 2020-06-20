@@ -38,7 +38,7 @@
             <li class="nav-item">
               <a class="nav-link" href="{% url 'PL_L_envios' %}">
                 <i class="ni ni-pin-3 text-green"></i>
-                <span class="nav-link-text">Listar Envios</span>
+                <span class="nav-link-text">Envios</span>
               </a>
             </li>
             <li class="nav-item">
@@ -54,24 +54,29 @@
     </div>
   </nav>
   
-    <nav style="background-color: #065226 " class="navbar  navbar-expand navbar-dark bg-primary2 border-bottom">
-      <div class="container-fluid">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav align-items-center  ml-md-auto ">
-            <li class="nav-item dropdown">
-              <a class="nav-link pr-0" href="#"  >
-                <div class="media align-items-center">
-                  <div class="media-body  ml-2  d-none d-lg-block">
-                    <i class="ni ni-user-run"></i>
-                    <span>Cerrar Sesion</span>
-                  </div>
+  <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary2 border-bottom">
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav align-items-center  ml-md-auto ">
+          <li class="nav-item dropdown">
+            <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">
+              <div class="media align-items-center">
+                <div class="media-body  ml-4  d-none d-lg-block">
+                  <form class="" action="{% url 'logout' %}" method="POST">{% csrf_token %}
+                    <span>¡Bienvenido {{user.first_name}}!</span>
+                    <br>
+                    <button id="logout" type="submit" class="btn btn-primary " style="background-color:rgb(15, 122, 42);"><i class="ni ni-user-run"></i> Cerrar
+                      Sesion</button>
+                  </form>
                 </div>
-              </a>
-            </li>
-          </ul>
-        </div>
+              </div>
+            </a>
+          </li>
+        </ul>
       </div>
-    </nav>
+    </div>
+  </nav>
 
      
   <!-- Scripts -->

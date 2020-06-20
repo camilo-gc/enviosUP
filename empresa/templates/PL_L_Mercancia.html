@@ -39,7 +39,7 @@
             <li class="nav-item">
               <a class="nav-link" href="{% url 'PL_L_envios' %}">
                 <i class="ni ni-pin-3 text-green"></i>
-                <span class="nav-link-text">Listar Envios</span>
+                <span class="nav-link-text">Envios</span>
               </a>
             </li>
             <li class="nav-item">
@@ -55,16 +55,21 @@
     </div>
   </nav>
   <div class="main-content" id="panel">
-    <nav  class="navbar navbar-top navbar-expand navbar-dark bg-primary2 border-bottom">
+    <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary2 border-bottom">
       <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav align-items-center  ml-md-auto ">
             <li class="nav-item dropdown">
-              <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
                 <div class="media align-items-center">
-                  <div class="media-body  ml-2  d-none d-lg-block">
-                    <i class="ni ni-user-run"></i>
-                    <span>Cerrar Sesion</span>
+                  <div class="media-body  ml-4  d-none d-lg-block">
+                    <form class="" action="{% url 'logout' %}" method="POST">{% csrf_token %}
+                      <span>¡Bienvenido {{user.first_name}}!</span>
+                      <br>
+                      <button id="logout" type="submit" class="btn btn-primary " style="background-color:rgb(15, 122, 42);"><i class="ni ni-user-run"></i> Cerrar
+                        Sesion</button>
+                    </form>
                   </div>
                 </div>
               </a>
@@ -75,16 +80,10 @@
     </nav>
  
     <div class="header bg-primary2 pb-6">
-      <div  class="container-fluid">
-        <div class="header-body">
-          <div  class="row align-items-center py-4">
-            <div class="col-lg-6 col-7">
-              <h6 class="h2 text-white d-inline-block mb-0">Listado de Mercancias</h6>
-            </div>
-          </div>
-        </div>
-      </div>
+      <div class="col-lg-6">
+              <h6 class="h2 text-white d-inline-block mb-0">Listado de Mercancias</h6><div><br></div>
     </div>
+  </div>
     <div  class="container-fluid mt--6">
     <form action="{% url 'PL_L_Mercancia' %}" method="POST" name="f1">{% csrf_token %}
       <div class="row">

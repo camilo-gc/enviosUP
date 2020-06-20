@@ -11,8 +11,9 @@
   <!-- Fonts -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
   <!-- Icons -->
-  <link rel="stylesheet" href="{% static 'empresa/assets/vendor/nucleo/css/nucleo.css' %}"type="text/css">
-  <link rel="stylesheet" href="{% static 'empresa/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css' %}" type="text/css">
+  <link rel="stylesheet" href="{% static 'empresa/assets/vendor/nucleo/css/nucleo.css' %}" type="text/css">
+  <link rel="stylesheet" href="{% static 'empresa/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css' %}"
+    type="text/css">
   <!-- CSS -->
   <link rel="stylesheet" href="{% static 'empresa/css/argon2.css' %}" type="text/css">
 </head>
@@ -22,13 +23,14 @@
     <div class="scrollbar-inner">
       <div class="sidenav-header  align-items-center">
         <a class="navbar-brand" href="javascript:void(0)">
-          <img href="{% url 'PL_principal' %}" src="{% static 'empresa/images/ENVIOS UP.png' %}" class="navbar-brand-img">
+          <img href="{% url 'PL_principal' %}" src="{% static 'empresa/images/ENVIOS UP.png' %}"
+            class="navbar-brand-img">
         </a>
       </div>
       <div class="navbar-inner">
         <div class="collapse navbar-collapse" id="sidenav-collapse-main">
           <ul class="navbar-nav">
-            
+
             <li class="nav-item">
               <a class="nav-link" href="{% url 'PL_R_Envio' %}">
                 <i class="ni ni-folder-17 text-red"></i>
@@ -38,7 +40,7 @@
             <li class="nav-item">
               <a class="nav-link" href="{% url 'PL_L_envios' %}">
                 <i class="ni ni-pin-3 text-green"></i>
-                <span class="nav-link-text">Listar Envios</span>
+                <span class="nav-link-text">Envios</span>
               </a>
             </li>
             <li class="nav-item">
@@ -53,17 +55,24 @@
       </div>
     </div>
   </nav>
+  <!-- Main content -->
   <div class="main-content" id="panel">
-    <nav  class="navbar navbar-top navbar-expand navbar-dark bg-primary2 border-bottom">
+    <!-- Topnav -->
+    <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary2 border-bottom">
       <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav align-items-center  ml-md-auto ">
             <li class="nav-item dropdown">
-              <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
                 <div class="media align-items-center">
-                  <div class="media-body  ml-2  d-none d-lg-block">
-                    <i class="ni ni-user-run"></i>
-                    <span>Cerrar Sesion</span>
+                  <div class="media-body  ml-4  d-none d-lg-block">
+                    <form class="" action="{% url 'logout' %}" method="POST">{% csrf_token %}
+                      <span>¡Bienvenido {{user.first_name}}!</span>
+                      <br>
+                      <button id="logout" type="submit" class="btn btn-primary " style="background-color:rgb(15, 122, 42);"><i class="ni ni-user-run"></i> Cerrar
+                        Sesion</button>
+                    </form>
                   </div>
                 </div>
               </a>
@@ -72,112 +81,51 @@
         </div>
       </div>
     </nav>
- 
-    <div class="header bg-primary2 pb-6">
-      <div class="container-fluid">
-        <div class="header-body">
-          <div class="row align-items-center py-4">
-            <div class="col-lg-6 col-7">
-              <h6 class="h2 text-white d-inline-block mb-0">Listado de Envios</h6>
+    <div style="min-height: 100px;"> </div>
+    <div class="container-fluid mt--6" style="min-height: 100px;">
+      <div class="row">
+        <div class="col-xl-8 order-xl-2">
+          <div class="card">
+            <div class="pl-lg-4">
+              <br>
+              <h2 class="mb-0">Modificar estado</h2>
+            </div>
+            <div class="card-body">
+              <form class="form-group" action="{% url 'buscar_emp' %}" method="POST">{% csrf_token %}
+                <label class="form-control-label" for="mer_num_guia">Numero de la guia:</label>
+                <input type="text" id="mer_num_guia" name="mer_num_guia" class="form-control" placeholder="Guia"
+                  value="" required>
+                <br>
+                <div class="text-right">
+                  <button type="submit" class="btn btn-sm "
+                    style="background-color: rgb(15, 122, 42); color: white;">Buscar</button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="container-fluid mt--6">
-      <div class="row">
-        <div class="col">
-          <div class="card">
-            <!-- Header tabla -->
-            <div class="card-header border-0">
-              <h3 class="mb-0">Envios Realizados</h3>
-            </div>
-            <!--tabla -->
-            <div class="table-responsive">
-              <table class="table align-items-center table-flush">
-                <thead class="thead-light">
-                  <tr>
-                    <th scope="col" >ID_envio</th>
-                    <th scope="col" >ID_mercancia</th>
-                    <th scope="col">ID_vehiculo</th>
-                    <th scope="col">ID_destinatario</th>
-                    <th scope="col">ID_empleado</th>
-                    <th scope="col">Precio_envio</th>
-                    <th scope="col">Registro_envio</th>
-                    <th scope="col">Entrega_estimada</th>
-                  </tr>
-                </thead>
-                <tbody class="list">
-                  <tr>
-                    <th></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <th></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <th></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <th></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <th></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <a  href="#!" class="btn btn-sm btn-primary" style="background:rgb(15, 122, 42);">Listar Envio</a>
-        </div>
-      </div>      
-      <!-- Footer -->
-      <footer class="footer pt-0">
-        <div class="row align-items-center justify-content-lg-between">
-          <div class="col-lg-6">
-            <div class="copyright text-center  text-lg-left  text-muted">
-              &copy; 2020 - Envios UP 
-            </div>
-          </div>
-        </div>
-      </footer>
-    </div>
   </div>
+
+
+
+  <!-- Footer -->
+  <footer class="footer pt-0 ">
+    <div class="row align-items-center justify-content-lg-between">
+      <div class="col-lg-6 ">
+        <div class="copyright text-center  text-lg-left  text-muted">
+          &copy; 2020 - Envios UP
+        </div>
+      </div>
+    </div>
+  </footer>
+  </div>
+  </div>
+  </div>
+
   <!-- Scripts-->
   <script src="../assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
