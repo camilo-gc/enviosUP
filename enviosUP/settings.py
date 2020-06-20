@@ -83,11 +83,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'envios_up',
         'USER': 'root',
-<<<<<<< HEAD
-        'PASSWORD': '1234', #Revisar Siempreeeeee!!!!!
-=======
         'PASSWORD': '12345', #Revisar Siempreeeeee!!!!!
->>>>>>> 82d75491012c3288c6a3c92510108c1fbb835a49
         'HOST': 'localhost',
     }
 }
