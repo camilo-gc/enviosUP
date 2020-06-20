@@ -10,7 +10,6 @@ from personal.models import Tipo_documento, Rol, Persona, Empleado
 
 # Create your views here.
 
-
 def registroEmpleado(request):
     tiposDoc = Tipo_documento.objects.all()
     roles = Rol.objects.all()
@@ -71,10 +70,9 @@ def login_user(request):
             # De prueba, se debe modificar.
             return render(request, 'empresa/index.html')
     else:
-        print('credenciales incorrectas')
         messages.error(request, 'Usuario o contraseña incorrectos')
         # De prueba, se debe modificar.
-        return render(request, 'empresa/index.html')
+        return redirect(reverse_lazy('login'))
 
 def eliminar_empleado(request):
     usuario = request.user
@@ -90,9 +88,10 @@ def eliminar_empleado(request):
             salario = request.POST.get('emp_salario', None)
             emp = Empleado.objects.filter(per_documento=documento)
             per = Persona.objects.filter(per_documento=documento)
+            usu = User.objects.get(username = per[0].per_email)
 
-            try:             
-                empleado = Empleado(emp_id=emp[0].emp_id)                
+            try:
+                empleado = Empleado(emp_id=emp[0].emp_id)
                 empleado.emp_inicio_contrato = emp[0].emp_inicio_contrato
                 empleado.emp_fin_contrato = fin_contrato
                 empleado.emp_salario = salario
@@ -101,6 +100,10 @@ def eliminar_empleado(request):
                 empleado.rol_id = Rol(rol_id=rol)
                 empleado.suc_id = Sucursal(suc_id=sucursal)
                 empleado.save()
+               
+                usu.is_active = False
+                usu.save()
+
                 messages.success(request, 'El empleado se elimino con exito')
 
             except Exception as e:
@@ -139,7 +142,7 @@ def modificar_empleado(request):
                 persona.per_apellido = apellido
                 persona.per_fecha_naci = per[0].per_fecha_naci
                 persona.per_email = correo
-                persona.per_contraseña = per[0].per_contrasena
+                persona.per_contraseña = per[0].per_contrasena #Revisar...
                 persona.per_telefono = telefono
                 persona.per_celular = celular
                 persona.per_direccion = direccion
@@ -154,6 +157,7 @@ def modificar_empleado(request):
 
                 persona.save()
                 empleado.save()
+                messages.success(request, 'Revisando Actualización exitosa')
                 messages.success(request, 'Actualización exitosa')
 
             except Exception as e:
