@@ -46,6 +46,7 @@ class Mercancia(models.Model):
     mer_precio_envio = models.DecimalField(max_digits=10, decimal_places=2)
     mer_contenido = models.CharField(max_length=350, null=True)
     mer_num_guia = models.CharField(max_length = 15, default = 0)
+    mer_estado = models.IntegerField( default = 0)
 
 class Envio(models.Model):
     env_id = models.AutoField(primary_key = True)

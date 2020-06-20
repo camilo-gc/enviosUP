@@ -10,6 +10,7 @@
   <link rel="shortcut icon" type="image/x-icon" href="{% static 'empresa/images/favicon.ico' %}" />
   <!-- Fonts -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <!-- Icons -->
   <link rel="stylesheet" href="{% static 'empresa/assets/vendor/nucleo/css/nucleo.css' %}"type="text/css">
   <link rel="stylesheet" href="{% static 'empresa/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css' %}" type="text/css">
@@ -85,21 +86,21 @@
       </div>
     </div>
     <div  class="container-fluid mt--6">
+    <form action="{% url 'PL_L_Mercancia' %}" method="POST" name="f1">{% csrf_token %}
       <div class="row">
         <div class="col">
           <div class="card">
             <!-- Header tabla -->
             <div class="card-header border-0">
-              <h3 class="mb-0">Lista de Mercancias</h3>
+              <h2 class="mb-0">Lista de Mercancias</h2>
+                       
             </div>
             <!--tabla -->
             <div class="table-responsive">
-              <table class="table align-items-center table-flush">
+              <table class="table align-items-center table-flush" name="mercancias" id="mercancias" >
                 <thead class="thead-light">
                   <tr>
                     <th scope="col">Id. Mercancia</th>
-                    <th scope="col">Doc. Remitente</th>
-                    <th scope="col">Doc. Destinatario</th>
                     <th scope="col">Tipo Mercancia</th>
                     <th scope="col">Peso</th>
                     <th scope="col">Municipio</th>
@@ -107,12 +108,10 @@
                     <th scope="col">Precio Envio</th>
                   </tr>
                 </thead>
-                <tbody class="list">
+                <tbody class="list" name="body" id="body">
                 {% for m in mer%}
                   <tr>
                     <th>{{m.mer_id}}</th>
-                    <td>{{m.cli_documento.per_documento.per_documento}}</td>
-                    <td>{{m.des_documento.des_documento}}</td>
                     <td>{{m.tm_id.tm_nombre}}</td>
                     <td>{{m.mer_peso}}</td>
                     <td>{{m.des_documento.mun_id.mun_nombre}}</td>
@@ -124,8 +123,9 @@
               </table>
             </div>
           </div>
-          <a  href="#!" class="btn btn-sm btn-primary" style="background:rgb(15, 122, 42);">Listar Mercancia</a>
+          <button type="submit" id="registerEnvio" style="background:rgb(15, 122, 42); margin:40px; display:none;"  class="btn btn-sm btn-primary" >Registrar Mercancía</button>
         </div>
+        </form>
       </div>      
       <!-- Footer -->
       <footer class="footer pt-0">
@@ -140,6 +140,6 @@
     </div>
   </div>
   <!-- Scripts-->
-  <script src="../assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

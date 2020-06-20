@@ -16,11 +16,28 @@
   <!-- CSS -->
   <link rel="stylesheet" href="{% static 'empresa/css/argon2.css' %}" type="text/css">
   <!-- JQuery Primero -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+  <!-- JQuery Primero -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <!-- Toastr.js Después -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
  
 </head>
 
 <body>
+    {% if messages %}
+      {% for message in messages %}
+          {% if message.tags == 'success'%}
+              <script type=text/javascript>toastr.{{ message.tags }}('{{ message }}')</script>
+          {% elif message.tags == 'info' %}
+              <script type=text/javascript>toastr.{{ message.tags }}('{{ message }}')</script>
+          {% elif message.tags == 'warning' %}
+              <script type=text/javascript>toastr.{{ message.tags }}('{{ message }}')</script>
+          {% elif message.tags == 'error' %}
+              <script type=text/javascript>toastr.{{ message.tags }}('{{ message }}')</script>
+          {% endif %}
+      {% endfor %}
+    {% endif %}
   <nav class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white" id="sidenav-main">
     <div class="scrollbar-inner">
       <div class="sidenav-header  align-items-center">
@@ -79,6 +96,7 @@
     </nav>
     <div style="min-height: 100px;">  </div>
     <div class="container-fluid mt--6"style="min-height: 100px;" >
+    <form action="{% url 'PL_R_Envio' %}" method="POST" name="f1">{% csrf_token %}
       <div class="row">
         <div class="col-xl-11 order-xl-1">
           <div class="card">
@@ -91,207 +109,67 @@
             </div>
             <div class="card-body">
               <form>
-                <h6 class="heading-small text-muted mb-4">DATOS CONDUCTOR</h6>
+                <h6 class="heading-small text-muted mb-4">DATOS ADICIONALES</h6>
                 <div class="pl-lg-4">
                   <div class="row">
-                    <div class="col-lg-6">
-                      <div class="form-group" >
-                        <label class="form-control-label" >Conductor</label>
-                        <select name="Conductor" id="id_conductor"class="form-control">
-                          <option value="1">pepito</option> 
-                          <option value="2">pepita</option>
-                          <option value="3">pepota</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <div class="form-group" style="display: none" >
-                        <label class="form-control-label" >Nombres </label>
-                        <input type="text"  class="form-control" placeholder="Nombres Conductor">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-6">
-                      <div class="form-group" style="display: none">
-                        <label class="form-control-label" for="per_apellido">Apellidos</label>
-                        <input type="text" id="per_nombre" class="form-control" placeholder="Apellidos Conductor" value="">
-                      </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <div class="form-group" style="display: none">
-                        <label class="form-control-label" for="per_celular">Celular</label>
-                        <input type="number" id="per_celular" class="form-control" placeholder="Celular conductor" value="">
-                      </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <div class="form-group" style="display: none">
-                        <label class="form-control-label" for="per_telefono">Telefono</label>
-                        <input type="Number" id="per_telefono" class="form-control" placeholder="Telefono Conductor" value="">
-                      </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <div class="form-group" style="display: none">
-                        <label class="form-control-label" for="per_correo">Correo</label>
-                        <input type="email" id="per_correo" class="form-control" placeholder="Correo" value="">
-                      </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <div class="form-group" style="display: none">
-                        <label class="form-control-label" for="per_direccion">Direccion</label>
-                        <input type="text" id="per_direccion" class="form-control" placeholder="Direccion Conductor" value="">
-                      </div>
-                    </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-xl-6">
+                  <div class="form-group">
+                    <label class="form-control-label">Despartamento destino:</label>
+                    <select name="dep" class="form-control" id="dep">
+                      {% for m in mun %}
+                        <option value="{{m.dep_id.dep_id}}">{{m.dep_id.dep_nombre}}</option>
+                      {% endfor%}
+                    </select> 
                   </div>
                 </div>
-                <hr class="my-4" />
-                <h6 class="heading-small text-muted mb-4">Datos Vehiculo</h6>
-                <div class="pl-lg-4">
-                  <div class="row">
-                    <div class="col-lg-6">
-                      <div class="form-group" >
-                        <label class="form-control-label" for="veh_vehiculo">Vehiculo</label>
-                        <select name="Vehiculo" id="veh_vehiculo"class="form-control">
-                          <option value="1">vehiculo1</option> 
-                          <option value="2">vehiculo2</option>
-                          <option value="3">vehiculo3</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <div class="form-group" style="display: none" >
-                        <label class="form-control-label" for="veh_marca">Marca</label>
-                        <input type="text" id="veh_marca" class="form-control" placeholder="Marca vehiculo" >
-                      </div>
-                    </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label">Vehículos disponibles:</label>
+                    <select name="veh" class="form-control" id="veh">
+                      {% for v in veh %}
+                        <option value="{{v.veh_id}}">{{v.veh_matricula}}  {{v.tv_id.tv_nombre}}</option>
+                      {% endfor%}
+                    </select>
                   </div>
-
-                  <div class="row">
-                    <div class="col-lg-6">
-                      <div class="form-group" style="display: none">
-                        <label class="form-control-label" for="veh_modelo">Modelo</label>
-                        <input type="text" id="veh_modelo" class="form-control" placeholder="Modelo Vehiculo" >
-                      </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <div class="form-group" style="display: none">
-                        <label class="form-control-label" for="veh_matricula">Matricula</label>
-                        <input type="text" id="veh_matricula" class="form-control" placeholder="Matricula Vehiculo">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-6">
-                      <div class="form-group" style="display: none">
-                        <label class="form-control-label" for="veh_capacidad">Capacidad</label>
-                        <input type="number" id="veh_capacidad" class="form-control" placeholder="Capacidad maxima" >
-                      </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <div class="form-group" style="display: none">
-                        <label class="form-control-label" for="veh_cubicaje">Cubicaje</label>
-                        <input type="text" id="veh_cubicaje" class="form-control" placeholder="Cubicaje" >
-                      </div>
-                    </div>
-                  </div>
+                </div>
+              </div>
                 </div>    
 
                 <h6 class="heading-small text-muted mb-4">Lista de Mercancias a Asignar</h6>
                 <div class="card">
                   <!-- Header tabla -->
                   <div class="card-header border-0">
-                    <h3 class="mb-0">Envios Realizados</h3>
+                    <h3 class="mb-0">Mercancia Pendiente de Envio</h3>
                   </div>
                   <!--tabla -->
                   <div class="table-responsive">
                     <table class="table align-items-center table-flush">
                       <thead class="thead-light">
-                        <tr>
-                          <th scope="col">Id_Mercancia</th>
-                          <th scope="col">Docu_cli</th>
-                          <th scope="col">Docu_Des</th>
-                          <th scope="col">Peso</th>
-                          <th scope="col">Alto</th>
-                          <th scope="col">Ancho</th>
-                          <th scope="col">Largo</th>
-                          <th scope="col">Precio</th>
-                          <th scope="col">Id_tip_Mer</th>
-                          <th scope="col">Id_emp</th>
-                          <th scope="col">Id_Fpago</th>
-                        </tr>
-                      </thead>
-                      <tbody class="list">
-                        <tr>
-                          <th></th>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                        </tr>
-                        <tr>
-                          <th></th>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                        </tr>
-                        <tr>
-                          <th></th>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                        </tr>
-                        <tr>
-                          <th></th>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                        </tr>
-                        <tr>
-                          <th></th>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                        </tr>
-                      </tbody>
+                  <tr>
+                    <th scope="col">Id. Mercancia</th>
+                    <th scope="col">Tipo Mercancia</th>
+                    <th scope="col">Peso</th>
+                    <th scope="col">Municipio</th>
+                    <th scope="col">Departamento</th>
+                    <th scope="col">Precio Envio</th>
+                  </tr>
+                </thead>
+                <tbody class="list" name="body" id="body">
+                {% for m in mer%}
+                  <tr>
+                    <th>{{m.mer_id}}</th>
+                    <td>{{m.tm_id.tm_nombre}}</td>
+                    <td>{{m.mer_peso}}</td>
+                    <td>{{m.des_documento.mun_id.mun_nombre}}</td>
+                    <td>{{m.des_documento.mun_id.dep_id.dep_nombre}}</td>
+                    <td>{{m.mer_precio_envio}}</td>
+                  </tr>
+                {% endfor %}  
+                </tbody>
                     </table>
                   </div>
-                  <div style="text-align: right;"><a  href="#!"  class="btn btn-sm btn-primary" style="background:rgb(15, 122, 42);">Listar Mercancias</a></div>
                 </div>
-                <a  href="#!" class="btn btn-sm btn-primary" style="background:rgb(15, 122, 42);">Registrar Mercancia</a>
+                <button type="submit" id="registerEnvio" style="background:rgb(15, 122, 42); margin:40px; "  class="btn btn-sm btn-primary" >Registrar Envio</button>
               </form>
             </div>
           </div>

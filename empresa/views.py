@@ -1,9 +1,10 @@
 from base64 import b64encode, b64decode
 import time
+from datetime import datetime, timedelta
 from random import randrange
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib import messages
 from django.core import serializers
 from django.contrib.auth.models import User
@@ -14,6 +15,7 @@ from django.views.generic import View
 from envio.models import Tipo_mercancia, Forma_pago, Tipo_mercancia, Destinatario, Mercancia, Mercancia_envio, Envio
 from personal.models import Tipo_documento, Persona, Empleado, Rol, Cliente
 from ubicacion.models import Departamento, Municipio
+from vehiculo.models import Vehiculo
 
 # Create your views here.
 from enviosUP.utileria_r import render_to_pdf  # created in step 4
@@ -88,14 +90,66 @@ def PL_principal(request):
 
 
 def PL_R_Envio(request):
-    return render(request, 'PL_R_Envio.html', {})
+    mers = Mercancia.objects.all().filter(mer_estado = 0)
+    muni = Municipio.objects.select_related('dep_id').filter(mun_estado=1).order_by('mun_id')
+    vehi = Vehiculo.objects.all().filter(veh_estado = 1)
+
+    if request.method == "POST":
+        # Persona
+        dep_id = request.POST.get('dep', None)
+        veh_id = request.POST.get('veh', None)
+        v = Vehiculo.objects.all().filter(veh_id = veh_id)
+        mers = Mercancia.objects.all().filter(mer_estado = 0)
+        mensaje = "Ninguno"
+        existen = 0
+        for m in mers:
+            print(m.des_documento.mun_id.dep_id.dep_id)
+            if m.des_documento.mun_id.dep_id.dep_id == int(dep_id):
+                existen = 1
+            else: ''
+
+        registro =  datetime.now()
+        estimada = datetime.now() + timedelta(days=7)
+        try:
+            if(existen == 1 ):
+                envio = Envio(veh_id = v[0], env_registro = registro, env_entrega_estimada = estimada)
+                up_veh = Vehiculo.objects.get(veh_id = v[0].veh_id)
+                up_veh.veh_estado = 0
+                up_veh.save()
+                envio.save()
+                e = Envio.objects.last()
+                for m in mers:
+                    if(m.des_documento.mun_id.dep_id.dep_id == int(dep_id)):
+                        me = Mercancia_envio(mer_id = m, env_id = e)
+                        me.save()
+                        up_mer = Mercancia.objects.get(mer_id = m.mer_id)
+                        up_mer.mer_estado = 1
+                        up_mer.save()
+                    else: ''
+
+                messages.success( request, 'Registro del envio exitoso ')
+            else:
+                messages.info( request, 'No hay mercancias pendientes por envio para dicho departamento')
+               
+        except Exception as e:
+            messages.error(request, "Algo ha salido mal")
+            print(e)
+    else:
+        ''
+
+    return render(request, 'PL_R_Envio.html', {'mer':mers, 'mun': muni, 'veh':vehi})
 
 
 def PL_L_Mercancia(request):
-    mers = Mercancia.objects.all()
-    print (mers[0].mer_id)
+    mers = Mercancia.objects.all().filter(mer_estado = 0)
+
     return render(request, 'PL_L_Mercancia.html', {'mer': mers})
 
+
+def buscar_mercancias(request):
+    dep_id = request.GET.get('id')
+    mer = Mercancia.objects.all().filter(mer_estado = 0)
+    return JsonResponse({'mer': mer })
 
 def PL_L_envios(request):
     return render(request, 'PL_L_envios.html', {})
