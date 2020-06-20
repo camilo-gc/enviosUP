@@ -11,8 +11,9 @@
   <!-- Fonts -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
   <!-- Icons -->
-  <link rel="stylesheet" href="{% static 'empresa/assets/vendor/nucleo/css/nucleo.css' %}"type="text/css">
-  <link rel="stylesheet" href="{% static 'empresa/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css' %}" type="text/css">
+  <link rel="stylesheet" href="{% static 'empresa/assets/vendor/nucleo/css/nucleo.css' %}" type="text/css">
+  <link rel="stylesheet" href="{% static 'empresa/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css' %}"
+    type="text/css">
   <!-- CSS -->
   <link rel="stylesheet" href="{% static 'empresa/css/argon2.css' %}" type="text/css">
 </head>
@@ -66,15 +67,16 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav align-items-center  ml-md-auto ">
             <li class="nav-item dropdown">
-              <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
                 <div class="media align-items-center">
                   <div class="media-body  ml-4  d-none d-lg-block">
                     <form class="" action="{% url 'logout' %}" method="POST">{% csrf_token %}
                       <span>¡Bienvenido {{user.username}}!</span>
                       <br>
-                      <button id="logout" type="submit" class="btn btn-primary"><i
-                              class="ni ni-user-run"></i>  Cerrar Sesion</button>
-                  </form>
+                      <button id="logout" type="submit" class="btn btn-primary"><i class="ni ni-user-run"></i> Cerrar
+                        Sesion</button>
+                    </form>
                   </div>
                 </div>
               </a>
@@ -83,7 +85,7 @@
         </div>
       </div>
     </nav>
- 
+
     <div class="header bg-primary pb-6">
       <div class="container-fluid">
         <div class="header-body">
@@ -111,51 +113,33 @@
                     <th scope="col" class="sort" data-sort="name">Numero de guia</th>
                     <th scope="col" class="sort" data-sort="budget">Destinatario</th>
                     <th scope="col" class="sort" data-sort="status">Entrega estimada</th>
-                    <th scope="col">Municipio</th>
+                    <th scope="col" class="sort" data-sort="status">Municipio</th>
                     <th scope="col" class="sort" data-sort="completion">Sucursal</th>
                   </tr>
                 </thead>
                 <tbody class="list">
+                  {% if envios %}
+                  {% for envio in envios %}
                   <tr>
-                    <th></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>{{envio.env_id}}</td>
+                    <td>{{envio.veh_id}}</td>
+                    <td>{{envio.env_registro}}</td>
+                    <td>{{envio.env_entrega_estimada}}</td>
                   </tr>
-                  <tr>
-                    <th></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <th></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <th></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
+                  {% endfor %}
+                  {% endif %}
                 </tbody>
               </table>
             </div>
           </div>
         </div>
-      </div>      
+      </div>
       <!-- Footer -->
       <footer class="footer pt-0">
         <div class="row align-items-center justify-content-lg-between">
           <div class="col-lg-6">
             <div class="copyright text-center  text-lg-left  text-muted">
-              &copy; 2020 - Envios UP 
+              &copy; 2020 - Envios UP
             </div>
           </div>
         </div>
@@ -165,4 +149,5 @@
   <!-- Scripts-->
   <script src="../assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

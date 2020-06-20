@@ -11,7 +11,7 @@ from empresa.models import Sucursal, Tarifa, Envios_up
 from envio.models import Tipo_mercancia
 from personal.models import Tipo_documento, Persona, Empleado, Rol
 from django.views.generic import View
-from envio.models import Tipo_mercancia, Forma_pago, Tipo_mercancia, Destinatario, Mercancia, Mercancia_envio
+from envio.models import Tipo_mercancia, Forma_pago, Tipo_mercancia, Destinatario, Mercancia, Mercancia_envio, Envio
 from personal.models import Tipo_documento, Persona, Empleado, Rol, Cliente
 from ubicacion.models import Departamento, Municipio
 
@@ -363,7 +363,8 @@ def buscar_empleado(request):
 def l_envios(request):
     usuario = request.user
     if usuario.is_active:
-        return render(request, 'l_envios.html')
+        envios = Envio.objects.all()
+        return render(request, 'l_envios.html', {'envios':envios})
     else:
         return redirect(reverse_lazy('login'))  # Probaaaaaar!!!
 
