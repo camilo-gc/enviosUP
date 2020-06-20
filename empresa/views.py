@@ -425,7 +425,7 @@ def l_envios(request):
 def operacional(request):
     usuario = request.user
     if usuario.is_active:
-        return render(request, 'operacional.html', {'user': usuario})
+        return render(request, 'PL_principal.html', {'user': usuario})
     else:
         return redirect(reverse_lazy('login'))  # Probaaaaaar!!!
 
