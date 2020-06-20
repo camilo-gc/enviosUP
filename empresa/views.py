@@ -162,6 +162,13 @@ def PL_L_Mercancia(request):
 
     return render(request, 'PL_L_Mercancia.html', {'mer': mers})
 
+def p_recepcionista(request):
+    usuario = request.user
+    if usuario.is_active:
+        return render(request, 'registrar_mercancia.html', {})
+    else:
+        messages.warning(request, 'Debe tener una sesion activa')
+        return redirect(reverse_lazy('login'))
 
 def buscar_mercancias(request):
     dep_id = request.GET.get('id')
@@ -444,7 +451,12 @@ def l_envios(request):
 def operacional(request):
     usuario = request.user
     if usuario.is_active:
-        return render(request, 'PL_principal.html', {'user': usuario})
+        per = Persona.objects.all().filter(per_email=usuario.email)            
+        emp = Empleado.objects.all().filter(per_documento=per[0].per_documento)
+        if emp[0].rol_id.rol_id == 3:
+            return redirect(reverse_lazy('registrar_mercancia'))
+        else:
+            return render(request, 'PL_principal.html', {'user': usuario})
     else:
         return redirect(reverse_lazy('login'))  # Probaaaaaar!!!
 

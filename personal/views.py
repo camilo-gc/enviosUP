@@ -65,8 +65,7 @@ def login_user(request):
             # Redireccionar Panel NO administrador
             return redirect(reverse_lazy('operacion'))
         else:
-            messages.error(
-                request, 'Esta intentando ingresar al sistema desde un lugar no permitido')
+            messages.error(request, 'Esta intentando ingresar al sistema desde un lugar no permitido')
             # De prueba, se debe modificar.
             return render(request, 'empresa/index.html')
     else:
