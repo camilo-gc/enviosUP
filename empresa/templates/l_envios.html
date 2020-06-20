@@ -119,12 +119,13 @@
                 </thead>
                 <tbody class="list">
                   {% if envios %}
-                  {% for envio in envios %}
+                  {% for envio in mer_env %}
                   <tr>
-                    <td>{{envio.env_id}}</td>
-                    <td>{{envio.veh_id}}</td>
-                    <td>{{envio.env_registro}}</td>
-                    <td>{{envio.env_entrega_estimada}}</td>
+                    <td>{{envio.mer_id.mer_num_guia}}</td>
+                    <td>{{envio.mer_id.des_documento.des_documento}}</td>
+                    <td>{{envio.env_id.env_entrega_estimada}}</td>
+                    <td>{{envio.mer_id.des_documento.mun_id.mun_nombre}}</td>
+                    <td>{{envio.mer_id.emp_id.suc_id.suc_nombre}}</td>
                   </tr>
                   {% endfor %}
                   {% endif %}

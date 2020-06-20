@@ -70,10 +70,9 @@ def login_user(request):
             # De prueba, se debe modificar.
             return render(request, 'empresa/index.html')
     else:
-        print('credenciales incorrectas')
         messages.error(request, 'Usuario o contraseña incorrectos')
         # De prueba, se debe modificar.
-        return render(request, 'empresa/index.html')
+        return redirect(reverse_lazy('login'))
 
 def eliminar_empleado(request):
     usuario = request.user
@@ -89,13 +88,7 @@ def eliminar_empleado(request):
             salario = request.POST.get('emp_salario', None)
             emp = Empleado.objects.filter(per_documento=documento)
             per = Persona.objects.filter(per_documento=documento)
-            #usu = User.objects.filter(username=per[0].per_email)
             usu = User.objects.get(username = per[0].per_email)
-            #usu_nom = usu[0].first_name
-            #usu_ape = usu[0].last_name
-            #usu_correo = usu[0].email
-            #usu_pass = usu[0].password
-
 
             try:
                 empleado = Empleado(emp_id=emp[0].emp_id)
@@ -110,7 +103,7 @@ def eliminar_empleado(request):
                
                 usu.is_active = False
                 usu.save()
-                
+
                 messages.success(request, 'El empleado se elimino con exito')
 
             except Exception as e:
