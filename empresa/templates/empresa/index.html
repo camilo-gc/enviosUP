@@ -26,16 +26,16 @@
 										<div class="tab-content">
 											<div class="tab-content-inner active" data-content="signup">
 												<h3>Rastrea tu envio</h3>
-												<form action="#">
+												<form action="{% url 'rastreo' %}" method="POST" name="f1">{% csrf_token %}
 													<div class="row form-group">
 														<div class="col-md-12">
 															<label for="fullname">Numero de guia</label>
-															<input type="text" id="fullname" class="form-control">
+															<input type="text" id="numguia" name="numguia" class="form-control">
 														</div>
 													</div>
 													<div class="row form-group">
 														<div class="col-md-12">
-															<button type="button" class="btn btn-primary btn-block"
+															<button type="submit" class="btn btn-primary btn-block"
 																>Rastrear</button>
 														</div>
 													</div>

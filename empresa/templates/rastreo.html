@@ -14,17 +14,19 @@
     <style>
       table,td {
 	     border: 1px solid black;
+       
       }
       body {
   background: url("{% static 'empresa/images/rastreo_ver4.jpg' %}") no-repeat center center fixed;
   background-size: cover;
-}
+  }
+
     </style>
 </head>
 <body class="img-responsive ">
         {% include "empresa/nav.html" %}  
            <div>
-           <div class="gtco-container">
+           <div class="gtco-container ">
                     {% if m == 0%}
                         <h1>Tu mercancía está pendiente por enviarse, por favor vuelve a consultar en unas horas.</h1><br>
                         <h2>¡Gracias!</h2><br>
@@ -33,25 +35,28 @@
                         <div class="row"  >
                             <div class="col-md-12 text-center gtco-heading animate-box"> 
                                 <h2 class="font-italic lead font-weight-bold">Seguimiento de tu envio</h2><br>
+                                <h3 class="font-weight-bold">No. GUIA: {{num}} </h3><br>
+                                <h3 class="font-weight-bold">{{estado.est_id.est_nombre}}</h3><br>
                             </div>
-                            <div class="col-md-6 text-left gtco-heading animate-box">
+                            <div class="col-md-6 text-left gtco-heading animate-box" style="background-color: rgba(255, 255, 255, 0.532);">
+                              
                                 <h2 class="font-weight-bold">Datos Origen</h2><br>
-                                <h3>Remitente:</h3>
-                                <h3>Fecha de entrega:</h3>
-                                <h3>Ciudad recogida:</h3>
-                                <h3>Direccion:</h3>
-                                <h3>Tipo de producto:</h3>
-                                <h3>Peso:</h3>
+                                <h3>Remitente: {{mer.cli_documento.per_documento.per_nombre}}  {{mer.cli_documento.per_documento.per_apellido}}</h3>
+                                <h3>Ciudad recogida: {{mer.emp_id.suc_id.mun_id.mun_nombre}}</h3>
+                                <h3>Direccion: {{mer.cli_documento.per_documento.per_direccion}}</h3>
+                                <h3>Tipo de mercancia: {{mer.tm_id.tm_nombre}}</h3>
+                                <h3>Peso: {{mer.mer_peso}}</h3>
+                              
                             </div>
-                            <div style="border-left: 1px solid black" class="col-md-6 text-left gtco-heading animate-box">
-                                <h2 class="font-weight-bold">Datos Destinatario</h2><br>
-                                <h3>Destinatario:</h3>
-                                <h3>Fecha de entrega:</h3>
-                                <h3>Ciudad Destino:</h3>
-                                <h3>Direccion:</h3>
-                                <h3>Telefono:</h3>
-
-                            </div>
+                            <div style="border-left: 1px solid black; background-color: rgba(255, 255, 255, 0.532);" class="col-md-6 text-left gtco-heading animate-box">
+                               <h2 class="font-weight-bold">Datos Destinatario</h2><br>
+                                <h3>Destinatario: {{mer.des_documento.des_nombre}}</h3>
+                                <h3>Ciudad Destino: {{mer.des_documento.mun_id.mun_nombre}}</h3>
+                                <h3>Direccion: {{mer.des_documento.des_direccion}}</h3>
+                                <h3>Telefono: {{mer.des_documento.des_celular }}</h3>
+                                <h3> F. Pago: {{mer.fp_id.fp_nombre}}</h3>
+                              </div>
+                            
                             <div class="col-md-12 text-left gtco-heading animate-box">
                                 <h2 class="font-weight-bold">Historial de estados</h2><br>
                                 <div class="table-responsive">
@@ -64,31 +69,13 @@
                                         </tr>
                                       </thead>
                                       <tbody class="list">
+                                      {% for e in est %}
                                         <tr>
-                                          <td></td>
-                                          <td></td>
-                                          <td></td>
+                                          <td>{{e.est_id.est_nombre}}</td>
+                                          <td>{{e.ee_fecha}}</td>
+                                          <td>{{e.est_id.est_descripcion}}</td>
                                         </tr>
-                                        <tr>
-                                          <td></td>
-                                          <td></td>
-                                          <td></td>
-                                        </tr>
-                                        <tr>
-                                          <td></td>
-                                          <td></td>
-                                          <td></td>
-                                        </tr>
-                                        <tr>
-                                          <td></td>
-                                          <td></td>
-                                          <td></td>
-                                        </tr>
-                                        <tr>
-                                          <td></td>
-                                          <td></td>
-                                          <td></td>
-                                        </tr>
+                                      {% endfor %}
                                       </tbody>
                                     </table>
                             </div>

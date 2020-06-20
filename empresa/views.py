@@ -12,7 +12,7 @@ from empresa.models import Sucursal, Tarifa, Envios_up
 from envio.models import Tipo_mercancia
 from personal.models import Tipo_documento, Persona, Empleado, Rol
 from django.views.generic import View
-from envio.models import Tipo_mercancia, Forma_pago, Tipo_mercancia, Destinatario, Mercancia, Mercancia_envio, Envio
+from envio.models import Tipo_mercancia, Forma_pago, Tipo_mercancia, Destinatario, Mercancia, Mercancia_envio, Envio, Estado_envio, Estado
 from personal.models import Tipo_documento, Persona, Empleado, Rol, Cliente
 from ubicacion.models import Departamento, Municipio
 from vehiculo.models import Vehiculo
@@ -67,12 +67,26 @@ def index(request):
     return render(request, 'empresa/index.html', {})
 
 
-def rastreo(request, numGuia):
-    print("numero de guia: "+ str(numGuia))
-    mer = Mercancia.objects.all().filter(mer_num_guia = numGuia)
-    m = mer.__len__()
+def rastreo(request):
+    if request.method == "POST":
+        numGuia = request.POST.get('numguia')
+        if(numGuia.__len__() > 0):
+            mer = Mercancia.objects.all().filter(mer_num_guia = numGuia)
+            m = mer.__len__()
+            if(m > 0):
+                e = Mercancia_envio.objects.all().filter(mer_id = mer[0].mer_id)
+                est = Estado_envio.objects.all().filter(env_id = e[0].env_id)
+                actual = est.last()
+                print(actual.est_id.est_nombre)
+                return render(request, 'rastreo.html', {'m':m, 'mer':mer[0], 'est':est, 'estado':actual, 'num':numGuia})
+            else: 
+                return render(request, 'rastreo.html', {'m':m})
+        else:        
+            return render(request, 'empresa/index.html', {})
+    else:
+        return render(request, 'empresa/index.html', {})
+
     
-    return render(request, 'rastreo.html', {'m':m})
 
 
 def login(request):
@@ -118,6 +132,9 @@ def PL_R_Envio(request):
                 up_veh.save()
                 envio.save()
                 e = Envio.objects.last()
+                est = Estado.objects.all().filter(est_id = 1)
+                e_e = Estado_envio(env_id = e, est_id = est[0], ee_fecha = registro, ee_descripcion = est[0].est_descripcion)
+                e_e.save()
                 for m in mers:
                     if(m.des_documento.mun_id.dep_id.dep_id == int(dep_id)):
                         me = Mercancia_envio(mer_id = m, env_id = e)
