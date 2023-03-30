@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Tarifas</title>
+    {% load static %}
+    <!--JQUERY-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    <!-- FRAMEWORK BOOTSTRAP para el estilo de la pagina-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'empresa/images/favicon.ico' %}" />
+    <!-- Los iconos tipo Solid de Fontawesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+    <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+    <!-- estilo registro -->
+    
+
+  {% include "empresa/header.html" %}
+</head>
+<body id="cuerpo_tarifas" style="background-color: white">
+    {% include "empresa/nav.html" %}
+    <div id="gtco-features" style="padding-top: 150px">
+        <div class="gtco-container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2 text-center gtco-heading animate-box">
+                    <h2>Tarifas</h2>
+                    <p>Estos son los precios fijos que manejamos en Envíos UP</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-6">
+                    <div class="feature-center animate-box" data-animate-effect="fadeIn">
+                        <h3>Tarifa Municipal</h3>
+                        <h4>{{tar.tar_departamental}}</h4>
+                        <p>Tarifa fija para envíos a municipios del mismo departamento.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6">
+                    <div class="feature-center animate-box" data-animate-effect="fadeIn">
+                        <h3>Tarifa Departamental</h3>
+                        <h4>{{tar.tar_nacional}}</h4>
+                        <p>Tarifa fija para envíos a municipios de cualquier otro departamento del país.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div id="gtco-features">
+        <div class="gtco-container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2 text-center gtco-heading animate-box">
+                    <h2>Especificación de Tipos de Mercancía</h2>
+                    <p>Estos son los diferentes tipos de mercancía que transportamos en Envíos UP</p>
+                </div>
+            </div>
+            <div class="row">
+                {% for tm in tms %}
+                    <div class="col-md-4 col-sm-4">
+                        <div class="feature-center animate-box" data-animate-effect="fadeIn">
+                            <h3>{{tm.tm_nombre}}</h3>
+                            <h4>{{tm.tm_precio}}</h4>
+                            {% if tm.tm_precio_adicional == 0 %}
+                                <p>{{tm.tm_descripcion}}</p>
+                            {% else %}
+                                <p>{{tm.tm_descripcion}} Y tendrá un adicional de {{tm.tm_precio_adicional}}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <footer>
+        {% include "empresa/footer.html" %} 
+    </footer>
+
+</body>
+</html>

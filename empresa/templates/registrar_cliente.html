@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>ENVIOS UP</title>
+  {% load static %}
+  <!-- Favicon -->
+  <link rel="icon" href="{% static 'empresa/images/clientes.png' %}" type="image/png">
+ <!-- Fonts -->
+ <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+ <!-- Icons -->
+ <link rel="stylesheet" href="{% static 'empresa/assets/vendor/nucleo/css/nucleo.css' %}"type="text/css">
+ <link rel="stylesheet" href="{% static 'empresa/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css' %}" type="text/css">
+ <!-- CSS -->
+ <link rel="stylesheet" href="{% static 'empresa/css/argon2.css' %}" type="text/css">
+</head>
+
+<body>
+  <!-- Sidenav -->
+  <nav class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white" id="sidenav-main">
+    <div class="scrollbar-inner">
+      <!-- Brand -->
+      <div class="sidenav-header  align-items-center">
+        <a class="navbar-brand" href="javascript:void(0)">
+          <img src="{% static 'empresa/images/ENVIOS UP.png' %}" class="navbar-brand-img" alt="...">
+        </a>
+      </div>
+      <div class="navbar-inner">
+        <!-- Collapse -->
+        <div class="collapse navbar-collapse" id="sidenav-collapse-main">
+          <!-- Nav items -->
+
+          <ul class="navbar-nav">
+
+
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'registrar_mercancia' %}">
+                <i class="ni ni-box-2 text-black"></i>
+                <span class="nav-link-text">Registrar Mercancia</span>
+              </a>
+            </li>
+
+          </ul>
+          <!-- Divider -->
+          <hr class="my-3">
+        </div>
+      </div>
+    </div>
+  </nav>
+  <!-- Main content -->
+  <div class="main-content" id="panel">
+    <!-- Topnav -->
+    <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav align-items-center  ml-md-auto ">
+            <li class="nav-item dropdown">
+              <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <div class="media align-items-center">
+                  <div class="media-body  ml-2  d-none d-lg-block">
+                    <i class="ni ni-user-run"></i>
+                    <span>Cerrar Sesion</span>
+                  </div>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!----------------------------------------------------DATOS DEL CLIENTE-------------------------------------------------------------------->
+
+    <div style="min-height: 100px;"">  </div>
+    <div class="container-fluid mt--6"style="min-height: 100px;" >
+
+        <div class="col">
+            <ul class="nav nav-pills justify-content-end">
+
+              <li class="nav-item mr-2 mr-md-0" data-toggle="chart" data-target="#chart-sales-dark" data-update='{"data":{"datasets":[{"data":[0, 20, 10, 30, 15, 40, 20, 60, 60]}]}}' data-prefix="$" data-suffix="k">
+                <a style="background-color: #465B70;" href="{% url 'registrar_cliente' %}" class="nav-link py-2 px-3 active" data-toggle="tab">
+                  <span class="d-none d-md-block">Registrar Cliente</span>
+                  <span class="d-md-none">M</span>
+                </a>
+              </li>
+
+              <li class="nav-item" data-toggle="chart" data-target="#chart-sales-dark" data-update='{"data":{"datasets":[{"data":[0, 20, 5, 25, 10, 30, 15, 40, 40]}]}}' data-prefix="$" data-suffix="k">
+                <a style="background-color: #ECFF20;" href="{% url 'buscar_cliente' %}" class="nav-link py-2 px-3" data-toggle="tab">
+                  <span  style="color: black;" class="d-none d-md-block">Modificar Cliente</span>
+                  <span class="d-md-none">W</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+          
+            <div class="row">
+                    <div class="col-xl-8 order-xl-1">
+                      <div class="card">
+                        <div class="card-header">
+                          <div class="row align-items-center">
+                            <div class="col-8">
+                              <h3 class="mb-0">REGISTRAR CLIENTE:</h3>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="card-body">
+                <form>
+                    <h6 class="heading-small text-muted mb-4"></h6>
+                    <div class="pl-lg-4">
+
+                      <div class="row">
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-xl-6">
+                          <div class="form-group">
+                            <label class="form-control-label" for="clie_documento">Tipo de identificación</label>
+                            <input type="text" id="clie_documento" class="form-control" placeholder="Tipo de Documento" value="">
+                          </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-xl-6">
+                          <div class="form-group">
+                            <label class="form-control-label" for="clie_id">Número identificación</label>
+                            <input type="text" id="clie_id" class="form-control" >
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-xl-6">
+                          <div class="form-group">
+                            <label class="form-control-label" for="clie_nombre">Nombre:</label>
+                            <input type="text" id="clie_nombre" class="form-control">
+                          </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-xl-6">
+                          <div class="form-group">
+                            <label class="form-control-label" for="clie_apellido">Apellidos:</label>
+                            <input type="text" id="clie_apellido" class="form-control">
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div class="row">
+                           <div class="col-xs-6 col-sm-6 col-md-6 col-xl-6">
+                            <div class="form-group">
+                              <label class="form-control-label" for="clie_departamento">Departamento:</label>
+                              <input type="text" id="clie_departamento" class="form-control">
+                            </div>
+                          </div>
+                          <div class="col-xs-6 col-sm-6 col-md-6 col-xl-6">
+                            <div class="form-group">
+                              <label class="form-control-label" for="clie_municipio">Municipio:</label>
+                              <input type="text" id="clie_municipio" class="form-control">
+                            </div>
+                          </div>
+                      </div>
+
+                      <div class="row"> 
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label class="form-control-label" for="clie_direccion">Dirección:</label>
+                            <input type="text" id="clie_direccion" class="form-control" placeholder="Dirección de residencia">
+                          </div>
+                        </div>
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label class="form-control-label" for="clie_email">Correo Electronico:</label>
+                            <input type="email" id="clie_email" class="form-control" >
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row"> 
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label class="form-control-label" for="clie_telefono">Teléfono:</label>
+                            <input type="text" id="clie_telefono" class="form-control">
+                          </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                              <label class="form-control-label" for="clie_celular">Celular:</label>
+                              <input type="text" id="clie_celular" class="form-control">
+                            </div>
+                          </div>
+                        </div>
+                        <button  style="position: absolute; right: 50%; bottom: -5%;" id="btn-envio" type="button" class="btn btn-primary ">Registrar Cliente</button>
+                        
+
+
+                      </div>
+                    </div>
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <br>
+
+      <!-- Footer -->
+      <footer class="footer pt-0">
+        <div class="row align-items-center justify-content-lg-between">
+          <div class="col-lg-6">
+            <div class="copyright text-center  text-lg-left  text-muted">
+              &copy; 2020 - Envios UP 
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+  <!--Scripts -->
+  <script src="../assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

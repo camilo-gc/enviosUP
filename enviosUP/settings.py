@@ -37,6 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'ubicacion.apps.UbicacionConfig',
+    'empresa.apps.EmpresaConfig',
+    'personal.apps.PersonalConfig',
+    'vehiculo.apps.VehiculoConfig',
+    'envio.apps.EnvioConfig',
 ]
 
 MIDDLEWARE = [
@@ -54,7 +59,7 @@ ROOT_URLCONF = 'enviosUP.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -76,9 +81,9 @@ WSGI_APPLICATION = 'enviosUP.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'pruebaDjango',
+        'NAME': 'envios_up',
         'USER': 'root',
-        'PASSWORD': '#332817Cg', #Revisar siempreeeeeee!!!
+        'PASSWORD': '12345', #Revisar Siempreeeeee!!!!!
         'HOST': 'localhost',
     }
 }
@@ -106,7 +111,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es-co'
 
 TIME_ZONE = 'UTC'
 
@@ -121,3 +126,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

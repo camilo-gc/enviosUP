@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html> 
+ <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+     {% load static %}
+     <!-- BOOTSTRAP-->
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+      <!-- Favicon -->
+     <link rel="shortcut icon" type="image/x-icon" href="{% static 'empresa/images/favicon.ico' %}" />
+      <!-- Fonts -->
+     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+
+     <style>
+        table {
+            border: 1px solid #111111;
+            width: 100%;
+            padding: 5px 10px;
+        }
+
+        td { 
+            padding: 5px 10px;
+            text-align: left;
+            border: 1px solid #111111;
+        }
+
+        tr:nth-child(1) {
+            background: #dedede;
+        }
+        .parrafo{
+          padding: -20%;
+        }
+    </style>
+ </head>
+  
+  <body>
+    {% for i in n %}
+        <table  >
+          <tr>
+            <td colspan="3" style="text-align: center;"> 
+              {% if i == 0 %}
+                <h3 style=" padding: -20%;"> PRUEBA DE ENTREGA </h3>
+              {% elif i == 1 %}
+                <h3 style=" padding: -20%;"> REMITENTE </h3>
+              {% else %}
+                <h3 style=" padding: -20%;"> DESTINATARIO </h3>
+              {% endif %}
+              <p class="parrafo" style="padding: -70%; font-size: 8px;"  > Ministerio de Transporte: Licencia No. 805 de Marzo 5/2001. MINTIC: Licencia No.1776 de mayo. 7/2020.</p>
+              </td>
+          </tr>
+            <tr>
+              <td style="text-align: right; " colspan="2">
+                <p align="justify" >
+                  <img align="left"src="/home/kracko/Documentos/ProyectosDjango/enviosUP/empresa/static/empresa/images/ENVIOS UP.png" width="70" height="70" alt="Imagen Logo" >
+                  {{nombre}} NIT: {{nit}} {{suc}} <br>
+                  {{direccion}} <br>
+                  {{correo}} Tel: {{telefono}} 
+                </p>
+              </td>
+                <td >
+                    <p style="text-align: right; font-size: 5;">GUÍA No. <input type="text"> {{numguia}} <br>
+                    Fecha: {{fecha}}
+                    </p>
+                </td>
+            </tr>
+            <tr>
+            <th style="text-align: center; ">DATOS REMITENTE</th>
+            <th style="text-align: center;  ">DATOS DESTINATARIO</th>
+            <th style="text-align: center;  ">DATOS MERCANCIA</th>
+            </tr>
+            
+            <td>
+              <p class="parrafo">Documento: <input type="number">{{doc_cli}}</p>
+              <p class="parrafo">Forma de pago: <input type="text">{{fp}}</p>
+              <p class="parrafo">Nombre: <input type="text"> {{nom_cli}} {{ape_cli}}</p>
+              <p class="parrafo">No. de cel: <input type="number">{{cel_cli}}</p>
+              <p class="parrafo">No. de tel: <input type="number">{{tel_cli}}</p>
+              <p class="parrafo">C. electrónico: <input type="email">{{cor_cli}}</p>
+              <p class="parrafo">Dirección: <input type="text">{{dir_cli}}</p>
+            </td>
+            
+            <td>
+              <p class="parrafo">Documento: <input type="number">{{doc_des}}</p>
+              <p class="parrafo">Nombre: <input type="text">{{nom_des}}</p>
+              <p class="parrafo">No. de cel: <input type="number" >{{cel_des}}</p>
+              <p class="parrafo">No. de tel: <input type="number" >{{tel_des}}</p>
+              <p class="parrafo">C. electrónico: <input type="text">{{cor_des}}</p>
+              <p class="parrafo">Dirección: <input type="text">{{dir_des}}</p>
+              <p class="parrafo">Municipio: <input type="text">{{mun}}</p>
+            </td>
+          
+            <td>
+            <p class="parrafo">Tipo de Mercancía: <input type="text">{{tm}}</p>
+            <p class="parrafo">Peso (Kg): <input type="text">{{peso}}</p>
+            <p class="parrafo">Contenido: <input type="text"> {{con}}</p>
+            <p class="parrafo">Precio Declarado: <input type="text">{{dec}}</p>
+            <p class="parrafo">Precio del envío: <input type="text">{{precio}}</p>
+            </td>
+
+        </table>
+        {% if i != 2 %}  
+          <p style="border-top: 3px solid #000000; color: #ffffff;">Separacion</p>
+        {% endif %}
+      {% endfor %} 
+    
+  </body>
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Registro Empleado</title>
+    {% load static %}
+    <!--JQUERY-->
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+  <!-- JQuery Primero -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <!-- Toastr.js Después -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+
+    <!-- FRAMEWORK BOOTSTRAP para el estilo de la pagina-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    
+    <!-- Los iconos tipo Solid de Fontawesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+    <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+    <!-- estilo registro -->
+    <link rel="stylesheet" type="text/css" href="{% static 'personal/css/estilo_registro.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'personal/css/estilo_ver2.css' %}">
+   <script type="text/javascript">
+
+    $(document).ready(function() {
+
+    $('#pass2').keyup(function() {
+
+        var pass1 = $('#pass1').val();
+        var pass2 = $('#pass2').val();
+
+        if ( pass1 == pass2 ) {
+            $('#error2').css("background", "url({% static 'personal/img/check.png' %})");
+        } else {
+            $('#error2').css("background", "url({% static 'personal/img/check-.png' %})");
+        }
+
+    });
+
+});
+/* Validacion telefono */
+var numero = document.getElementById('numero');
+
+function comprueba_tel(valor){
+  if(valor.value <= 0){
+    valor.value = "";
+  }
+  if( valor.value.length >7 ) {
+      alert("No es un telefono valido");
+      $("#numero").val("");
+  return false;
+}
+}
+/* Validacion celular */
+var numero = document.getElementById('numero_cell');
+
+function comprueba_celular(valor){
+  if(valor.value <= 0){
+    valor.value = "";
+  }
+  if( valor.value.length >15 ) {
+  alert("Numero de celular invalido");
+  $("#numero_cell").val("");
+  return false;
+}
+}
+/* Validacion salario */
+var numero = document.getElementById('p_salario');
+
+function comprueba_salario(valor){
+  if(valor.value <= 0){
+    valor.value = 877803;
+  }
+  if( valor.value.length<6) {
+  alert("salario mal establecido");
+  $("#p_salario").val("");
+  return false;
+  }
+}
+// validacion fecha de nacimiento
+$(document).ready(function(){
+    	$("#fecha").change(function(){
+        	var hoy= new Date();
+            var fecha=$('#fecha').val();
+            var fechaFormulario=Date.parse(fecha);			
+			if (hoy <= fechaFormulario) {
+                  alert("USTED NO A NI NACIDO!!!!");
+                  $("#fecha").val("");
+			}
+    	});
+    });
+  //validacion contrato
+  $(document).ready(function(){
+    	$("#contrato_F").change(function(){
+        	var fecha_inicio= $('#contrato_I').val();
+            var fecha_final=$('#contrato_F').val();
+            var fechaContratoF=Date.parse(fecha_final);
+            var fechaContratoI=Date.parse(fecha_inicio);				
+			if (fechaContratoF <= fechaContratoI) {
+                  alert("EL CONTRATO ESTA MAL DEFINIDO!!!!");
+                  $("#contrato_I").val("");
+                  $("#contrato_F").val("");
+                  return false;
+			}
+    	});
+    });
+   </script>
+  {% include "empresa/header.html" %}
+</head>
+<body id="cuerpo_registro"style="background-color: cadetblue">
+    {% include "empresa/nav.html" %}
+
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'success'%}
+                <script type=text/javascript>toastr.{{ message.tags }}('{{ message }}')</script>
+            {% elif message.tags == 'info' %}
+                <script type=text/javascript>toastr.{{ message.tags }}('{{ message }}')</script>
+            {% elif message.tags == 'warning' %}
+                <script type=text/javascript>toastr.{{ message.tags }}('{{ message }}')</script>
+            {% elif message.tags == 'error' %}
+                <script type=text/javascript>toastr.{{ message.tags }}('{{ message }}')</script>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+        
+    
+    <div class="modal-dialog text-center">
+        <div class="col-sm-10 " id="section">
+            <div class="modal-content" id="content">
+                <div class="col-12 user-img">
+                    <img src="{% static 'personal/img/usuario.png' %}" th:src="@{% static 'personal/img/usuario_envia.png' %}"/>
+                </div>
+                <form onsubmit="return validar();"class="col-12" action="{% url 'registrarEmpleado' %}" method="POST" name="f1">{% csrf_token %}
+                    <div class="form-group" id="T_documento" >
+                        <select name="roles" class="estilo_select" id="rol">
+                            {% for rol in roles %}
+                                <option value="{{rol.rol_id}}">{{rol.rol_nombre}}</option>
+                            {% endfor%}
+                        </select>
+                        <select name="sucursales" class="estilo_select" id="sucu" >
+                            {% for sucu in suc %}
+                                <option value="{{sucu.suc_id}}">{{sucu.suc_nombre}}</option>
+                            {% endfor%}
+                        </select>
+                    </div>
+                    
+                    <div class="form-group" id="Nombre_cliente">
+                        <input type="text" class="form-control" placeholder="Nombres" name="nombre" required/>
+                    </div>
+
+                    <div class="form-group" id= "Apellido_cliente" >
+                        <input type="text" class="form-control" placeholder="Apellidos" name="apellido" required/>
+                    </div>
+
+                    <div class="form-group" id="F_nacimiento" >
+                        <input type="date" id="fecha"  class="form-control" placeholder="dd/mm/yyyy" name="fecha_nacimiento" required/>
+                    </div>
+
+                    <div class="form-group" id="Direccion_cliente" >
+                        <input type="text" class="form-control" placeholder="Direccion" name="direccion" required/>
+                    </div>
+                    
+                    <div class="form-group" id="Tel_cliente" >
+                        <input id="numero" onkeypress="comprueba_tel(this)" type="number" class="form-control" placeholder="Telefono"  max="9999999"name="telefono"/>
+                    </div>
+
+                    <div class="form-group" id="Cell_cliente">
+                        <input type="number" id="numero_cell" onkeypress="comprueba_celular(this)" class="form-control" placeholder="Celular" mmax="9999999999" name="celular" required/>
+                    </div>
+
+                    <div class="form-group" id="T_documento" >
+                        <select name="tipo_documento" class="estilo_select" id="docu" >
+                            {% for tipo in tipos %}
+                                <option value="{{tipo.td_id}}">{{tipo.td_nombre}}</option>
+                            {% endfor%}
+                        </select>
+                    </div>
+
+                    <div class="form-group" id="N_documento">
+                        <input type="number" class="form-control" placeholder="Numero de documento" name="documento" required/>
+                    </div>
+
+                    <div class="form-group" id="F_inicio" >
+                        <input type="date" id="contrato_I"class="form-control" placeholder="Fecha Inicio de Contrato" name="fecha_inicio" required/>
+                    </div>
+                    <div class="form-group" id="F_fin" >
+                        <input type="date"id="contrato_F" class="form-control" placeholder="Fecha Fin de Contrato" name="fecha_fin" required/>
+                    </div>
+                    <div class="form-group" id="Salario">
+                        <input type="number" id="P_salario" onkeypress="comprueba_salario(this)"class="form-control" minimo="877803" placeholder="Salario Mensual" name="salario" required/>
+                    </div>
+
+                    <div class="form-group" >
+                        <input type="email" class="form-control" placeholder="Corre Electronico" name="correo" id="correo" required/>
+                    </div>
+
+                    <div class="form-group" id="Con_cliente" for="pass1">
+                        <input id="pass1"type="password" class="form-control" placeholder="Contrasena" name="clave1" required/>
+                        <div id="error1"></div>
+                    </div>
+
+                    <div class="form-group" id="re_contrasena" for="pass2">
+                        <input id="pass2"type="password" class="form-control" placeholder="Repetir contrasena" name="clave2" required/>
+                        <div id="error2"></div>
+                    </div>
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i> Registrar </button>
+                </form>
+
+
+		        </div>                 
+            </div>
+        </div>
+    </div>
+<footer>
+    {% include "empresa/footer.html" %} 
+</footer>
+
+</body>
+</html>
